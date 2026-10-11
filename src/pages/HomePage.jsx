@@ -22,7 +22,6 @@ import SEOHead from '../components/SEOHead';
 import ActivityCard from '../components/ActivityCard';
 import ImagePlaceholder from '../components/ImagePlaceholder';
 import Accordion from '../components/Accordion';
-import Lightbox from '../components/Lightbox';
 import { siteConfig } from '../data/siteConfig';
 import { activities } from '../data/activities';
 import { celebrationOfferings } from '../data/celebrations';
@@ -31,10 +30,8 @@ import { faqs } from '../data/faqs';
 import { galleryItems, galleryCategories } from '../data/gallery';
 
 export default function HomePage({ onOpenEnquiry }) {
-  // Gallery filtering & lightbox state
+  // Gallery filtering state
   const [selectedGalleryCategory, setSelectedGalleryCategory] = useState('all');
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const primaryActivities = activities.filter((a) => a.category === 'primary');
   const supportingActivity = activities.find((a) => a.id === 'karaoke');
@@ -43,19 +40,6 @@ export default function HomePage({ onOpenEnquiry }) {
     selectedGalleryCategory === 'all'
       ? galleryItems.slice(0, 6)
       : galleryItems.filter((item) => item.category === selectedGalleryCategory).slice(0, 6);
-
-  const handleOpenLightbox = (index) => {
-    setLightboxIndex(index);
-    setLightboxOpen(true);
-  };
-
-  const handlePrevLightbox = () => {
-    setLightboxIndex((prev) => (prev > 0 ? prev - 1 : filteredGallery.length - 1));
-  };
-
-  const handleNextLightbox = () => {
-    setLightboxIndex((prev) => (prev < filteredGallery.length - 1 ? prev + 1 : 0));
-  };
 
   const dateOffering = celebrationOfferings.find((c) => c.id === 'dates');
   const friendsOffering = celebrationOfferings.find((c) => c.id === 'friends');
@@ -522,20 +506,10 @@ export default function HomePage({ onOpenEnquiry }) {
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredGallery.map((item, idx) => (
+          {filteredGallery.map((item) => (
             <div
               key={item.id}
-              onClick={() => handleOpenLightbox(idx)}
-              className="group cursor-pointer rounded-2xl overflow-hidden bg-white border border-[#E2DDD0] shadow-xs hover:shadow-lg transition-all flex flex-col"
-              tabIndex={0}
-              role="button"
-              aria-label={`Open photo view for ${item.title}`}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  handleOpenLightbox(idx);
-                }
-              }}
+              className="rounded-2xl overflow-hidden bg-white border border-[#E2DDD0] shadow-xs hover:shadow-md transition-shadow flex flex-col"
             >
               <ImagePlaceholder
                 src={`/images/${item.filename}`}
@@ -543,18 +517,15 @@ export default function HomePage({ onOpenEnquiry }) {
                 title={item.title}
                 type={item.category === 'pottery-painting' ? 'pottery' : item.category}
                 aspectRatio={item.aspectRatio || '3/4'}
-                className="rounded-b-none transition-transform duration-300 group-hover:scale-102"
+                className="rounded-b-none"
               />
               <div className="p-4 bg-white border-t border-[#F1ECE1] flex items-center justify-between mt-auto">
                 <div className="min-w-0 pr-2">
-                  <h3 className="font-serif font-semibold text-sm text-[#242824] group-hover:text-[#245449] transition-colors truncate">
+                  <h3 className="font-serif font-semibold text-sm text-[#242824] truncate">
                     {item.title}
                   </h3>
                   <p className="text-xs text-[#4D534D] line-clamp-1">{item.caption}</p>
                 </div>
-                <span className="text-xs text-[#963E23] font-semibold opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-                  View →
-                </span>
               </div>
             </div>
           ))}
@@ -570,16 +541,6 @@ export default function HomePage({ onOpenEnquiry }) {
           </Link>
         </div>
       </section>
-
-      {/* Lightbox for Gallery */}
-      <Lightbox
-        isOpen={lightboxOpen}
-        items={filteredGallery}
-        currentIndex={lightboxIndex}
-        onClose={() => setLightboxOpen(false)}
-        onPrev={handlePrevLightbox}
-        onNext={handleNextLightbox}
-      />
 
       {/* -------------------------------------------------------------
           5. CUSTOMER REVIEWS + COMPACT BOOKING EXPLAINER

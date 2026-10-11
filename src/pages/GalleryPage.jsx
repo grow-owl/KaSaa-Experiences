@@ -3,31 +3,15 @@ import { ArrowLeft, Tag, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import ImagePlaceholder from '../components/ImagePlaceholder';
-import Lightbox from '../components/Lightbox';
 import { galleryItems, galleryCategories } from '../data/gallery';
 
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const filteredItems =
     activeCategory === 'all'
       ? galleryItems
       : galleryItems.filter((item) => item.category === activeCategory);
-
-  const handleOpenLightbox = (index) => {
-    setCurrentIndex(index);
-    setLightboxOpen(true);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : filteredItems.length - 1));
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev < filteredItems.length - 1 ? prev + 1 : 0));
-  };
 
   return (
     <div className="py-8 sm:py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
@@ -98,20 +82,10 @@ export default function GalleryPage() {
 
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {filteredItems.map((item, idx) => (
+        {filteredItems.map((item) => (
           <div
             key={item.id}
-            onClick={() => handleOpenLightbox(idx)}
-            className="group cursor-pointer rounded-3xl overflow-hidden bg-white border border-[#E2DDD0] shadow-xs hover:shadow-xl transition-all flex flex-col"
-            tabIndex={0}
-            role="button"
-            aria-label={`View photo ${item.title}`}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleOpenLightbox(idx);
-              }
-            }}
+            className="rounded-3xl overflow-hidden bg-white border border-[#E2DDD0] shadow-xs hover:shadow-md transition-shadow flex flex-col"
           >
             <div className="overflow-hidden">
               <ImagePlaceholder
@@ -120,7 +94,7 @@ export default function GalleryPage() {
                 title={item.title}
                 type={item.category === 'pottery-painting' ? 'pottery' : item.category}
                 aspectRatio={item.aspectRatio || '3/4'}
-                className="rounded-b-none transition-transform duration-300 group-hover:scale-103"
+                className="rounded-b-none"
               />
             </div>
 
@@ -131,12 +105,9 @@ export default function GalleryPage() {
                     <Tag className="w-3 h-3 text-[#C86F50]" />
                     {item.categoryLabel}
                   </span>
-                  <span className="text-[#AF5B3E] font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                    Click to Expand ↗
-                  </span>
                 </div>
 
-                <h2 className="font-serif font-bold text-base sm:text-lg text-[#242824] group-hover:text-[#245449] transition-colors">
+                <h2 className="font-serif font-bold text-base sm:text-lg text-[#242824]">
                   {item.title}
                 </h2>
 
@@ -148,16 +119,6 @@ export default function GalleryPage() {
           </div>
         ))}
       </div>
-
-      {/* Lightbox Modal */}
-      <Lightbox
-        isOpen={lightboxOpen}
-        items={filteredItems}
-        currentIndex={currentIndex}
-        onClose={() => setLightboxOpen(false)}
-        onPrev={handlePrev}
-        onNext={handleNext}
-      />
     </div>
   );
 }
