@@ -57,22 +57,43 @@ export default function GalleryPage() {
         </p>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center gap-2 pb-2 border-b border-[#E8E0D0]">
-        {galleryCategories.map((cat) => (
-          <button
-            key={cat.id}
-            type="button"
-            onClick={() => setActiveCategory(cat.id)}
-            className={`px-4 py-2 text-xs font-semibold rounded-xl transition-all ${
-              activeCategory === cat.id
-                ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
-                : 'bg-white hover:bg-[#F1ECE1] text-[#535953] border border-[#E2DDD0]'
-            }`}
-          >
-            {cat.label}
-          </button>
-        ))}
+      {/* Filter Tabs (3 on line 1, 2 on line 2 on mobile) */}
+      <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-2 pb-2 border-b border-[#E8E0D0]">
+        {/* Mobile Line 1: 3 filters */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          {galleryCategories.slice(0, 3).map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-2.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold rounded-xl transition-all whitespace-nowrap ${
+                activeCategory === cat.id
+                  ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
+                  : 'bg-white hover:bg-[#F1ECE1] text-[#535953] border border-[#E2DDD0]'
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Mobile Line 2: 2 filters */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          {galleryCategories.slice(3, 5).map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-2.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold rounded-xl transition-all whitespace-nowrap ${
+                activeCategory === cat.id
+                  ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
+                  : 'bg-white hover:bg-[#F1ECE1] text-[#535953] border border-[#E2DDD0]'
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Grid */}

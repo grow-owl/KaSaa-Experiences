@@ -476,24 +476,47 @@ export default function HomePage({ onOpenEnquiry }) {
             </p>
           </div>
 
-          {/* Category Filter Chips */}
-          <div className="flex flex-wrap gap-2" role="tablist" aria-label="Gallery category filters">
-            {galleryCategories.map((cat) => (
-              <button
-                key={cat.id}
-                type="button"
-                role="tab"
-                aria-selected={selectedGalleryCategory === cat.id}
-                onClick={() => setSelectedGalleryCategory(cat.id)}
-                className={`px-3.5 py-1.5 text-xs font-semibold rounded-full transition-colors ${
-                  selectedGalleryCategory === cat.id
-                    ? 'bg-[#245449] text-[#F8F4EB]'
-                    : 'bg-[#F1ECE1] hover:bg-[#E5DEC9] text-[#4D534D]'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+          {/* Category Filter Chips (3 on line 1, 2 on line 2 on mobile) */}
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2" role="tablist" aria-label="Gallery category filters">
+            {/* Mobile Line 1: 3 filters */}
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              {galleryCategories.slice(0, 3).map((cat) => (
+                <button
+                  key={cat.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={selectedGalleryCategory === cat.id}
+                  onClick={() => setSelectedGalleryCategory(cat.id)}
+                  className={`px-2.5 sm:px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full transition-colors whitespace-nowrap ${
+                    selectedGalleryCategory === cat.id
+                      ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
+                      : 'bg-[#F1ECE1] hover:bg-[#E5DEC9] text-[#4D534D]'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Mobile Line 2: 2 filters */}
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              {galleryCategories.slice(3, 5).map((cat) => (
+                <button
+                  key={cat.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={selectedGalleryCategory === cat.id}
+                  onClick={() => setSelectedGalleryCategory(cat.id)}
+                  className={`px-2.5 sm:px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full transition-colors whitespace-nowrap ${
+                    selectedGalleryCategory === cat.id
+                      ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
+                      : 'bg-[#F1ECE1] hover:bg-[#E5DEC9] text-[#4D534D]'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
