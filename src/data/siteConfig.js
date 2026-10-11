@@ -13,7 +13,7 @@ export const siteConfig = {
     "Creative recreation and hands-on experiences venue at Vega Circle Mall, Siliguri — specializing in pottery workshops, canvas painting, date experiences, and celebrations.",
   
   // Production Canonical Domain
-  siteUrl: import.meta.env.VITE_SITE_URL || "https://kasaaexperiences.com",
+  siteUrl: import.meta.env.VITE_SITE_URL || "https://kasaa-experiences.vercel.app",
 
   // Location & Address (From public business listings & verified floor details)
   location: {

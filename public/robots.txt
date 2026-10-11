@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kasaaexperiences.com/sitemap.xml
+Sitemap: https://kasaa-experiences.vercel.app/sitemap.xml

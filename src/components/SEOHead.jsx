@@ -7,6 +7,7 @@ export default function SEOHead({
   description,
   canonicalPath = '',
   ogType = 'website',
+  ogImage = '',
   noIndex = false,
 }) {
   const location = useLocation();
@@ -16,6 +17,7 @@ export default function SEOHead({
     ? `${title} | ${siteConfig.businessName}`
     : `${siteConfig.businessName} | Pottery, Painting & Creative Experiences in Siliguri`;
   const metaDesc = description || siteConfig.shortDescription;
+  const socialImage = ogImage || `${siteConfig.siteUrl}/images/hero-pottery-hands.webp`;
 
   useEffect(() => {
     // 1. Update document title
@@ -61,13 +63,15 @@ export default function SEOHead({
     setMeta('og:url', canonicalUrl, true);
     setMeta('og:type', ogType, true);
     setMeta('og:site_name', siteConfig.businessName, true);
+    setMeta('og:image', socialImage, true);
 
     // Twitter Card
     setMeta('twitter:card', 'summary_large_image');
     setMeta('twitter:title', pageTitle);
     setMeta('twitter:description', metaDesc);
+    setMeta('twitter:image', socialImage);
 
-    // 4. Inject JSON-LD Schema (LocalBusiness) on homepage / main pages
+    // 4. Inject JSON-LD Schema (LocalBusiness)
     let schemaScript = document.getElementById('kasaa-jsonld-schema');
     if (!schemaScript) {
       schemaScript = document.createElement('script');
@@ -76,19 +80,21 @@ export default function SEOHead({
       document.head.appendChild(schemaScript);
     }
 
-    const jsonLdData = {
+    const localBusinessSchema = {
       '@context': 'https://schema.org',
       '@type': 'LocalBusiness',
       name: siteConfig.businessName,
       description: siteConfig.shortDescription,
       url: siteConfig.siteUrl,
+      image: `${siteConfig.siteUrl}/images/hero-pottery-hands.webp`,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: '5th Floor, INOX, Vega Circle Mall, Sevoke Road',
-        addressLocality: 'Siliguri',
-        addressRegion: 'West Bengal',
+        streetAddress: siteConfig.location.fullAddress,
+        addressLocality: siteConfig.location.city,
+        addressRegion: siteConfig.location.state,
         addressCountry: 'IN',
       },
+      telephone: siteConfig.contact.phone || undefined,
       openingHoursSpecification: [
         {
           '@type': 'OpeningHoursSpecification',
@@ -105,11 +111,36 @@ export default function SEOHead({
           closes: '20:00',
         },
       ],
-      // Verified note: phone, geo, and fake ratings intentionally omitted per Google guidelines
+      sameAs: [
+        siteConfig.social.instagram,
+      ].filter(Boolean),
     };
 
-    schemaScript.textContent = JSON.stringify(jsonLdData);
-  }, [pageTitle, metaDesc, canonicalUrl, noIndex, ogType]);
+    // Include breadcrumb schema for subpages
+    if (fullPath !== '/' && title) {
+      const breadcrumbSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: siteConfig.siteUrl,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: title,
+            item: canonicalUrl,
+          },
+        ],
+      };
+      schemaScript.textContent = JSON.stringify([localBusinessSchema, breadcrumbSchema]);
+    } else {
+      schemaScript.textContent = JSON.stringify(localBusinessSchema);
+    }
+  }, [pageTitle, metaDesc, canonicalUrl, noIndex, ogType, socialImage, fullPath, title]);
 
   return null;
 }

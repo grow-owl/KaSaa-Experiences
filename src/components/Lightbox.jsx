@@ -35,6 +35,21 @@ export default function Lightbox({
         } else if (e.key === 'ArrowRight') {
           e.preventDefault();
           onNext();
+        } else if (e.key === 'Tab') {
+          const focusable = lightboxRef.current?.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          );
+          if (focusable && focusable.length > 0) {
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
         }
       };
 
