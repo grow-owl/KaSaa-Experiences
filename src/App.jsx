@@ -33,6 +33,10 @@ function ScrollToTop() {
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const handleMobileMenuToggle = React.useCallback((isOpen) => {
+    setIsMobileMenuOpen(isOpen);
+  }, []);
+
   const handleOpenEnquiry = (activity = 'general', occasion = '') => {
     const message = buildEnquiryMessage({
       type: activity,
@@ -51,7 +55,7 @@ export default function App() {
       {/* Primary Sticky Navbar */}
       <Navbar
         onOpenEnquiry={handleOpenEnquiry}
-        onMobileMenuToggle={(isOpen) => setIsMobileMenuOpen(isOpen)}
+        onMobileMenuToggle={handleMobileMenuToggle}
       />
 
       {/* Main Content Area */}
