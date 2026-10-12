@@ -17,6 +17,7 @@ import {
   CheckCircle2,
   Music,
   Phone,
+  Utensils,
 } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import ActivityCard from '../components/ActivityCard';
@@ -28,6 +29,7 @@ import { celebrationOfferings } from '../data/celebrations';
 import { reviews, bookingSteps } from '../data/reviews';
 import { faqs } from '../data/faqs';
 import { galleryItems, galleryCategories } from '../data/gallery';
+import { landingMenuFeatured, allDishes } from '../data/menuData';
 
 export default function HomePage({ onOpenEnquiry }) {
   // Gallery filtering state
@@ -539,6 +541,106 @@ export default function HomePage({ onOpenEnquiry }) {
             <span>View All Photos & Studio Captions</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
+        </div>
+      </section>
+
+      {/* -------------------------------------------------------------
+          FOOD MENU PREVIEW SECTION (EXACTLY 3 IMAGES + SHOW MORE)
+          Placed directly above "Loved by People Who Visit"
+          ------------------------------------------------------------- */}
+      {/* -------------------------------------------------------------
+          FOOD MENU SHOWCASE (HERO MENU CARD + RIGHT DESCRIPTION)
+          Placed directly above "Loved by People Who Visit"
+          ------------------------------------------------------------- */}
+      <section className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#FAF7F0] border border-[#E2DDD0] rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xs hover:shadow-sm transition-shadow">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left: Food Menu Card (Bada Size) */}
+            <div className="lg:col-span-5 flex justify-center">
+              <Link
+                to="/menu"
+                className="group relative block w-full max-w-xs sm:max-w-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-[#141814] border border-[#3E473E]"
+              >
+                <picture>
+                  <source srcSet="/images/menu/menu_page_1.webp" type="image/webp" />
+                  <img
+                    src="/images/menu/menu_page_1.jpg"
+                    alt="KaSaa Official Food Menu Card"
+                    className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-500"
+                    loading="eager"
+                  />
+                </picture>
+
+                {/* Subtle Hover Overlay */}
+                <div className="absolute inset-0 bg-[#245449]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                  <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-[#242824] text-xs sm:text-sm font-bold shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                    <span>Click to Explore Menu</span>
+                    <ArrowRight className="w-4 h-4 text-[#245449]" />
+                  </span>
+                </div>
+
+                {/* Official Badge */}
+                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#E9BF69] text-[#242824] text-[11px] font-bold tracking-wider uppercase shadow-xs">
+                  Official Menu Card
+                </div>
+              </Link>
+            </div>
+
+            {/* Right: Rich Minimal Description & Details */}
+            <div className="lg:col-span-7 space-y-6 text-left">
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
+                  <Utensils className="w-3.5 h-3.5 text-[#B37B15]" />
+                  <span>FOOD IS OUR LOVE LANGUAGE</span>
+                </div>
+
+                <h2 className="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-[#242824] tracking-tight leading-tight">
+                  Food Like Never Before
+                </h2>
+
+                <p className="font-serif italic text-base sm:text-lg text-[#963E23]">
+                  "Good vibe, great food. The best conversations happen over food."
+                </p>
+              </div>
+
+              <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
+                At KaSaa Experiences, creativity and taste come together. Whether you are spinning clay on the pottery wheel, 
+                painting a canvas, or enjoying an intimate date or birthday celebration, our studio cafe offers freshly made street 
+                favorites, hot momos, crisp grilled sandwiches, artisan pizzas, comforting ramen bowls, desserts, and refreshing coolers.
+              </p>
+
+              {/* Highlights List */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs sm:text-sm text-[#343A34]">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#245449] shrink-0" />
+                  <span>41 Handcrafted Dishes & Drinks</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#245449] shrink-0" />
+                  <span>Street Favs to Artisan Pizzas</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#245449] shrink-0" />
+                  <span>Freshly Prepared While You Create</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#245449] shrink-0" />
+                  <span>Custom Menus for 10+ Guests</span>
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <div className="pt-2">
+                <Link
+                  to="/menu"
+                  className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-[#245449] hover:bg-[#1B4037] text-white font-semibold text-sm rounded-xl transition-all shadow-sm hover:shadow-md active:scale-98"
+                >
+                  <span>View Complete Menu</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

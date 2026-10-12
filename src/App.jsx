@@ -7,6 +7,7 @@ import { buildEnquiryMessage, getWhatsAppUrl } from './utils/whatsapp';
 
 import HomePage from './pages/HomePage';
 import GalleryPage from './pages/GalleryPage';
+import MenuPage from './pages/MenuPage';
 import VisitPage from './pages/VisitPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import BookingPolicyPage from './pages/BookingPolicyPage';
@@ -65,6 +66,7 @@ export default function App() {
           {/* External page routes removed per user request: redirect to respective homepage sections */}
           <Route path="/experiences" element={<Navigate to="/#experiences" replace />} />
           <Route path="/together" element={<Navigate to="/#together" replace />} />
+          <Route path="/menu" element={<MenuPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/visit" element={<VisitPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />

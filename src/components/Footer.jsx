@@ -74,6 +74,11 @@ export default function Footer({ onOpenEnquiry }) {
                 </Link>
               </li>
               <li>
+                <Link to="/menu" className="hover:text-[#E9BF69] transition-colors">
+                  Food Menu
+                </Link>
+              </li>
+              <li>
                 <Link to="/visit" className="hover:text-[#E9BF69] transition-colors">
                   Visit & Directions
                 </Link>

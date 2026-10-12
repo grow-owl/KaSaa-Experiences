@@ -56,6 +56,7 @@ export default function Navbar({ onOpenEnquiry, onMobileMenuToggle }) {
     { name: 'Pottery & Painting', path: '/#experiences', hash: 'experiences' },
     { name: 'Dates & Celebrations', path: '/#together', hash: 'together' },
     { name: 'Gallery', path: '/gallery' },
+    { name: 'Food Menu', path: '/menu' },
     { name: 'Visit Us', path: '/visit' },
   ];
 
