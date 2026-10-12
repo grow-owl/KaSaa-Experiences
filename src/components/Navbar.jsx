@@ -53,7 +53,7 @@ export default function Navbar({ onOpenEnquiry, onMobileMenuToggle }) {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { name: 'Pottery & Painting', path: '/#experiences', hash: 'experiences' },
+    { name: 'Activities & Workshops', path: '/#experiences', hash: 'experiences' },
     { name: 'Dates & Celebrations', path: '/#together', hash: 'together' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Food Menu', path: '/menu' },

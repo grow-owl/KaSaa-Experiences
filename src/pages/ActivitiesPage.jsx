@@ -111,11 +111,6 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="eager"
               />
-
-              {/* Brochure Page Badge */}
-              <div className="absolute top-3 right-3 px-2.5 py-1 rounded-xl bg-black/70 backdrop-blur-sm text-white text-[10px] font-bold tracking-wider uppercase shadow-xs">
-                Brochure Page {category.brochurePage}
-              </div>
             </div>
 
             {/* Category Content */}

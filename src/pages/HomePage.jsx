@@ -18,13 +18,13 @@ import {
   Music,
   Phone,
   Utensils,
+  ChevronRight,
 } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
-import ActivityCard from '../components/ActivityCard';
 import ImagePlaceholder from '../components/ImagePlaceholder';
 import Accordion from '../components/Accordion';
 import { siteConfig } from '../data/siteConfig';
-import { activities } from '../data/activities';
+import { BROCHURE_CATEGORIES } from '../data/brochureActivities';
 import { celebrationOfferings } from '../data/celebrations';
 import { reviews, bookingSteps } from '../data/reviews';
 import { faqs } from '../data/faqs';
@@ -34,9 +34,6 @@ import { landingMenuFeatured, allDishes } from '../data/menuData';
 export default function HomePage({ onOpenEnquiry }) {
   // Gallery filtering state
   const [selectedGalleryCategory, setSelectedGalleryCategory] = useState('all');
-
-  const primaryActivities = activities.filter((a) => a.category === 'primary');
-  const supportingActivity = activities.find((a) => a.id === 'karaoke');
 
   const filteredGallery =
     selectedGalleryCategory === 'all'
@@ -79,10 +76,10 @@ export default function HomePage({ onOpenEnquiry }) {
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
                 <a
                   href="#experiences"
-                  aria-label="Explore hands-on pottery and painting experiences"
+                  aria-label="Explore creative workshops and activities"
                   className="px-6 py-3.5 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-sm rounded-xl shadow-xs transition-all duration-200 flex items-center justify-center gap-2 group hover:shadow-md active:scale-98"
                 >
-                  <span>Explore Pottery & Painting</span>
+                  <span>Explore Activities & Workshops</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </a>
 
@@ -168,97 +165,68 @@ export default function HomePage({ onOpenEnquiry }) {
       </section>
 
       {/* -------------------------------------------------------------
-          2. EXPLORE EXPERIENCES — PRIMARY CONTENT SECTION
+          2. EXPLORE WORKSHOPS & ACTIVITIES — 12 CATEGORIES GRID
           ------------------------------------------------------------- */}
       <section id="experiences" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <p className="text-xs font-bold uppercase tracking-widest text-[#963E23]">
-            Creative Hands-On Workshops
+            12 Workshop Categories
           </p>
           <h2 className="font-serif font-bold text-3xl sm:text-4xl text-[#242824] tracking-tight">
-            Discover Your Creative Side
+            Creative Workshops & Activities
           </h2>
           <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
-            Our primary focus is hands-on pottery and painting. Try something tactile, center your mind, and create a piece you will cherish.
+            Curated hands-on workshop categories from our official Activity Brochure. All materials provided for every session.
           </p>
         </div>
 
-        {/* Priority 1 & 2: Primary Large Cards Side-by-Side */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          {primaryActivities.map((activity) => (
-            <ActivityCard
-              key={activity.id}
-              activity={activity}
-              onEnquire={(type) => onOpenEnquiry(type)}
-            />
-          ))}
-        </div>
+        {/* 12 Activity Categories Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {BROCHURE_CATEGORIES.map((category) => (
+            <article
+              key={category.id}
+              className="group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1"
+            >
+              {/* Category Hero Image */}
+              <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden">
+                <img
+                  src={category.heroImage}
+                  alt={category.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
 
-        {/* Priority 3: Supporting Activity — Karaoke & Recreation Lounge (No image, matching white card styling) */}
-        {supportingActivity && (
-          <div
-            id="karaoke"
-            className="rounded-3xl bg-white border border-[#E2DDD0] shadow-sm hover:shadow-md transition-all duration-300 p-6 sm:p-8 lg:p-10 space-y-6"
-          >
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="space-y-2">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#DCE6D9] text-[#193B33] border border-[#BFD0BC]">
-                  <Music className="w-3.5 h-3.5 text-[#245449]" />
-                  <span>Supporting Activity</span>
+              {/* Category Content */}
+              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                <div className="space-y-2">
+                  <h3 className="font-serif font-bold text-xl text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
+                    {category.name}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-[#535953] leading-relaxed line-clamp-2">
+                    {category.tagline}
+                  </p>
+
+                  {/* Sub-items count & brief inclusions */}
+                  <div className="pt-2 flex items-center gap-2 text-xs text-[#245449] font-medium">
+                    <span className="px-2.5 py-0.5 rounded-md bg-[#FAF7F0] border border-[#E2DDD0] text-[11px] font-semibold text-[#6E5528]">
+                      {category.items?.length || 0} Session Options
+                    </span>
+                  </div>
                 </div>
 
-                <h3 className="font-serif font-bold text-2xl sm:text-3xl text-[#242824]">
-                  {supportingActivity.title}
-                </h3>
-                <p className="font-serif italic text-sm text-[#963E23]">
-                  {supportingActivity.tagline}
-                </p>
-              </div>
-
-              <div className="shrink-0">
-                <button
-                  type="button"
-                  onClick={() => onOpenEnquiry('karaoke')}
-                  aria-label="Ask about karaoke and recreation lounge availability"
-                  className="py-3 px-5 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-xs rounded-xl transition-colors flex items-center gap-2 shadow-xs active:scale-98"
+                {/* Action Button */}
+                <Link
+                  to={`/activities/${category.slug}`}
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#FAF7F0] hover:bg-[#245449] text-[#242824] hover:text-white border border-[#D5CEBF] hover:border-[#245449] text-xs font-semibold transition-all group-hover:bg-[#245449] group-hover:text-white group-hover:border-[#245449]"
                 >
-                  <MessageCircle className="w-4 h-4 text-[#E9BF69]" />
-                  <span>{supportingActivity.ctaLabel}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                  <span>View Activities & Details</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
-            </div>
-
-            <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed max-w-3xl">
-              {supportingActivity.fullDescription}
-            </p>
-          </div>
-        )}
-
-        {/* Brochure Activities Spotlight */}
-        <div className="rounded-3xl bg-[#FAF7F0] border border-[#E2DDD0] p-6 sm:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-2 max-w-xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#E9BF69]/20 text-[#7D5B18] border border-[#E9BF69]/30">
-              <Sparkles className="w-3.5 h-3.5 text-[#B37B15]" />
-              <span>12 WORKSHOP CATEGORIES</span>
-            </div>
-            <h3 className="font-serif font-bold text-2xl sm:text-3xl text-[#242824]">
-              Explore KaSaa Activity Brochure
-            </h3>
-            <p className="text-sm text-[#535953] leading-relaxed">
-              From Classic Canvas and Fluid Expressions to Resin Art, Decoupage, Textured Tales, and Kids Soft Play — all materials provided.
-            </p>
-          </div>
-
-          <div className="shrink-0">
-            <Link
-              to="/activities"
-              className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#245449] hover:bg-[#193B33] text-white text-xs sm:text-sm font-semibold rounded-2xl shadow-xs transition-all hover:scale-[1.01] active:scale-[0.99]"
-            >
-              <span>Explore All 12 Activities</span>
-              <ArrowRight className="w-4 h-4 text-[#E9BF69]" />
-            </Link>
-          </div>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -722,42 +690,6 @@ export default function HomePage({ onOpenEnquiry }) {
               <span>Read Verified Google Reviews</span>
               <ExternalLink className="w-3.5 h-3.5 text-[#4D534D]" />
             </a>
-          </div>
-
-          {/* Compact Three-Step Booking Strip */}
-          <div className="pt-8 border-t border-[#E2DDD0]">
-            <div className="text-center mb-8">
-              <h3 className="font-serif font-bold text-2xl text-[#242824]">
-                How Booking an Experience Works
-              </h3>
-              <p className="text-xs sm:text-sm text-[#4D534D] mt-1">
-                Straightforward coordination directly with the studio team via WhatsApp.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {bookingSteps.map((step) => (
-                <div
-                  key={step.step}
-                  className="bg-white/85 p-6 rounded-2xl border border-[#E2DDD0] relative overflow-hidden"
-                >
-                  <span className="font-serif font-bold text-4xl text-[#DCE6D9] absolute -top-1 right-3 select-none pointer-events-none">
-                    {step.step}
-                  </span>
-                  <div className="relative z-10 space-y-1.5">
-                    <span className="text-xs font-bold text-[#963E23] uppercase tracking-wider">
-                      Step {step.step}
-                    </span>
-                    <h4 className="font-serif font-bold text-lg text-[#242824]">
-                      {step.title}
-                    </h4>
-                    <p className="text-xs sm:text-sm text-[#4D534D] leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>

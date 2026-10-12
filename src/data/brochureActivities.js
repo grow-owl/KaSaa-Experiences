@@ -18,7 +18,7 @@ export const BROCHURE_CATEGORIES = [
     slug: 'classic-canvas',
     name: 'Classic Canvas',
     brochurePage: 2,
-    heroImage: '/images/brochure/classic-canvas.webp',
+    heroImage: '/images/brochure/classic-canvas-real.webp',
     tagline: 'Classic guided canvas painting session where your personal creativity takes center stage.',
     description:
       'Take your seat at a tabletop easel with high-quality canvas, vibrant paints, and artist tools. Whether an individual creative pause or a shared afternoon, enjoy a dedicated studio environment designed for painting.',
@@ -141,7 +141,7 @@ export const BROCHURE_CATEGORIES = [
     slug: 'the-artisan-edit',
     name: 'The Artisan Edit',
     brochurePage: 3,
-    heroImage: '/images/brochure/lippan-art.webp',
+    heroImage: '/images/brochure/artisan-craft-real.webp',
     tagline: 'Heritage crafts, mirror mosaics, and intricate artistic traditions curated for mindful hands-on creation.',
     description:
       'Explore timeless artisan traditions that blend sacred geometry, clay relief sculpture, and shimmering crystal embellishment into mindful meditative sessions.',
@@ -249,7 +249,7 @@ export const BROCHURE_CATEGORIES = [
     slug: 'the-textured-tales',
     name: 'The Textured Tales',
     brochurePage: 4,
-    heroImage: '/images/brochure/textured-3d-moon.webp',
+    heroImage: '/images/brochure/textured-art-real.webp',
     tagline: 'Tactile dimension and sculptural palette knife artistry that leaps off the canvas surface.',
     description:
       'Immerse yourself in heavy texture art — sculpting rich acrylic pastes, beach wave froth, and illuminated lunar craters using artist palette knives and dimensional mediums.',
@@ -293,7 +293,7 @@ export const BROCHURE_CATEGORIES = [
     slug: 'cloth-and-colour',
     name: 'Cloth & Colour',
     brochurePage: 4,
-    heroImage: '/images/brochure/tote-bag-painting.webp',
+    heroImage: '/images/brochure/diy-potli.webp',
     tagline: 'Wearable textile artistry, hand-painted fabric accessories, and bespoke handcrafted wardrobe staples.',
     description:
       'Turn cotton, canvas, silk, and heritage fabrics into wearable artistic expressions using professional fabric pigments, stencils, and personalized illustrations.',
@@ -357,7 +357,7 @@ export const BROCHURE_CATEGORIES = [
     slug: 'out-of-the-ordinary',
     name: 'Out of the Ordinary',
     brochurePage: 5,
-    heroImage: '/images/brochure/plushie-stuffing.webp',
+    heroImage: '/images/brochure/wine-glass-painting.webp',
     tagline: 'Playful, unexpected creative experiences that step joyfully outside ordinary canvas bounds.',
     description:
       'From painting terracotta planters to stuffing cuddly teddy bears and decorating funky sunglasses, these offbeat crafts bring pure joy and quirky creativity to every participant.',
@@ -400,7 +400,7 @@ export const BROCHURE_CATEGORIES = [
     slug: 'personalised-memoirs',
     name: 'Personalised Memoirs',
     brochurePage: 5,
-    heroImage: '/images/brochure/scrapbook-making.webp',
+    heroImage: '/images/diy_2.webp',
     tagline: 'Custom handcrafted keepsakes infused with intimacy, sentiment, and cherished moments.',
     description:
       'Create heirloom-quality keepsakes — stringing charm bracelets, painting wine glasses for a toast, sculpting clay memories, or curating sentimental scrapbook pages with your favorite photos.',
@@ -465,7 +465,7 @@ export const BROCHURE_CATEGORIES = [
     slug: 'resin-reflections',
     name: 'Resin Reflections',
     brochurePage: 6,
-    heroImage: '/images/brochure/resin-clock.webp',
+    heroImage: '/images/diy.webp',
     tagline: 'High-gloss epoxy crystal creations, geode wall clocks, and shimmering wearable resin art.',
     description:
       'Master the mesmerizing art of resin — mixing liquid epoxies with rich mica pigments, gold leafing, and botanical inclusions to craft glass-smooth functional art pieces.',
@@ -559,7 +559,7 @@ export const BROCHURE_CATEGORIES = [
     slug: 'soft-play',
     name: 'Soft Play',
     brochurePage: 7,
-    heroImage: '/images/brochure/soft-play-entry.webp',
+    heroImage: '/images/brochure/soft-play-real.webp',
     tagline: 'Safe, joyful play arenas and curated birthday celebrations for children and families.',
     description:
       'Step into KaSaa’s dedicated Soft Play zone at Vega Circle Mall — offering safe cushioned fun for children, unlimited play time, and complete birthday package coordination.',
@@ -613,7 +613,7 @@ export const BROCHURE_CATEGORIES = [
     slug: 'bespoke-celebrations',
     name: 'Bespoke Celebrations',
     brochurePage: 8,
-    heroImage: '/images/brochure/bespoke-gathering.webp',
+    heroImage: '/images/painting_3.webp',
     tagline: 'Private setups, cooking dates, proposal milestones, and fully planned signature experiences.',
     description:
       'From custom decor and tailored art activities to intimate cooking dates and unforgettable proposals — KaSaa plans and hosts your occasions from start to finish.',

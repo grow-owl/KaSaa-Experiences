@@ -115,7 +115,7 @@ export default function ActivityDetailPageLayout({
           <div className="lg:col-span-8 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FAF7F0] border border-[#E2DDD0] text-xs font-semibold text-[#245449]">
               <Sparkles className="w-3.5 h-3.5 text-[#C86F50]" />
-              <span>Official KaSaa Activity Brochure • Page {category.brochurePage}</span>
+              <span>Official KaSaa Activity Brochure</span>
             </div>
 
             <h1 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl text-[#242824] tracking-tight">
@@ -140,25 +140,6 @@ export default function ActivityDetailPageLayout({
               >
                 <MessageCircle className="w-4 h-4 text-[#E9BF69]" />
                 <span>Enquire on WhatsApp</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleCopyMessage()}
-                className="inline-flex items-center gap-2 px-4 py-3.5 bg-[#FAF7F0] hover:bg-[#F1ECE1] border border-[#E2DDD0] text-xs sm:text-sm font-medium text-[#242824] rounded-2xl transition-colors cursor-pointer"
-                aria-label="Copy enquiry template"
-              >
-                {copiedItem === 'category' ? (
-                  <>
-                    <Check className="w-4 h-4 text-emerald-600" />
-                    <span className="text-emerald-700 font-semibold">Message Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-4 h-4 text-[#4D534D]" />
-                    <span>Copy Message Template</span>
-                  </>
-                )}
               </button>
             </div>
           </div>
@@ -288,29 +269,15 @@ export default function ActivityDetailPageLayout({
                 </div>
 
                 {/* Card WhatsApp Action */}
-                <div className="pt-3 border-t border-[#F1ECE1] flex items-center gap-2">
+                <div className="pt-3 border-t border-[#F1ECE1]">
                   <button
                     type="button"
                     onClick={() => handleItemEnquiry(item.name)}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] text-xs font-semibold rounded-xl transition-colors cursor-pointer"
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] text-xs font-semibold rounded-xl transition-colors cursor-pointer"
                     aria-label={`Enquire about ${item.name} on WhatsApp`}
                   >
                     <MessageCircle className="w-4 h-4 text-[#E9BF69]" />
                     <span>Enquire on WhatsApp</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleCopyMessage(item.name)}
-                    title="Copy enquiry text"
-                    aria-label={`Copy enquiry text for ${item.name}`}
-                    className="p-2.5 rounded-xl border border-[#E2DDD0] bg-[#FAF7F0] hover:bg-[#F1ECE1] text-[#4D534D] transition-colors cursor-pointer"
-                  >
-                    {copiedItem === item.name ? (
-                      <Check className="w-4 h-4 text-emerald-600" />
-                    ) : (
-                      <Copy className="w-4 h-4" />
-                    )}
                   </button>
                 </div>
               </div>
@@ -377,16 +344,13 @@ export default function ActivityDetailPageLayout({
               <Link
                 key={cat.id}
                 to={`/activities/${cat.slug}`}
-                className={`p-3 rounded-xl border text-xs text-center transition-all flex flex-col justify-between gap-1.5 ${
+                className={`p-3 rounded-xl border text-xs text-center transition-all flex items-center justify-center min-h-[44px] ${
                   isActive
                     ? 'bg-[#245449] text-[#F8F4EB] border-[#245449] font-bold shadow-xs'
                     : 'bg-white hover:bg-[#FAF7F0] text-[#242824] border-[#E2DDD0] hover:border-[#245449]/40'
                 }`}
               >
-                <span className="truncate">{cat.name}</span>
-                <span className={`text-[10px] ${isActive ? 'text-[#E9BF69]' : 'text-[#4D534D]'}`}>
-                  Page {cat.brochurePage}
-                </span>
+                <span className="truncate font-medium">{cat.name}</span>
               </Link>
             );
           })}
