@@ -116,7 +116,7 @@ export default function MenuPage({ onOpenEnquiry }) {
 
         {/* Clean GST Note */}
         <p className="text-xs text-[#7A827A]">
-          * Prices mentioned are exclusive of GST, as on the official menu card.
+          * Prices mentioned are exclusive of GST.
         </p>
       </div>
 

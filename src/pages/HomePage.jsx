@@ -565,7 +565,7 @@ export default function HomePage({ onOpenEnquiry }) {
                   <source srcSet="/images/menu/menu_page_1.webp" type="image/webp" />
                   <img
                     src="/images/menu/menu_page_1.jpg"
-                    alt="KaSaa Official Food Menu Card"
+                    alt="KaSaa Food Menu Card"
                     className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-500"
                     loading="eager"
                   />
@@ -577,11 +577,6 @@ export default function HomePage({ onOpenEnquiry }) {
                     <span>Click to Explore Menu</span>
                     <ArrowRight className="w-4 h-4 text-[#245449]" />
                   </span>
-                </div>
-
-                {/* Official Badge */}
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#E9BF69] text-[#242824] text-[11px] font-bold tracking-wider uppercase shadow-xs">
-                  Official Menu Card
                 </div>
               </Link>
             </div>
