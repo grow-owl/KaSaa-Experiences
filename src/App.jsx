@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import MobileBottomBar from './components/MobileBottomBar';
@@ -8,10 +8,23 @@ import { buildEnquiryMessage, getWhatsAppUrl } from './utils/whatsapp';
 import HomePage from './pages/HomePage';
 import GalleryPage from './pages/GalleryPage';
 import MenuPage from './pages/MenuPage';
+import ActivitiesPage from './pages/ActivitiesPage';
+import ActivityDetailPageLayout from './pages/activities/ActivityDetailPageLayout';
+import { getBrochureCategory } from './data/brochureActivities';
 import VisitPage from './pages/VisitPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import BookingPolicyPage from './pages/BookingPolicyPage';
 import NotFoundPage from './pages/NotFoundPage';
+
+// Dynamic wrapper for isolated brochure activity detail pages
+function ActivityRouteWrapper({ onOpenEnquiry }) {
+  const { slug } = useParams();
+  const category = getBrochureCategory(slug);
+  if (!category) {
+    return <Navigate to="/activities" replace />;
+  }
+  return <ActivityDetailPageLayout category={category} onOpenEnquiry={onOpenEnquiry} />;
+}
 
 // Scroll to top or anchor target helper on route change
 function ScrollToTop() {
@@ -66,6 +79,8 @@ export default function App() {
           {/* External page routes removed per user request: redirect to respective homepage sections */}
           <Route path="/experiences" element={<Navigate to="/#experiences" replace />} />
           <Route path="/together" element={<Navigate to="/#together" replace />} />
+          <Route path="/activities" element={<ActivitiesPage onOpenEnquiry={handleOpenEnquiry} />} />
+          <Route path="/activities/:slug" element={<ActivityRouteWrapper onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/menu" element={<MenuPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/visit" element={<VisitPage onOpenEnquiry={handleOpenEnquiry} />} />

@@ -98,7 +98,9 @@ export default function ActivityDetailPageLayout({
           <span>Home</span>
         </Link>
         <span>/</span>
-        <span className="text-[#4D534D]">Activity Brochure</span>
+        <Link to="/activities" className="hover:text-[#245449] transition-colors">
+          Activity Brochure
+        </Link>
         <span>/</span>
         <span className="text-[#242824] font-semibold">{category.name}</span>
       </nav>

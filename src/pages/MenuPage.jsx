@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { 
   ArrowLeft, 
   Search, 
-  Sparkles, 
   Info, 
   Utensils, 
   MessageCircle, 
@@ -12,7 +11,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Flame,
-  Star,
   CheckCircle2,
   Clock
 } from 'lucide-react';
@@ -71,7 +69,6 @@ export default function MenuPage({ onOpenEnquiry }) {
         canonicalPath="/menu"
       />
 
-      {/* -------------------------------------------------------------
       {/* -------------------------------------------------------------
           1. MINIMAL PREMIUM HEADER (CENTERED)
           ------------------------------------------------------------- */}
@@ -195,13 +192,7 @@ export default function MenuPage({ onOpenEnquiry }) {
                 />
               </picture>
 
-              {/* Tag / Badge */}
-              {dish.tag && (
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#245449]/90 backdrop-blur-sm text-white text-[10px] font-bold tracking-wider uppercase shadow-xs flex items-center gap-1">
-                  <Star className="w-2.5 h-2.5 fill-[#E9BF69] text-[#E9BF69]" />
-                  <span>{dish.tag}</span>
-                </div>
-              )}
+
 
               {/* Exact Price Pill */}
               <div className="absolute top-3 right-3 px-3 py-1 rounded-xl bg-black/75 backdrop-blur-sm text-[#E9BF69] text-xs font-bold tracking-tight shadow-xs">

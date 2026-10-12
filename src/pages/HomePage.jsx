@@ -235,6 +235,31 @@ export default function HomePage({ onOpenEnquiry }) {
           </div>
         )}
 
+        {/* Brochure Activities Spotlight */}
+        <div className="rounded-3xl bg-[#FAF7F0] border border-[#E2DDD0] p-6 sm:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-2 max-w-xl">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#E9BF69]/20 text-[#7D5B18] border border-[#E9BF69]/30">
+              <Sparkles className="w-3.5 h-3.5 text-[#B37B15]" />
+              <span>12 WORKSHOP CATEGORIES</span>
+            </div>
+            <h3 className="font-serif font-bold text-2xl sm:text-3xl text-[#242824]">
+              Explore KaSaa Activity Brochure
+            </h3>
+            <p className="text-sm text-[#535953] leading-relaxed">
+              From Classic Canvas and Fluid Expressions to Resin Art, Decoupage, Textured Tales, and Kids Soft Play — all materials provided.
+            </p>
+          </div>
+
+          <div className="shrink-0">
+            <Link
+              to="/activities"
+              className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#245449] hover:bg-[#193B33] text-white text-xs sm:text-sm font-semibold rounded-2xl shadow-xs transition-all hover:scale-[1.01] active:scale-[0.99]"
+            >
+              <span>Explore All 12 Activities</span>
+              <ArrowRight className="w-4 h-4 text-[#E9BF69]" />
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* -------------------------------------------------------------
