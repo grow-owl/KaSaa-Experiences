@@ -561,7 +561,7 @@ export default function HomePage({ onOpenEnquiry }) {
                     src="/images/menu/menu_page_1.jpg"
                     alt="KaSaa Food Menu Card"
                     className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-500"
-                    loading="eager"
+                    loading="lazy"
                   />
                 </picture>
 

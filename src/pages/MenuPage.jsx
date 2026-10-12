@@ -188,7 +188,7 @@ export default function MenuPage({ onOpenEnquiry }) {
                   src={dish.fallbackImage}
                   alt={dish.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="eager"
+                  loading="lazy"
                 />
               </picture>
 
@@ -259,7 +259,7 @@ export default function MenuPage({ onOpenEnquiry }) {
                 src="/images/menu/menu_page_10.jpg"
                 alt="KaSaa Group Custom Menu - Page 10 Artwork"
                 className="w-full h-auto object-cover"
-                loading="eager"
+                loading="lazy"
               />
             </picture>
           </div>
