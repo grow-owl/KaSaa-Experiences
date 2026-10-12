@@ -82,7 +82,7 @@ export default function ImagePlaceholder({
   };
 
   // Convert aspect ratio string like "16/10" or "4/3" or "3/4" to CSS style
-  const aspectStyle = { aspectRatio: aspectRatio.replace('/', ' / ') };
+  const aspectStyle = aspectRatio ? { aspectRatio: aspectRatio.replace('/', ' / ') } : undefined;
 
   return (
     <div

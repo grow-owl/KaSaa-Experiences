@@ -24,7 +24,7 @@ export default function VisitPage({ onOpenEnquiry }) {
           <span className="text-[#242824] font-medium">Visit</span>
         </div>
 
-        <h1 className="font-serif font-bold text-3.5xl sm:text-5xl text-[#242824] tracking-tight">
+        <h1 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
           Plan Your Visit to KaSaa Experiences
         </h1>
 

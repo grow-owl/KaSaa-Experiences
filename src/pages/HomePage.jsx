@@ -62,7 +62,7 @@ export default function HomePage({ onOpenEnquiry }) {
             {/* Left Column: Copy & Actions (Desktop ~48%, 6 cols in 12-col grid) */}
             <div className="lg:col-span-6 space-y-6 text-left">
               {/* Main Heading */}
-              <h1 className="font-serif font-bold text-3.5xl sm:text-5xl lg:text-6xl text-[#242824] tracking-tight leading-[1.12]">
+              <h1 className="font-serif font-bold text-5xl sm:text-5xl lg:text-6xl text-[#242824] tracking-tight leading-[1.12]">
                 Make Something. <br />
                 <span className="text-[#963E23] italic font-normal">Make Memories.</span>
               </h1>
@@ -107,9 +107,10 @@ export default function HomePage({ onOpenEnquiry }) {
 
             {/* Right Column: Editorial Photo Collage (Desktop ~52%, 6 cols in 12-col grid) */}
             <div className="lg:col-span-6 relative">
-              <div className="grid grid-cols-12 gap-3 sm:gap-4 items-center">
+              {/* Mobile: Full-width main card + 2 side-by-side cards below / Desktop: 8:4 column collage */}
+              <div className="flex flex-col sm:grid sm:grid-cols-12 gap-3 sm:gap-4 items-center">
                 {/* Large Main Feature Card (Pottery focus) */}
-                <div className="col-span-8 sm:col-span-8 space-y-2.5">
+                <div className="w-full sm:col-span-8 space-y-2.5">
                   <ImagePlaceholder
                     src="/images/hero-pottery-hands.webp"
                     alt="Hands shaping wet clay on an electric pottery wheel at KaSaa Experiences"
@@ -122,32 +123,32 @@ export default function HomePage({ onOpenEnquiry }) {
                   />
                 </div>
 
-                {/* Supporting Compact Cards - made smaller */}
-                <div className="col-span-4 sm:col-span-4 space-y-2.5">
-                  <div className="space-y-1">
+                {/* Supporting Compact Cards - 2 equal columns on mobile, stacked column on tablet/desktop */}
+                <div className="w-full sm:col-span-4 grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2.5">
+                  <div className="space-y-1.5">
                     <ImagePlaceholder
                       src="/images/painting.webp"
                       alt="Guided canvas painting workshop at KaSaa Experiences"
                       title="Canvas Painting"
                       type="painting"
-                      aspectRatio="4/3"
-                      className="shadow-xs border-2 border-white rounded-xl"
+                      aspectRatio={null}
+                      className="aspect-[4/5] sm:aspect-4/3 shadow-xs border-2 border-white rounded-xl"
                     />
-                    <div className="text-[10px] sm:text-[11px] font-medium text-[#6D756D] text-center truncate">
+                    <div className="text-xs sm:text-[11px] font-semibold text-[#242824] sm:text-[#6D756D] text-center truncate">
                       Canvas Painting
                     </div>
                   </div>
 
-                  <div className="space-y-1">
+                  <div className="space-y-1.5">
                     <ImagePlaceholder
                       src="/images/collection_of_work.webp"
                       alt="Finished handcrafted ceramic pottery and artwork on display"
                       title="Handcrafted Art"
                       type="general"
-                      aspectRatio="4/3"
-                      className="shadow-xs border-2 border-white rounded-xl"
+                      aspectRatio={null}
+                      className="aspect-[4/5] sm:aspect-4/3 shadow-xs border-2 border-white rounded-xl"
                     />
-                    <div className="text-[10px] sm:text-[11px] font-medium text-[#6D756D] text-center truncate">
+                    <div className="text-xs sm:text-[11px] font-semibold text-[#242824] sm:text-[#6D756D] text-center truncate">
                       Finished Art
                     </div>
                   </div>
