@@ -189,6 +189,7 @@ export default function MenuPage({ onOpenEnquiry }) {
                   alt={dish.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
+                  decoding="async"
                 />
               </picture>
 
@@ -260,6 +261,7 @@ export default function MenuPage({ onOpenEnquiry }) {
                 alt="KaSaa Group Custom Menu - Page 10 Artwork"
                 className="w-full h-auto object-cover"
                 loading="lazy"
+                decoding="async"
               />
             </picture>
           </div>
@@ -333,6 +335,7 @@ export default function MenuPage({ onOpenEnquiry }) {
               src={originalMenuBookPages[bookletPage].image}
               alt={originalMenuBookPages[bookletPage].title}
               className="max-h-[80vh] max-w-full object-contain rounded-2xl shadow-2xl border border-white/10"
+              decoding="async"
             />
 
             <button

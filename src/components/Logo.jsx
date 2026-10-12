@@ -20,7 +20,8 @@ export default function Logo({ className = '', footer = false }) {
         className={`w-auto object-contain transition-opacity duration-200 group-hover:opacity-90 ${
           footer ? 'h-11 sm:h-13' : 'h-10 sm:h-12'
         }`}
-        loading="eager"
+        loading={footer ? 'lazy' : 'eager'}
+        fetchPriority={footer ? 'auto' : 'high'}
         decoding="async"
       />
     </Link>

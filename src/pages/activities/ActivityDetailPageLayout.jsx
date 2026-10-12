@@ -154,6 +154,8 @@ export default function ActivityDetailPageLayout({
                     alt={`${category.name} visual showcase`}
                     className="w-full h-64 sm:h-72 object-contain p-3 transition-transform duration-500 group-hover:scale-105"
                     loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                   />
                 </div>
                 <div className="mt-2 text-center text-xs text-[#4D534D]">
@@ -237,6 +239,7 @@ export default function ActivityDetailPageLayout({
                     alt={item.name}
                     className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
+                    decoding="async"
                   />
                 ) : (
                   <div className="text-xs text-[#4D534D] italic">Visual in Brochure</div>
