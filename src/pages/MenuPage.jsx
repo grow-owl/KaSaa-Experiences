@@ -72,61 +72,53 @@ export default function MenuPage({ onOpenEnquiry }) {
       />
 
       {/* -------------------------------------------------------------
-          1. MINIMAL PREMIUM HEADER
+      {/* -------------------------------------------------------------
+          1. MINIMAL PREMIUM HEADER (CENTERED)
           ------------------------------------------------------------- */}
-      <div className="space-y-6 pb-8 border-b border-[#E2DDD0]">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div className="space-y-4 max-w-2xl">
-            {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-xs text-[#535953]">
-              <Link to="/" className="hover:text-[#245449] flex items-center gap-1 font-medium">
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span>Home</span>
-              </Link>
-              <span>/</span>
-              <span className="text-[#242824] font-semibold">Food Menu</span>
-            </div>
-
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
-              <Sparkles className="w-3.5 h-3.5 text-[#B37B15]" />
-              <span>FOOD IS OUR LOVE LANGUAGE</span>
-            </div>
-
-            <h1 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
-              KaSaa Food Menu
-            </h1>
-
-            <p className="text-sm sm:text-base text-[#535953] leading-relaxed">
-              Food like never before. Good vibe, great food. Also, food is our love language.
-            </p>
-          </div>
-
-          {/* Quick Action Button: View original handwritten chalk menu */}
-          <div className="shrink-0 self-start md:self-end">
-            <button
-              type="button"
-              onClick={() => setBookletOpen(true)}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white hover:bg-[#F2EDE2] text-[#242824] border border-[#D5CEBF] text-xs sm:text-sm font-semibold shadow-xs transition-all hover:border-[#245449] active:scale-98"
-            >
-              <BookOpen className="w-4 h-4 text-[#245449]" />
-              <span>View Original Chalk Menu Book</span>
-            </button>
-          </div>
+      <div className="space-y-4 pb-8 border-b border-[#E2DDD0] text-center max-w-2xl mx-auto">
+        {/* Breadcrumb */}
+        <div className="flex items-center justify-center gap-2 text-xs text-[#535953]">
+          <Link to="/" className="hover:text-[#245449] flex items-center gap-1 font-medium">
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Home</span>
+          </Link>
+          <span>/</span>
+          <span className="text-[#242824] font-semibold">Food Menu</span>
         </div>
+
+        <h1 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+          KaSaa Food Menu
+        </h1>
+
+        <p className="text-sm sm:text-base text-[#535953] leading-relaxed">
+          Food like never before. Good vibe, great food.
+        </p>
 
         {/* Clean GST Note */}
         <p className="text-xs text-[#7A827A]">
           * Prices mentioned are exclusive of GST.
         </p>
+
+        {/* Quick Action Button: View original handwritten chalk menu */}
+        <div className="pt-2 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setBookletOpen(true)}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white hover:bg-[#F2EDE2] text-[#242824] border border-[#D5CEBF] text-xs sm:text-sm font-semibold shadow-xs transition-all hover:border-[#245449] active:scale-98"
+          >
+            <BookOpen className="w-4 h-4 text-[#245449]" />
+            <span>View Original Chalk Menu Book</span>
+          </button>
+        </div>
       </div>
 
       {/* -------------------------------------------------------------
           2. MINIMAL SEARCH & CATEGORY FILTER TABS
           ------------------------------------------------------------- */}
       <div className="space-y-4">
-        {/* Search bar + Counter */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <div className="relative w-full sm:max-w-md">
+        {/* Search bar */}
+        <div className="flex justify-center">
+          <div className="relative w-full max-w-md">
             <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8C938C]" />
             <input
               type="text"
@@ -145,17 +137,10 @@ export default function MenuPage({ onOpenEnquiry }) {
               </button>
             )}
           </div>
-
-          <p className="text-xs text-[#6F776F] font-medium">
-            Showing <span className="font-bold text-[#242824]">{filteredDishes.length}</span> dishes
-            {activeCategory !== 'all' && (
-              <span> in <span className="font-semibold text-[#245449]">{activeCategory === 'popular' ? 'Bestsellers' : activeCategory}</span></span>
-            )}
-          </p>
         </div>
 
         {/* Category Scrollable Pill Tabs */}
-        <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 scrollbar-none">
+        <div className="flex items-center sm:justify-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 scrollbar-none">
           {tabs.map((tab) => {
             const count = categoryCounts[tab.id] || 0;
             const isActive = activeCategory === tab.id;
