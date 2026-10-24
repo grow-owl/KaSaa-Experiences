@@ -109,15 +109,15 @@ export default function HomePage({ onOpenEnquiry }) {
             <div className="lg:col-span-6 relative">
               {/* Mobile: Full-width main card + 2 side-by-side cards below / Desktop: 8:4 column collage */}
               <div className="flex flex-col sm:grid sm:grid-cols-12 gap-3 sm:gap-4 items-center">
-                {/* Large Main Feature Card (Pottery focus) */}
+                {/* Large Main Feature Card (Collection of Work focus) */}
                 <div className="w-full sm:col-span-8 space-y-2.5 flex flex-col items-center">
                   <ImagePlaceholder
-                    src="/images/hero-pottery-hands.webp"
-                    alt="Hands shaping wet clay on an electric pottery wheel at KaSaa Experiences"
-                    title="Pottery Wheel Sessions"
-                    type="pottery"
+                    src="/images/collection_of_work.webp"
+                    alt="Finished handcrafted ceramic pottery and artwork on display at KaSaa Experiences"
+                    title="Handcrafted Art & Pottery"
+                    type="general"
                     aspectRatio="4/3"
-                    objectPosition="center top"
+                    objectPosition="center"
                     priority={true}
                     className="shadow-md border-2 border-white rounded-2xl w-full"
                   />
@@ -144,11 +144,12 @@ export default function HomePage({ onOpenEnquiry }) {
 
                   <div className="space-y-1.5">
                     <ImagePlaceholder
-                      src="/images/collection_of_work.webp"
-                      alt="Finished handcrafted ceramic pottery and artwork on display"
+                      src="/images/hero-pottery-hands.webp"
+                      alt="Lady holding a freshly made pottery pot at KaSaa Experiences"
                       title="Pottery"
                       type="pottery"
                       aspectRatio={null}
+                      objectPosition="center top"
                       className="aspect-[4/5] sm:aspect-4/3 shadow-xs border-2 border-white rounded-xl"
                     />
                     <div className="text-xs sm:text-[11px] font-semibold text-[#242824] sm:text-[#6D756D] text-center truncate">
