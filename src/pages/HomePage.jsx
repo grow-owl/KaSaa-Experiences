@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Sparkles,
   MapPin,
@@ -19,6 +19,8 @@ import {
   Phone,
   Utensils,
   ChevronRight,
+  ChevronDown,
+  Check,
 } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import ImagePlaceholder from '../components/ImagePlaceholder';
@@ -32,6 +34,100 @@ import { galleryItems, galleryCategories } from '../data/gallery';
 import { landingMenuFeatured, allDishes } from '../data/menuData';
 
 export default function HomePage({ onOpenEnquiry }) {
+  const navigate = useNavigate();
+
+  // Experience Match Finder state (Single line, custom interactive dropdowns)
+  const [matchCategory, setMatchCategory] = useState('');
+  const [matchPrice, setMatchPrice] = useState('all');
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isPriceOpen, setIsPriceOpen] = useState(false);
+  const categoryDropdownRef = useRef(null);
+  const priceDropdownRef = useRef(null);
+
+  const categoryOptions = [
+    { value: '', label: 'Category', sublabel: 'All creative offerings' },
+    { value: 'Food', label: 'Food', sublabel: 'Fresh cafe menu & treats' },
+    { value: 'Activities', label: 'Activities', sublabel: '12 Workshop categories' },
+    { value: 'Celebrations', label: 'Celebrations', sublabel: 'Dates, birthdays & groups' },
+  ];
+
+  const priceOptions = [
+    { value: 'all', label: 'Price Range', sublabel: 'Any budget' },
+    { value: 'under-300', label: 'Under ₹300', sublabel: 'Pocket-friendly sessions' },
+    { value: '300-700', label: '₹300 – ₹700', sublabel: 'Popular workshops' },
+    { value: '700-1500', label: '₹700 – ₹1500', sublabel: 'Signature art experiences' },
+    { value: '1500-plus', label: '₹1500+', sublabel: 'Curated celebration setups' },
+  ];
+
+  const categoryLabel =
+    categoryOptions.find((c) => c.value === matchCategory)?.label || 'Category';
+  const priceLabel =
+    priceOptions.find((p) => p.value === matchPrice)?.label || 'Price Range';
+
+  // Close dropdowns on outside click or Escape
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        categoryDropdownRef.current &&
+        !categoryDropdownRef.current.contains(event.target)
+      ) {
+        setIsCategoryOpen(false);
+      }
+      if (
+        priceDropdownRef.current &&
+        !priceDropdownRef.current.contains(event.target)
+      ) {
+        setIsPriceOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsCategoryOpen(false);
+        setIsPriceOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  const handleMatchSubmit = (e) => {
+    e.preventDefault();
+    setIsCategoryOpen(false);
+    setIsPriceOpen(false);
+
+    if (matchCategory === 'Food') {
+      const el = document.getElementById('menu-preview');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        navigate('/menu');
+      }
+      return;
+    }
+
+    if (matchCategory === 'Celebrations') {
+      const el = document.getElementById('together');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+      return;
+    }
+
+    // Activities or general
+    const el = document.getElementById('experiences');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/activities');
+    }
+  };
+
   // Gallery filtering state
   const [selectedGalleryCategory, setSelectedGalleryCategory] = useState('all');
 
@@ -85,11 +181,11 @@ export default function HomePage({ onOpenEnquiry }) {
 
                 <a
                   href="#together"
-                  aria-label="View creative date and celebration options"
+                  aria-label="View creative date ideas and celebration options"
                   className="px-6 py-3.5 bg-white hover:bg-[#F1ECE1] text-[#242824] border border-[#D5CEBF] font-semibold text-sm rounded-xl transition-all duration-200 flex items-center justify-center gap-2 active:scale-98"
                 >
                   <Heart className="w-4 h-4 text-[#963E23]" />
-                  <span>Dates & Celebrations</span>
+                  <span>Date Ideas & Celebrations</span>
                 </a>
               </div>
 
@@ -105,59 +201,161 @@ export default function HomePage({ onOpenEnquiry }) {
               </div>
             </div>
 
-            {/* Right Column: Editorial Photo Collage (Desktop ~52%, 6 cols in 12-col grid) */}
-            <div className="lg:col-span-6 relative">
-              {/* Mobile: Full-width main card + 2 side-by-side cards below / Desktop: 8:4 column collage */}
-              <div className="flex flex-col sm:grid sm:grid-cols-12 gap-3 sm:gap-4 items-center">
-                {/* Large Main Feature Card (Collection of Work focus) */}
-                <div className="w-full sm:col-span-8 space-y-2.5 flex flex-col items-center">
-                  <ImagePlaceholder
-                    src="/images/collection_of_work.webp"
-                    alt="Finished handcrafted ceramic pottery and artwork on display at KaSaa Experiences"
-                    title="Handcrafted Art & Pottery"
-                    type="general"
-                    aspectRatio="4/3"
-                    objectPosition="center"
-                    priority={true}
-                    className="shadow-md border-2 border-white rounded-2xl w-full"
-                  />
-                  <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#FAF7F0] border border-[#E2DDD0] text-xs font-semibold text-[#193B33] shadow-xs">
-                    <span>Less scrolling. More living.</span>
-                  </div>
-                </div>
-
-                {/* Supporting Compact Cards - 2 equal columns on mobile, stacked column on tablet/desktop */}
-                <div className="w-full sm:col-span-4 grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2.5">
-                  <div className="space-y-1.5">
-                    <ImagePlaceholder
-                      src="/images/painting.webp"
-                      alt="Guided canvas painting workshop at KaSaa Experiences"
-                      title="Canvas Painting"
-                      type="painting"
-                      aspectRatio={null}
-                      className="aspect-[4/5] sm:aspect-4/3 shadow-xs border-2 border-white rounded-xl"
-                    />
-                    <div className="text-xs sm:text-[11px] font-semibold text-[#242824] sm:text-[#6D756D] text-center truncate">
-                      Canvas Painting
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <ImagePlaceholder
-                      src="/images/hero-pottery-hands.webp"
-                      alt="Lady holding a freshly made pottery pot at KaSaa Experiences"
-                      title="Pottery"
-                      type="pottery"
-                      aspectRatio={null}
-                      objectPosition="center top"
-                      className="aspect-[4/5] sm:aspect-4/3 shadow-xs border-2 border-white rounded-xl"
-                    />
-                    <div className="text-xs sm:text-[11px] font-semibold text-[#242824] sm:text-[#6D756D] text-center truncate">
-                      Pottery
-                    </div>
-                  </div>
+            {/* Right Column: Hero Feature Card */}
+            <div className="lg:col-span-6 relative flex flex-col items-center justify-center">
+              <div className="w-full max-w-lg lg:max-w-none space-y-3 flex flex-col items-center">
+                <ImagePlaceholder
+                  src="/images/collection_of_work.webp"
+                  alt="Finished handcrafted ceramic pottery and artwork on display at KaSaa Experiences"
+                  title="Handcrafted Art & Pottery"
+                  type="general"
+                  aspectRatio="4/3"
+                  objectPosition="center"
+                  priority={true}
+                  className="shadow-md border-2 border-white rounded-2xl w-full"
+                />
+                <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#FAF7F0] border border-[#E2DDD0] text-xs font-semibold text-[#193B33] shadow-xs">
+                  <span>SILIGURI HAPPY PLACE(ISH)</span>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Sentence Match Finder Widget (Reference Design - Single Line) */}
+          <div className="mt-12 sm:mt-16 pt-10 sm:pt-14 border-t border-[#E8E0D0] text-center">
+            <div className="max-w-4xl mx-auto px-2">
+              <form onSubmit={handleMatchSubmit} className="space-y-6 sm:space-y-8">
+                {/* Sentence: Single line on desktop/tablet */}
+                <div className="font-light text-xl sm:text-2xl md:text-3xl lg:text-[32px] text-[#242824] leading-relaxed tracking-tight flex items-center justify-center flex-wrap sm:flex-nowrap gap-x-2.5 sm:gap-x-3.5 gap-y-3">
+                  <span className="whitespace-nowrap">I’m looking for</span>
+
+                  {/* Dropdown 1: Category */}
+                  <div className="relative inline-block" ref={categoryDropdownRef}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsCategoryOpen((prev) => !prev);
+                        setIsPriceOpen(false);
+                      }}
+                      aria-expanded={isCategoryOpen}
+                      aria-label="Select category"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 border-b-2 border-[#7E909B] hover:border-[#245449] pb-0.5 text-[#526B73] hover:text-[#245449] font-normal transition-colors cursor-pointer group whitespace-nowrap focus:outline-none"
+                    >
+                      <span>{categoryLabel}</span>
+                      <ChevronDown
+                        className={`w-4 h-4 text-[#526B73] group-hover:text-[#245449] transition-transform duration-200 ${isCategoryOpen ? 'rotate-180' : ''
+                          }`}
+                      />
+                    </button>
+
+                    {/* Category Popover Menu */}
+                    {isCategoryOpen && (
+                      <div
+                        className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-64 sm:w-72 bg-[#FAF7F0] border border-[#D5CEBF] rounded-2xl shadow-xl z-50 p-1.5 text-left animate-in fade-in zoom-in-95 duration-150"
+                        role="listbox"
+                      >
+                        {categoryOptions.map((opt) => {
+                          const isSelected = matchCategory === opt.value;
+                          return (
+                            <button
+                              key={opt.value}
+                              type="button"
+                              onClick={() => {
+                                setMatchCategory(opt.value);
+                                setIsCategoryOpen(false);
+                              }}
+                              className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm transition-all flex items-center justify-between cursor-pointer ${isSelected
+                                  ? 'bg-[#245449] text-white font-medium shadow-xs'
+                                  : 'text-[#242824] hover:bg-[#EAE4D5]'
+                                }`}
+                            >
+                              <div>
+                                <div className="font-medium text-sm">{opt.label}</div>
+                                <div
+                                  className={`text-[11px] ${isSelected ? 'text-white/80' : 'text-[#6D756D]'
+                                    }`}
+                                >
+                                  {opt.sublabel}
+                                </div>
+                              </div>
+                              {isSelected && <Check className="w-4 h-4 text-white shrink-0 ml-2" />}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+
+                  <span className="whitespace-nowrap">within</span>
+
+                  {/* Dropdown 2: Price Range */}
+                  <div className="relative inline-block" ref={priceDropdownRef}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsPriceOpen((prev) => !prev);
+                        setIsCategoryOpen(false);
+                      }}
+                      aria-expanded={isPriceOpen}
+                      aria-label="Select price range"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 border-b-2 border-[#7E909B] hover:border-[#245449] pb-0.5 text-[#526B73] hover:text-[#245449] font-normal transition-colors cursor-pointer group whitespace-nowrap focus:outline-none"
+                    >
+                      <span>{priceLabel}</span>
+                      <ChevronDown
+                        className={`w-4 h-4 text-[#526B73] group-hover:text-[#245449] transition-transform duration-200 ${isPriceOpen ? 'rotate-180' : ''
+                          }`}
+                      />
+                    </button>
+
+                    {/* Price Range Popover Menu */}
+                    {isPriceOpen && (
+                      <div
+                        className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-64 sm:w-72 bg-[#FAF7F0] border border-[#D5CEBF] rounded-2xl shadow-xl z-50 p-1.5 text-left animate-in fade-in zoom-in-95 duration-150"
+                        role="listbox"
+                      >
+                        {priceOptions.map((opt) => {
+                          const isSelected = matchPrice === opt.value;
+                          return (
+                            <button
+                              key={opt.value}
+                              type="button"
+                              onClick={() => {
+                                setMatchPrice(opt.value);
+                                setIsPriceOpen(false);
+                              }}
+                              className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm transition-all flex items-center justify-between cursor-pointer ${isSelected
+                                  ? 'bg-[#245449] text-white font-medium shadow-xs'
+                                  : 'text-[#242824] hover:bg-[#EAE4D5]'
+                                }`}
+                            >
+                              <div>
+                                <div className="font-medium text-sm">{opt.label}</div>
+                                <div
+                                  className={`text-[11px] ${isSelected ? 'text-white/80' : 'text-[#6D756D]'
+                                    }`}
+                                >
+                                  {opt.sublabel}
+                                </div>
+                              </div>
+                              {isSelected && <Check className="w-4 h-4 text-white shrink-0 ml-2" />}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Submit Action Button */}
+                <div>
+                  <button
+                    type="submit"
+                    className="px-8 sm:px-12 py-3.5 bg-[#9AA5A8] hover:bg-[#245449] text-white text-xs sm:text-sm font-semibold tracking-widest uppercase rounded-none shadow-xs hover:shadow-md transition-all active:scale-98 cursor-pointer"
+                  >
+                    <span>MEET YOUR ART MATCH</span>
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -463,11 +661,10 @@ export default function HomePage({ onOpenEnquiry }) {
                   role="tab"
                   aria-selected={selectedGalleryCategory === cat.id}
                   onClick={() => setSelectedGalleryCategory(cat.id)}
-                  className={`px-2.5 sm:px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full transition-colors whitespace-nowrap ${
-                    selectedGalleryCategory === cat.id
+                  className={`px-2.5 sm:px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full transition-colors whitespace-nowrap ${selectedGalleryCategory === cat.id
                       ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
                       : 'bg-[#F1ECE1] hover:bg-[#E5DEC9] text-[#4D534D]'
-                  }`}
+                    }`}
                 >
                   {cat.label}
                 </button>
@@ -483,11 +680,10 @@ export default function HomePage({ onOpenEnquiry }) {
                   role="tab"
                   aria-selected={selectedGalleryCategory === cat.id}
                   onClick={() => setSelectedGalleryCategory(cat.id)}
-                  className={`px-2.5 sm:px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full transition-colors whitespace-nowrap ${
-                    selectedGalleryCategory === cat.id
+                  className={`px-2.5 sm:px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full transition-colors whitespace-nowrap ${selectedGalleryCategory === cat.id
                       ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
                       : 'bg-[#F1ECE1] hover:bg-[#E5DEC9] text-[#4D534D]'
-                  }`}
+                    }`}
                 >
                   {cat.label}
                 </button>
@@ -542,7 +738,7 @@ export default function HomePage({ onOpenEnquiry }) {
           FOOD MENU SHOWCASE (HERO MENU CARD + RIGHT DESCRIPTION)
           Placed directly above "Loved by People Who Visit"
           ------------------------------------------------------------- */}
-      <section className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="menu-preview" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#FAF7F0] border border-[#E2DDD0] rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xs hover:shadow-sm transition-shadow">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left: Food Menu Card (Bada Size) */}
@@ -590,8 +786,8 @@ export default function HomePage({ onOpenEnquiry }) {
               </div>
 
               <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
-                At KaSaa Experiences, creativity and taste come together. Whether you are spinning clay on the pottery wheel, 
-                painting a canvas, or enjoying an intimate date or birthday celebration, our studio cafe offers freshly made street 
+                At KaSaa Experiences, creativity and taste come together. Whether you are spinning clay on the pottery wheel,
+                painting a canvas, or enjoying an intimate date or birthday celebration, our studio cafe offers freshly made street
                 favorites, hot momos, crisp grilled sandwiches, artisan pizzas, comforting ramen bowls, desserts, and refreshing coolers.
               </p>
 

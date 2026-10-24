@@ -85,6 +85,7 @@ export default function App() {
           <Route path="/menu" element={<MenuPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/our-story" element={<OurStoryPage onOpenEnquiry={handleOpenEnquiry} />} />
+          <Route path="/diy-kits" element={<Navigate to="/activities/soft-play" replace />} />
           <Route path="/diy-kids" element={<Navigate to="/activities/soft-play" replace />} />
           <Route path="/visit" element={<VisitPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />

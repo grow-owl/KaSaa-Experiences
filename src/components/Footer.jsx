@@ -75,7 +75,7 @@ export default function Footer({ onOpenEnquiry }) {
               </li>
               <li>
                 <Link to="/activities/soft-play" className="hover:text-[#E9BF69] transition-colors">
-                  DIY Kids
+                  DIY Kits
                 </Link>
               </li>
               <li>

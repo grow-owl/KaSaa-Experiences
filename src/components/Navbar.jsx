@@ -156,10 +156,10 @@ export default function Navbar({ onOpenEnquiry, onMobileMenuToggle }) {
     }, 180);
   };
 
-  // Nav links in order requested: Celebrations, DIY Kids, Food Menu, Gallery, Our Story, Visit Us
+  // Nav links in order requested: Celebrations, DIY Kits, Food Menu, Gallery, Our Story, Visit Us
   const otherNavLinks = [
     { name: 'Celebrations', path: '/#together', hash: 'together' },
-    { name: 'DIY Kids', path: '/activities/soft-play' },
+    { name: 'DIY Kits', path: '/activities/soft-play' },
     { name: 'Food Menu', path: '/menu' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Our Story', path: '/our-story' },
