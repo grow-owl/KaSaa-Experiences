@@ -249,6 +249,70 @@ const DATE_PLANS = [
   },
 ];
 
+// 10 Group Experiences for "Planning, Group, Experience?" Section
+const GROUP_EXPERIENCES = [
+  {
+    id: 'birthdays-milestones',
+    title: 'Birthdays & Milestones',
+    description: 'Celebrate your special day with hands-on activities, fun experiences, and the people who matter most.',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'baby-showers',
+    title: 'Baby Showers',
+    description: 'Celebrate the mum-to-be with thoughtful décor, fun activities and all her favourite people.',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'bridal-showers',
+    title: 'Bridal Showers',
+    description: 'Bring the girls together for a day of crafts, laughter and celebrating the bride-to-be.',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'anniversary-celebrations',
+    title: 'Anniversary Celebrations',
+    description: 'Celebrate your journey together with a special setup and an experience you’ll both love.',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'private-parties',
+    title: 'Private Parties & Get-Togethers',
+    description: 'Good company, fun activities and a space to celebrate your way.',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'corporate-events',
+    title: 'Corporate Events',
+    description: 'Swap the usual office routine for creative workshops, team games and some well-deserved fun.',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'kitty-parties',
+    title: 'Kitty Parties',
+    description: 'Catch up with your favourite people over games, creative activities and lots of laughter.',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'farewell-parties',
+    title: 'Farewell Parties',
+    description: 'Make the last get-together extra special with activities, games and memories to take along.',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'festive-celebrations',
+    title: 'Festive Celebrations',
+    description: 'Bring everyone together for festive activities, creative fun and a little celebration.',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'friends-family-outings',
+    title: 'Friends & Family Outings',
+    description: 'Spend time together painting, playing games or trying something new at KaSaa.',
+    image: '', // reserved for future upload
+  },
+];
+
 export default function HomePage({ onOpenEnquiry }) {
   const navigate = useNavigate();
 
@@ -423,6 +487,86 @@ export default function HomePage({ onOpenEnquiry }) {
       };
     }
   }, [checkDatePlansScroll]);
+
+  // Group Experiences Side-Scroll State & Handlers (same as Our Best Sellers)
+  const groupScrollRef = useRef(null);
+  const [activeGroupIndex, setActiveGroupIndex] = useState(0);
+
+  const checkGroupScroll = React.useCallback(() => {
+    const container = groupScrollRef.current;
+    if (!container) return;
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    const children = container.children;
+    if (!children || children.length === 0) return;
+
+    if (scrollLeft <= 15) {
+      setActiveGroupIndex(0);
+      return;
+    }
+    if (scrollLeft >= scrollWidth - clientWidth - 25) {
+      setActiveGroupIndex(children.length - 1);
+      return;
+    }
+
+    const containerRect = container.getBoundingClientRect();
+    const containerCenter = containerRect.left + containerRect.width / 2;
+
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    for (let i = 0; i < children.length; i++) {
+      const childRect = children[i].getBoundingClientRect();
+      const childCenter = childRect.left + childRect.width / 2;
+      const distance = Math.abs(childCenter - containerCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = i;
+      }
+    }
+
+    setActiveGroupIndex(closestIndex);
+  }, []);
+
+  const scrollToGroupIndex = (index) => {
+    const container = groupScrollRef.current;
+    if (!container) return;
+    const children = container.children;
+    if (children && children[index]) {
+      children[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+      setActiveGroupIndex(index);
+    }
+  };
+
+  const scrollGroupExperiences = (direction) => {
+    const container = groupScrollRef.current;
+    if (!container) return;
+    const children = container.children;
+    if (!children || children.length === 0) return;
+
+    const targetIndex = direction === 'left'
+      ? Math.max(0, activeGroupIndex - 1)
+      : Math.min(children.length - 1, activeGroupIndex + 1);
+
+    scrollToGroupIndex(targetIndex);
+  };
+
+  useEffect(() => {
+    const el = groupScrollRef.current;
+    if (el) {
+      el.addEventListener('scroll', checkGroupScroll, { passive: true });
+      window.addEventListener('resize', checkGroupScroll);
+      checkGroupScroll();
+      return () => {
+        el.removeEventListener('scroll', checkGroupScroll);
+        window.removeEventListener('resize', checkGroupScroll);
+      };
+    }
+  }, [checkGroupScroll]);
 
   useEffect(() => {
     if (isHeroPaused) return;
@@ -838,6 +982,121 @@ export default function HomePage({ onOpenEnquiry }) {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-0.5" />
               </button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* -------------------------------------------------------------
+          3B. PLANNING, GROUP, EXPERIENCE? — SIDE SCROLL REVEAL (10 Cards)
+          ------------------------------------------------------------- */}
+      <section id="group-experiences" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <h2 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+            Planning, Group, Experience?
+          </h2>
+          <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
+            From birthday parties and bridal showers to team outings & reunions, We'll help you bring everyone together for memorable time at kasa
+          </p>
+        </div>
+
+        {/* Horizontal Side-Scroll 10 Cards Track with Reveal Snap (Same as Our Best Sellers) */}
+        <div className="relative">
+          <div
+            ref={groupScrollRef}
+            className="flex gap-5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 px-1 scroll-smooth"
+          >
+            {GROUP_EXPERIENCES.map((exp) => (
+              <article
+                key={exp.id}
+                className="w-[260px] sm:w-[300px] md:w-[320px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
+              >
+                {/* Image Placeholder Space (Reserved for future image upload) */}
+                <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden flex items-center justify-center">
+                  {exp.image ? (
+                    <img
+                      src={exp.image}
+                      alt={exp.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center text-[#8C8577] space-y-2 p-4 text-center select-none">
+                      <div className="w-12 h-12 rounded-2xl bg-[#DFD8CA]/80 border border-[#D5CEBF] flex items-center justify-center text-[#245449] shadow-2xs">
+                        <Users className="w-5 h-5 text-[#245449]" />
+                      </div>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#736C5F]">
+                        Photo Coming Soon
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Content Section: Title, Description & Action Button */}
+                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+                  <div className="space-y-1.5">
+                    <h3 className="font-serif font-bold text-lg sm:text-xl text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
+                      {exp.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#535953] leading-relaxed line-clamp-2">
+                      {exp.description}
+                    </p>
+                  </div>
+
+                  {/* Action Button */}
+                  <div className="pt-3 border-t border-[#F1ECE1]">
+                    <button
+                      type="button"
+                      onClick={() => onOpenEnquiry ? onOpenEnquiry('celebration', `Group Booking: ${exp.title}`) : null}
+                      className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#245449] hover:bg-[#193B33] text-white text-xs font-bold transition-all shadow-xs group-hover:shadow-md active:scale-95 cursor-pointer"
+                    >
+                      <Users className="w-3.5 h-3.5 text-[#E9BF69]" />
+                      <span>Plan This Event</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* Interactive Pagination Dots with Left/Right Arrows */}
+          <div className="mt-8 flex items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => scrollGroupExperiences('left')}
+              disabled={activeGroupIndex === 0}
+              aria-label="Previous group experience"
+              className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-2">
+              {GROUP_EXPERIENCES.map((exp, idx) => (
+                <button
+                  key={exp.id}
+                  type="button"
+                  onClick={() => scrollToGroupIndex(idx)}
+                  aria-label={`Go to group experience ${idx + 1}: ${exp.title}`}
+                  className={`transition-all duration-300 rounded-full cursor-pointer ${activeGroupIndex === idx
+                    ? 'w-7 sm:w-8 h-2.5 bg-[#245449] shadow-xs'
+                    : 'w-2.5 h-2.5 bg-[#D5CEBF] hover:bg-[#245449]/50 hover:scale-125'
+                    }`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => scrollGroupExperiences('right')}
+              disabled={activeGroupIndex === GROUP_EXPERIENCES.length - 1}
+              aria-label="Next group experience"
+              className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </section>
