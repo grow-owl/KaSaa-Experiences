@@ -144,96 +144,12 @@ export default function HomePage({ onOpenEnquiry }) {
     return () => clearInterval(interval);
   }, [isHeroPaused]);
 
-  // Experience Match Finder state (Single line, custom interactive dropdowns)
-  const [matchCategory, setMatchCategory] = useState('');
-  const [matchPrice, setMatchPrice] = useState('all');
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const [isPriceOpen, setIsPriceOpen] = useState(false);
-  const categoryDropdownRef = useRef(null);
-  const priceDropdownRef = useRef(null);
+  const nextHeroSlide = () => {
+    setHeroSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+  };
 
-  const categoryOptions = [
-    { value: '', label: 'Category', sublabel: 'All creative offerings' },
-    { value: 'Food', label: 'Food', sublabel: 'Fresh cafe menu & treats' },
-    { value: 'Activities', label: 'Activities', sublabel: '12 Workshop categories' },
-    { value: 'Celebrations', label: 'Celebrations', sublabel: 'Dates, birthdays & groups' },
-  ];
-
-  const priceOptions = [
-    { value: 'all', label: 'Price Range', sublabel: 'Any budget' },
-    { value: 'under-300', label: 'Under ₹300', sublabel: 'Pocket-friendly sessions' },
-    { value: '300-700', label: '₹300 – ₹700', sublabel: 'Popular workshops' },
-    { value: '700-1500', label: '₹700 – ₹1500', sublabel: 'Signature art experiences' },
-    { value: '1500-plus', label: '₹1500+', sublabel: 'Curated celebration setups' },
-  ];
-
-  const categoryLabel =
-    categoryOptions.find((c) => c.value === matchCategory)?.label || 'Category';
-  const priceLabel =
-    priceOptions.find((p) => p.value === matchPrice)?.label || 'Price Range';
-
-  // Close dropdowns on outside click or Escape
-  useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (
-        categoryDropdownRef.current &&
-        !categoryDropdownRef.current.contains(event.target)
-      ) {
-        setIsCategoryOpen(false);
-      }
-      if (
-        priceDropdownRef.current &&
-        !priceDropdownRef.current.contains(event.target)
-      ) {
-        setIsPriceOpen(false);
-      }
-    };
-
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        setIsCategoryOpen(false);
-        setIsPriceOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleOutsideClick);
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
-
-  const handleMatchSubmit = (e) => {
-    e.preventDefault();
-    setIsCategoryOpen(false);
-    setIsPriceOpen(false);
-
-    if (matchCategory === 'Food') {
-      const el = document.getElementById('menu-preview');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        navigate('/menu');
-      }
-      return;
-    }
-
-    if (matchCategory === 'Celebrations') {
-      const el = document.getElementById('together');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-      return;
-    }
-
-    // Activities or general
-    const el = document.getElementById('experiences');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      navigate('/activities');
-    }
+  const prevHeroSlide = () => {
+    setHeroSlideIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
   };
 
   // Gallery filtering state
@@ -260,7 +176,7 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           1. HERO SECTION (Editorial Desktop / Compact Mobile)
           ------------------------------------------------------------- */}
-      <section className="relative py-14 sm:py-18 lg:py-20 pb-16 sm:pb-24 border-b border-[#E8E0D0]">
+      <section className="relative py-14 sm:py-18 lg:py-20 border-b border-[#E8E0D0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
             {/* Left Column: Copy & Actions (Desktop ~48%, 6 cols in 12-col grid) */}
@@ -341,6 +257,24 @@ export default function HomePage({ onOpenEnquiry }) {
                       </div>
                     );
                   })}
+
+                  {/* Previous / Next Arrow Controls */}
+                  <button
+                    type="button"
+                    onClick={prevHeroSlide}
+                    aria-label="Previous image"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/85 hover:bg-[#245449] text-[#242824] hover:text-white shadow-md backdrop-blur-xs flex items-center justify-center transition-all duration-200 active:scale-90 cursor-pointer"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={nextHeroSlide}
+                    aria-label="Next image"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/85 hover:bg-[#245449] text-[#242824] hover:text-white shadow-md backdrop-blur-xs flex items-center justify-center transition-all duration-200 active:scale-90 cursor-pointer"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
                 </div>
 
                 {/* Pill Badge */}
@@ -351,143 +285,6 @@ export default function HomePage({ onOpenEnquiry }) {
             </div>
           </div>
 
-          {/* Sentence Match Finder Widget (Reference Design - Single Line) */}
-          <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-[#E8E0D0] text-center">
-            <div className="max-w-3xl mx-auto px-2">
-              <form onSubmit={handleMatchSubmit} className="space-y-4 sm:space-y-5">
-                {/* Sentence: Single line on desktop/tablet, refined smaller font */}
-                <div className="font-light text-base sm:text-lg md:text-xl lg:text-[22px] text-[#242824] leading-relaxed tracking-tight flex items-center justify-center flex-wrap sm:flex-nowrap gap-x-2 sm:gap-x-2.5 gap-y-2">
-                  <span className="whitespace-nowrap">I’m looking for</span>
-
-                  {/* Dropdown 1: Category */}
-                  <div className="relative inline-block" ref={categoryDropdownRef}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsCategoryOpen((prev) => !prev);
-                        setIsPriceOpen(false);
-                      }}
-                      aria-expanded={isCategoryOpen}
-                      aria-label="Select category"
-                      className="inline-flex items-center gap-1 sm:gap-1.5 border-b-2 border-[#7E909B] hover:border-[#245449] pb-0.5 text-[#526B73] hover:text-[#245449] font-normal transition-colors cursor-pointer group whitespace-nowrap focus:outline-none"
-                    >
-                      <span>{categoryLabel}</span>
-                      <ChevronDown
-                        className={`w-3.5 h-3.5 text-[#526B73] group-hover:text-[#245449] transition-transform duration-200 ${isCategoryOpen ? 'rotate-180' : ''
-                          }`}
-                      />
-                    </button>
-
-                    {/* Category Popover Menu (Scroll-type) */}
-                    {isCategoryOpen && (
-                      <div
-                        className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-60 sm:w-64 max-h-44 sm:max-h-48 overflow-y-auto bg-[#FAF7F0] border border-[#D5CEBF] rounded-xl shadow-xl z-50 p-1 text-left animate-in fade-in zoom-in-95 duration-150 overscroll-contain"
-                        role="listbox"
-                      >
-                        {categoryOptions.map((opt) => {
-                          const isSelected = matchCategory === opt.value;
-                          return (
-                            <button
-                              key={opt.value}
-                              type="button"
-                              onClick={() => {
-                                setMatchCategory(opt.value);
-                                setIsCategoryOpen(false);
-                              }}
-                              className={`w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm transition-all flex items-center justify-between cursor-pointer ${isSelected
-                                ? 'bg-[#245449] text-white font-medium shadow-xs'
-                                : 'text-[#242824] hover:bg-[#EAE4D5]'
-                                }`}
-                            >
-                              <div>
-                                <div className="font-medium">{opt.label}</div>
-                                <div
-                                  className={`text-[10px] ${isSelected ? 'text-white/80' : 'text-[#6D756D]'
-                                    }`}
-                                >
-                                  {opt.sublabel}
-                                </div>
-                              </div>
-                              {isSelected && <Check className="w-3.5 h-3.5 text-white shrink-0 ml-2" />}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-
-                  <span className="whitespace-nowrap">within</span>
-
-                  {/* Dropdown 2: Price Range */}
-                  <div className="relative inline-block" ref={priceDropdownRef}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsPriceOpen((prev) => !prev);
-                        setIsCategoryOpen(false);
-                      }}
-                      aria-expanded={isPriceOpen}
-                      aria-label="Select price range"
-                      className="inline-flex items-center gap-1 sm:gap-1.5 border-b-2 border-[#7E909B] hover:border-[#245449] pb-0.5 text-[#526B73] hover:text-[#245449] font-normal transition-colors cursor-pointer group whitespace-nowrap focus:outline-none"
-                    >
-                      <span>{priceLabel}</span>
-                      <ChevronDown
-                        className={`w-3.5 h-3.5 text-[#526B73] group-hover:text-[#245449] transition-transform duration-200 ${isPriceOpen ? 'rotate-180' : ''
-                          }`}
-                      />
-                    </button>
-
-                    {/* Price Range Popover Menu (Scroll-type) */}
-                    {isPriceOpen && (
-                      <div
-                        className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-60 sm:w-64 max-h-44 sm:max-h-48 overflow-y-auto bg-[#FAF7F0] border border-[#D5CEBF] rounded-xl shadow-xl z-50 p-1 text-left animate-in fade-in zoom-in-95 duration-150 overscroll-contain"
-                        role="listbox"
-                      >
-                        {priceOptions.map((opt) => {
-                          const isSelected = matchPrice === opt.value;
-                          return (
-                            <button
-                              key={opt.value}
-                              type="button"
-                              onClick={() => {
-                                setMatchPrice(opt.value);
-                                setIsPriceOpen(false);
-                              }}
-                              className={`w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm transition-all flex items-center justify-between cursor-pointer ${isSelected
-                                ? 'bg-[#245449] text-white font-medium shadow-xs'
-                                : 'text-[#242824] hover:bg-[#EAE4D5]'
-                                }`}
-                            >
-                              <div>
-                                <div className="font-medium">{opt.label}</div>
-                                <div
-                                  className={`text-[10px] ${isSelected ? 'text-white/80' : 'text-[#6D756D]'
-                                    }`}
-                                >
-                                  {opt.sublabel}
-                                </div>
-                              </div>
-                              {isSelected && <Check className="w-3.5 h-3.5 text-white shrink-0 ml-2" />}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Submit Action Button */}
-                <div>
-                  <button
-                    type="submit"
-                    className="px-6 sm:px-8 py-2.5 sm:py-3 bg-[#9AA5A8] hover:bg-[#245449] text-white text-[11px] sm:text-xs font-semibold tracking-wider uppercase rounded-none shadow-xs hover:shadow-md transition-all active:scale-98 cursor-pointer"
-                  >
-                    <span>MEET YOUR ART MATCH</span>
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
         </div>
       </section>
 
