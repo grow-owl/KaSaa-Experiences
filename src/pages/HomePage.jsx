@@ -455,7 +455,7 @@ export default function HomePage({ onOpenEnquiry }) {
       <section id="experiences" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header: Our Best Sellers */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <h2 className="font-serif font-bold text-3xl sm:text-4xl text-[#242824] tracking-tight">
+          <h2 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
             Our Best Sellers
           </h2>
           <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
