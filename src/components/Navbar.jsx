@@ -170,6 +170,16 @@ export default function Navbar({ onOpenEnquiry, onMobileMenuToggle }) {
     setMobileMenuOpen(false);
     setActivitiesDropdownOpen(false);
 
+    if (link.path === '/') {
+      if (location.pathname === '/') {
+        e?.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/');
+      }
+      return;
+    }
+
     if (link.hash) {
       if (location.pathname === '/') {
         e?.preventDefault();
@@ -202,6 +212,19 @@ export default function Navbar({ onOpenEnquiry, onMobileMenuToggle }) {
 
             {/* Desktop Nav Items */}
             <div className="hidden md:flex items-center gap-0.5 lg:gap-1.5 xl:gap-2">
+              {/* Home Link */}
+              <Link
+                to="/"
+                onClick={(e) => handleLinkClick({ path: '/' }, e)}
+                className={`px-2 lg:px-2.5 xl:px-3 py-1.5 lg:py-2 text-xs lg:text-[13px] xl:text-sm font-semibold rounded-lg transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#245449] ${
+                  location.pathname === '/' && !location.hash
+                    ? 'text-[#245449] bg-[#F1ECE1]'
+                    : 'text-[#242824] hover:text-[#245449] hover:bg-[#F1ECE1]'
+                }`}
+              >
+                Home
+              </Link>
+
               {/* Activities Dropdown Trigger */}
               <div
                 className="relative"
@@ -299,16 +322,23 @@ export default function Navbar({ onOpenEnquiry, onMobileMenuToggle }) {
               </div>
 
               {/* Other Navigation Links */}
-              {otherNavLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={(e) => handleLinkClick(link, e)}
-                  className="px-2 lg:px-3 py-2 text-xs lg:text-sm font-semibold rounded-lg transition-colors text-[#242824] hover:text-[#245449] hover:bg-[#F1ECE1] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#245449] whitespace-nowrap"
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {otherNavLinks.map((link) => {
+                const isActive = !link.hash && location.pathname === link.path;
+                return (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    onClick={(e) => handleLinkClick(link, e)}
+                    className={`px-2 lg:px-2.5 xl:px-3 py-1.5 lg:py-2 text-xs lg:text-[13px] xl:text-sm font-semibold rounded-lg transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#245449] ${
+                      isActive
+                        ? 'text-[#245449] bg-[#F1ECE1]'
+                        : 'text-[#242824] hover:text-[#245449] hover:bg-[#F1ECE1]'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
             </div>
 
             {/* Desktop Primary CTA */}
@@ -388,6 +418,20 @@ export default function Navbar({ onOpenEnquiry, onMobileMenuToggle }) {
               <p className="px-3 pb-1 text-xs font-bold uppercase tracking-wider text-[#963E23]">
                 Explore KaSaa
               </p>
+
+              {/* Home Link */}
+              <Link
+                to="/"
+                onClick={(e) => handleLinkClick({ path: '/' }, e)}
+                className={`w-full text-left px-4 py-3.5 rounded-xl text-base font-semibold transition-colors flex items-center justify-between ${
+                  location.pathname === '/' && !location.hash
+                    ? 'bg-[#EBF1E9] text-[#245449]'
+                    : 'text-[#242824] hover:bg-[#EAE4D5] hover:text-[#245449]'
+                }`}
+              >
+                <span>Home</span>
+                <span className="text-[#963E23] text-sm opacity-60">→</span>
+              </Link>
 
               {/* Activities Accordion in Mobile */}
               <div className="rounded-xl overflow-hidden border border-[#E8E0D0] bg-[#FAF7F0]">

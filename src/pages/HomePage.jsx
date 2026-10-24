@@ -19,6 +19,7 @@ import {
   Phone,
   Utensils,
   ChevronRight,
+  ChevronLeft,
   ChevronDown,
   Check,
 } from 'lucide-react';
@@ -33,8 +34,115 @@ import { faqs } from '../data/faqs';
 import { galleryItems, galleryCategories } from '../data/gallery';
 import { landingMenuFeatured, allDishes } from '../data/menuData';
 
+// 13 Authentic KaSaa Experience Slides with tailored alignment
+const HERO_SLIDES = [
+  {
+    id: 1,
+    src: '/images/hero-carousel/slide_1.jpeg',
+    alt: 'Birthday celebration with handcrafted photo frames at KaSaa Experiences',
+    title: 'Celebrations & Birthday Parties',
+    objectPosition: 'center 62%',
+  },
+  {
+    id: 2,
+    src: '/images/hero-carousel/slide_2.jpeg',
+    alt: 'Handcrafted personalized denim heart charm making at KaSaa Experiences',
+    title: 'Handmade Charms & DIY Crafts',
+    objectPosition: 'center 35%',
+  },
+  {
+    id: 3,
+    src: '/images/hero-carousel/slide_3.jpeg',
+    alt: 'Guided canvas painting workshop at KaSaa Experiences Siliguri',
+    title: 'Canvas Painting Workshops',
+    objectPosition: 'center 30%',
+  },
+  {
+    id: 4,
+    src: '/images/hero-carousel/slide_4.jpeg',
+    alt: 'Wearable textile art and customized painted cap at KaSaa',
+    title: 'Wearable Textile & Cap Art',
+    objectPosition: 'center 38%',
+  },
+  {
+    id: 5,
+    src: '/images/hero-carousel/slide_5.jpeg',
+    alt: 'Friends creating personalized tote bags and jewelry at KaSaa',
+    title: 'Personalized Tote Bag Art',
+    objectPosition: 'center 42%',
+  },
+  {
+    id: 6,
+    src: '/images/hero-carousel/slide_6.jpeg',
+    alt: 'Cake decorating celebration party gathering at KaSaa',
+    title: 'Cake Decorating Parties',
+    objectPosition: 'center center',
+  },
+  {
+    id: 7,
+    src: '/images/hero-carousel/slide_7.jpeg',
+    alt: 'Creative date outing for couples with pottery and art at KaSaa',
+    title: 'Couples & Creative Date Ideas',
+    objectPosition: 'center 45%',
+  },
+  {
+    id: 8,
+    src: '/images/hero-carousel/slide_8.jpeg',
+    alt: 'Kids workshop making plushies and crafts at KaSaa',
+    title: 'Kids DIY Workshops & Plushies',
+    objectPosition: 'center 60%',
+  },
+  {
+    id: 9,
+    src: '/images/hero-carousel/slide_9.jpeg',
+    alt: 'Friends holding painted pebble art in front of our kind of MAGIC neon at KaSaa',
+    title: 'Pebble Art & Creative Memories',
+    objectPosition: 'center 35%',
+  },
+  {
+    id: 10,
+    src: '/images/hero-carousel/slide_10.jpeg',
+    alt: 'Friends enjoying charm bracelet making and cafe ambiance at KaSaa',
+    title: 'Charm Bracelets & Bestie Outings',
+    objectPosition: 'center 50%',
+  },
+  {
+    id: 11,
+    src: '/images/hero-carousel/slide_11.jpeg',
+    alt: 'Vision board collage workshop at KaSaa Experiences',
+    title: 'Vision Boards & Collage Art',
+    objectPosition: 'center 45%',
+  },
+  {
+    id: 12,
+    src: '/images/hero-carousel/slide_12.jpeg',
+    alt: 'Couple enjoying pizza making date at KaSaa Experiences cafe',
+    title: 'Artisan Pizza Dates & Cafe Treats',
+    objectPosition: 'center 48%',
+  },
+  {
+    id: 13,
+    src: '/images/hero-carousel/slide_13.jpeg',
+    alt: 'Vintage decoupage and letter art group workshop at KaSaa',
+    title: 'Vintage Decoupage & Paper Crafts',
+    objectPosition: 'center 60%',
+  },
+];
+
 export default function HomePage({ onOpenEnquiry }) {
   const navigate = useNavigate();
+
+  // Hero auto-changing image carousel state
+  const [heroSlideIndex, setHeroSlideIndex] = useState(0);
+  const [isHeroPaused, setIsHeroPaused] = useState(false);
+
+  useEffect(() => {
+    if (isHeroPaused) return;
+    const interval = setInterval(() => {
+      setHeroSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, 3800);
+    return () => clearInterval(interval);
+  }, [isHeroPaused]);
 
   // Experience Match Finder state (Single line, custom interactive dropdowns)
   const [matchCategory, setMatchCategory] = useState('');
@@ -152,7 +260,7 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           1. HERO SECTION (Editorial Desktop / Compact Mobile)
           ------------------------------------------------------------- */}
-      <section className="relative overflow-hidden py-16 sm:py-20 lg:py-28 xl:py-32 min-h-[75vh] lg:min-h-[82vh] flex items-center border-b border-[#E8E0D0]">
+      <section className="relative py-14 sm:py-18 lg:py-20 pb-16 sm:pb-24 border-b border-[#E8E0D0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
             {/* Left Column: Copy & Actions (Desktop ~48%, 6 cols in 12-col grid) */}
@@ -197,36 +305,58 @@ export default function HomePage({ onOpenEnquiry }) {
                   ))}
                 </div>
                 <span className="font-bold text-[#242824] text-sm">4.9 / 5.0</span>
-                <span className="text-[#6D756D]">· Verified Customer Rating</span>
+                <span className="text-[#6D756D]"> Verified Customer Rating</span>
               </div>
             </div>
 
-            {/* Right Column: Hero Feature Card */}
+            {/* Right Column: Auto-changing Hero Image Carousel */}
             <div className="lg:col-span-6 relative flex flex-col items-center justify-center">
-              <div className="w-full max-w-lg lg:max-w-none space-y-3 flex flex-col items-center">
-                <ImagePlaceholder
-                  src="/images/collection_of_work.webp"
-                  alt="Finished handcrafted ceramic pottery and artwork on display at KaSaa Experiences"
-                  title="Handcrafted Art & Pottery"
-                  type="general"
-                  aspectRatio="4/3"
-                  objectPosition="center"
-                  priority={true}
-                  className="shadow-md border-2 border-white rounded-2xl w-full"
-                />
+              <div className="w-full max-w-md sm:max-w-lg lg:max-w-none space-y-3.5 flex flex-col items-center">
+                {/* Carousel Container */}
+                <div
+                  className="relative w-full aspect-[4/5] sm:aspect-[4/5] max-h-[480px] rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-[#EAE5D9] group select-none"
+                  onMouseEnter={() => setIsHeroPaused(true)}
+                  onMouseLeave={() => setIsHeroPaused(false)}
+                  role="region"
+                  aria-label="KaSaa Experiences Photo Highlights"
+                >
+                  {/* Stacked Slides for Smooth Cross-fade */}
+                  {HERO_SLIDES.map((slide, index) => {
+                    const isActive = index === heroSlideIndex;
+                    return (
+                      <div
+                        key={slide.id}
+                        className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                          isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                        }`}
+                      >
+                        <img
+                          src={slide.src}
+                          alt={slide.alt}
+                          style={{ objectPosition: slide.objectPosition }}
+                          className="w-full h-full object-cover transition-transform duration-7000 ease-out transform scale-100 group-hover:scale-102"
+                          loading={index === 0 ? 'eager' : 'lazy'}
+                          decoding="async"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Pill Badge */}
                 <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#FAF7F0] border border-[#E2DDD0] text-xs font-semibold text-[#193B33] shadow-xs">
-                  <span>SILIGURI HAPPY PLACE(ISH)</span>
+                  <span>SILIGURI'S HAPPY PLACE(ISH)</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Sentence Match Finder Widget (Reference Design - Single Line) */}
-          <div className="mt-12 sm:mt-16 pt-10 sm:pt-14 border-t border-[#E8E0D0] text-center">
-            <div className="max-w-4xl mx-auto px-2">
-              <form onSubmit={handleMatchSubmit} className="space-y-6 sm:space-y-8">
-                {/* Sentence: Single line on desktop/tablet */}
-                <div className="font-light text-xl sm:text-2xl md:text-3xl lg:text-[32px] text-[#242824] leading-relaxed tracking-tight flex items-center justify-center flex-wrap sm:flex-nowrap gap-x-2.5 sm:gap-x-3.5 gap-y-3">
+          <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-[#E8E0D0] text-center">
+            <div className="max-w-3xl mx-auto px-2">
+              <form onSubmit={handleMatchSubmit} className="space-y-4 sm:space-y-5">
+                {/* Sentence: Single line on desktop/tablet, refined smaller font */}
+                <div className="font-light text-base sm:text-lg md:text-xl lg:text-[22px] text-[#242824] leading-relaxed tracking-tight flex items-center justify-center flex-wrap sm:flex-nowrap gap-x-2 sm:gap-x-2.5 gap-y-2">
                   <span className="whitespace-nowrap">I’m looking for</span>
 
                   {/* Dropdown 1: Category */}
@@ -239,19 +369,19 @@ export default function HomePage({ onOpenEnquiry }) {
                       }}
                       aria-expanded={isCategoryOpen}
                       aria-label="Select category"
-                      className="inline-flex items-center gap-1.5 sm:gap-2 border-b-2 border-[#7E909B] hover:border-[#245449] pb-0.5 text-[#526B73] hover:text-[#245449] font-normal transition-colors cursor-pointer group whitespace-nowrap focus:outline-none"
+                      className="inline-flex items-center gap-1 sm:gap-1.5 border-b-2 border-[#7E909B] hover:border-[#245449] pb-0.5 text-[#526B73] hover:text-[#245449] font-normal transition-colors cursor-pointer group whitespace-nowrap focus:outline-none"
                     >
                       <span>{categoryLabel}</span>
                       <ChevronDown
-                        className={`w-4 h-4 text-[#526B73] group-hover:text-[#245449] transition-transform duration-200 ${isCategoryOpen ? 'rotate-180' : ''
+                        className={`w-3.5 h-3.5 text-[#526B73] group-hover:text-[#245449] transition-transform duration-200 ${isCategoryOpen ? 'rotate-180' : ''
                           }`}
                       />
                     </button>
 
-                    {/* Category Popover Menu */}
+                    {/* Category Popover Menu (Scroll-type) */}
                     {isCategoryOpen && (
                       <div
-                        className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-64 sm:w-72 bg-[#FAF7F0] border border-[#D5CEBF] rounded-2xl shadow-xl z-50 p-1.5 text-left animate-in fade-in zoom-in-95 duration-150"
+                        className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-60 sm:w-64 max-h-44 sm:max-h-48 overflow-y-auto bg-[#FAF7F0] border border-[#D5CEBF] rounded-xl shadow-xl z-50 p-1 text-left animate-in fade-in zoom-in-95 duration-150 overscroll-contain"
                         role="listbox"
                       >
                         {categoryOptions.map((opt) => {
@@ -264,21 +394,21 @@ export default function HomePage({ onOpenEnquiry }) {
                                 setMatchCategory(opt.value);
                                 setIsCategoryOpen(false);
                               }}
-                              className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm transition-all flex items-center justify-between cursor-pointer ${isSelected
-                                  ? 'bg-[#245449] text-white font-medium shadow-xs'
-                                  : 'text-[#242824] hover:bg-[#EAE4D5]'
+                              className={`w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm transition-all flex items-center justify-between cursor-pointer ${isSelected
+                                ? 'bg-[#245449] text-white font-medium shadow-xs'
+                                : 'text-[#242824] hover:bg-[#EAE4D5]'
                                 }`}
                             >
                               <div>
-                                <div className="font-medium text-sm">{opt.label}</div>
+                                <div className="font-medium">{opt.label}</div>
                                 <div
-                                  className={`text-[11px] ${isSelected ? 'text-white/80' : 'text-[#6D756D]'
+                                  className={`text-[10px] ${isSelected ? 'text-white/80' : 'text-[#6D756D]'
                                     }`}
                                 >
                                   {opt.sublabel}
                                 </div>
                               </div>
-                              {isSelected && <Check className="w-4 h-4 text-white shrink-0 ml-2" />}
+                              {isSelected && <Check className="w-3.5 h-3.5 text-white shrink-0 ml-2" />}
                             </button>
                           );
                         })}
@@ -298,19 +428,19 @@ export default function HomePage({ onOpenEnquiry }) {
                       }}
                       aria-expanded={isPriceOpen}
                       aria-label="Select price range"
-                      className="inline-flex items-center gap-1.5 sm:gap-2 border-b-2 border-[#7E909B] hover:border-[#245449] pb-0.5 text-[#526B73] hover:text-[#245449] font-normal transition-colors cursor-pointer group whitespace-nowrap focus:outline-none"
+                      className="inline-flex items-center gap-1 sm:gap-1.5 border-b-2 border-[#7E909B] hover:border-[#245449] pb-0.5 text-[#526B73] hover:text-[#245449] font-normal transition-colors cursor-pointer group whitespace-nowrap focus:outline-none"
                     >
                       <span>{priceLabel}</span>
                       <ChevronDown
-                        className={`w-4 h-4 text-[#526B73] group-hover:text-[#245449] transition-transform duration-200 ${isPriceOpen ? 'rotate-180' : ''
+                        className={`w-3.5 h-3.5 text-[#526B73] group-hover:text-[#245449] transition-transform duration-200 ${isPriceOpen ? 'rotate-180' : ''
                           }`}
                       />
                     </button>
 
-                    {/* Price Range Popover Menu */}
+                    {/* Price Range Popover Menu (Scroll-type) */}
                     {isPriceOpen && (
                       <div
-                        className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-64 sm:w-72 bg-[#FAF7F0] border border-[#D5CEBF] rounded-2xl shadow-xl z-50 p-1.5 text-left animate-in fade-in zoom-in-95 duration-150"
+                        className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-60 sm:w-64 max-h-44 sm:max-h-48 overflow-y-auto bg-[#FAF7F0] border border-[#D5CEBF] rounded-xl shadow-xl z-50 p-1 text-left animate-in fade-in zoom-in-95 duration-150 overscroll-contain"
                         role="listbox"
                       >
                         {priceOptions.map((opt) => {
@@ -323,21 +453,21 @@ export default function HomePage({ onOpenEnquiry }) {
                                 setMatchPrice(opt.value);
                                 setIsPriceOpen(false);
                               }}
-                              className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm transition-all flex items-center justify-between cursor-pointer ${isSelected
-                                  ? 'bg-[#245449] text-white font-medium shadow-xs'
-                                  : 'text-[#242824] hover:bg-[#EAE4D5]'
+                              className={`w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm transition-all flex items-center justify-between cursor-pointer ${isSelected
+                                ? 'bg-[#245449] text-white font-medium shadow-xs'
+                                : 'text-[#242824] hover:bg-[#EAE4D5]'
                                 }`}
                             >
                               <div>
-                                <div className="font-medium text-sm">{opt.label}</div>
+                                <div className="font-medium">{opt.label}</div>
                                 <div
-                                  className={`text-[11px] ${isSelected ? 'text-white/80' : 'text-[#6D756D]'
+                                  className={`text-[10px] ${isSelected ? 'text-white/80' : 'text-[#6D756D]'
                                     }`}
                                 >
                                   {opt.sublabel}
                                 </div>
                               </div>
-                              {isSelected && <Check className="w-4 h-4 text-white shrink-0 ml-2" />}
+                              {isSelected && <Check className="w-3.5 h-3.5 text-white shrink-0 ml-2" />}
                             </button>
                           );
                         })}
@@ -350,7 +480,7 @@ export default function HomePage({ onOpenEnquiry }) {
                 <div>
                   <button
                     type="submit"
-                    className="px-8 sm:px-12 py-3.5 bg-[#9AA5A8] hover:bg-[#245449] text-white text-xs sm:text-sm font-semibold tracking-widest uppercase rounded-none shadow-xs hover:shadow-md transition-all active:scale-98 cursor-pointer"
+                    className="px-6 sm:px-8 py-2.5 sm:py-3 bg-[#9AA5A8] hover:bg-[#245449] text-white text-[11px] sm:text-xs font-semibold tracking-wider uppercase rounded-none shadow-xs hover:shadow-md transition-all active:scale-98 cursor-pointer"
                   >
                     <span>MEET YOUR ART MATCH</span>
                   </button>
@@ -662,8 +792,8 @@ export default function HomePage({ onOpenEnquiry }) {
                   aria-selected={selectedGalleryCategory === cat.id}
                   onClick={() => setSelectedGalleryCategory(cat.id)}
                   className={`px-2.5 sm:px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full transition-colors whitespace-nowrap ${selectedGalleryCategory === cat.id
-                      ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
-                      : 'bg-[#F1ECE1] hover:bg-[#E5DEC9] text-[#4D534D]'
+                    ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
+                    : 'bg-[#F1ECE1] hover:bg-[#E5DEC9] text-[#4D534D]'
                     }`}
                 >
                   {cat.label}
@@ -681,8 +811,8 @@ export default function HomePage({ onOpenEnquiry }) {
                   aria-selected={selectedGalleryCategory === cat.id}
                   onClick={() => setSelectedGalleryCategory(cat.id)}
                   className={`px-2.5 sm:px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full transition-colors whitespace-nowrap ${selectedGalleryCategory === cat.id
-                      ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
-                      : 'bg-[#F1ECE1] hover:bg-[#E5DEC9] text-[#4D534D]'
+                    ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
+                    : 'bg-[#F1ECE1] hover:bg-[#E5DEC9] text-[#4D534D]'
                     }`}
                 >
                   {cat.label}
