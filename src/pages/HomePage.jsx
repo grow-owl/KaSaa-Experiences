@@ -561,6 +561,17 @@ export default function HomePage({ onOpenEnquiry }) {
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
+
+          {/* Explore All Activities CTA Button */}
+          <div className="mt-8 sm:mt-10 text-center">
+            <Link
+              to="/activities"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-sm sm:text-base transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95 group cursor-pointer"
+            >
+              <span>Explore All Activities</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
         </div>
       </section>
 
