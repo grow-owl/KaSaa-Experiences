@@ -1033,29 +1033,14 @@ export default function HomePage({ onOpenEnquiry }) {
                   )}
                 </div>
 
-                {/* Content Section: Title, Description & Action Button */}
-                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
-                  <div className="space-y-1.5">
-                    <h3 className="font-serif font-bold text-lg sm:text-xl text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
-                      {exp.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-[#535953] leading-relaxed line-clamp-2">
-                      {exp.description}
-                    </p>
-                  </div>
-
-                  {/* Action Button */}
-                  <div className="pt-3 border-t border-[#F1ECE1]">
-                    <button
-                      type="button"
-                      onClick={() => onOpenEnquiry ? onOpenEnquiry('celebration', `Group Booking: ${exp.title}`) : null}
-                      className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#245449] hover:bg-[#193B33] text-white text-xs font-bold transition-all shadow-xs group-hover:shadow-md active:scale-95 cursor-pointer"
-                    >
-                      <Users className="w-3.5 h-3.5 text-[#E9BF69]" />
-                      <span>Plan This Event</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                {/* Content Section: Title & Description */}
+                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-start space-y-2">
+                  <h3 className="font-serif font-bold text-lg sm:text-xl text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
+                    {exp.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#535953] leading-relaxed line-clamp-3">
+                    {exp.description}
+                  </p>
                 </div>
               </article>
             ))}
@@ -1096,6 +1081,19 @@ export default function HomePage({ onOpenEnquiry }) {
               className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
             >
               <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Plan Your Celebration CTA Button */}
+          <div className="mt-8 sm:mt-10 text-center">
+            <button
+              type="button"
+              onClick={() => onOpenEnquiry ? onOpenEnquiry('celebration', 'Plan Your Celebration') : null}
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-sm sm:text-base transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95 group cursor-pointer"
+            >
+              <Users className="w-4 h-4 text-[#E9BF69]" />
+              <span>Plan Your Celebration</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-0.5" />
             </button>
           </div>
         </div>
