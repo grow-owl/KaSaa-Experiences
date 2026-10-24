@@ -129,12 +129,174 @@ const HERO_SLIDES = [
   },
 ];
 
+// 10 Best-Selling KaSaa Activities for Side-Scroll Reveal
+const TOP_10_ACTIVITIES = [
+  {
+    id: 'wheel-pottery',
+    title: 'Wheel Pottery',
+    price: 900,
+    duration: '45-60 min',
+    image: '/images/activity-pottery.webp',
+  },
+  {
+    id: 'classic-canvas',
+    title: 'Classic Canvas',
+    price: 500,
+    duration: '60 min',
+    image: '/images/brochure/classic-canvas-real.webp',
+  },
+  {
+    id: 'textured-3d-moon',
+    title: 'Textured 3D Moon',
+    price: 900,
+    duration: '60 min',
+    image: '/images/brochure/textured-3d-moon.webp',
+  },
+  {
+    id: 'metallic-frame',
+    title: 'Metallic Frame',
+    price: 800,
+    duration: '45 min',
+    image: '/images/brochure/metallic-frame.webp',
+  },
+  {
+    id: 'charm-bracelet',
+    title: 'Charm Bracelet',
+    price: 300,
+    duration: '30 min',
+    image: '/images/brochure/charm-bracelet.webp',
+  },
+  {
+    id: 'tote-bag-painting',
+    title: 'Tote Bag Painting',
+    price: 500,
+    duration: '45 min',
+    image: '/images/brochure/tote-bag-painting.webp',
+  },
+  {
+    id: 'scrapbook-making',
+    title: 'Scrapbook Making',
+    price: 1000,
+    duration: '75 min',
+    image: '/images/brochure/scrapbook-making.webp',
+  },
+  {
+    id: 'textured-canvas',
+    title: 'Textured Canvas',
+    price: 700,
+    duration: '60 min',
+    image: '/images/brochure/textured-canvas.webp',
+  },
+  {
+    id: 'resin-clock',
+    title: 'Resin Clock',
+    price: 1500,
+    duration: '90 min',
+    image: '/images/brochure/resin-clock.webp',
+  },
+  {
+    id: 'fluid-bear',
+    title: 'Fluid Bear',
+    price: 1000,
+    duration: '45 min',
+    image: '/images/brochure/fluid-bear.webp',
+  },
+];
+
 export default function HomePage({ onOpenEnquiry }) {
   const navigate = useNavigate();
 
   // Hero auto-changing image carousel state
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
   const [isHeroPaused, setIsHeroPaused] = useState(false);
+
+  // Top 10 Activities Horizontal Scroll State & Ref
+  const activitiesScrollRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const checkActivitiesScroll = React.useCallback(() => {
+    const container = activitiesScrollRef.current;
+    if (!container) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    setCanScrollLeft(scrollLeft > 15);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 15);
+
+    const children = container.children;
+    if (!children || children.length === 0) return;
+
+    // Boundary snap overrides for instant accuracy at extremes
+    if (scrollLeft <= 15) {
+      setActiveIndex(0);
+      return;
+    }
+    if (scrollLeft >= scrollWidth - clientWidth - 25) {
+      setActiveIndex(children.length - 1);
+      return;
+    }
+
+    // Precise center-focal calculation: identify the card closest to the visible center
+    const containerRect = container.getBoundingClientRect();
+    const containerCenter = containerRect.left + containerRect.width / 2;
+
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    for (let i = 0; i < children.length; i++) {
+      const childRect = children[i].getBoundingClientRect();
+      const childCenter = childRect.left + childRect.width / 2;
+      const distance = Math.abs(childCenter - containerCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = i;
+      }
+    }
+
+    setActiveIndex(closestIndex);
+  }, []);
+
+  const scrollToActivityIndex = (index) => {
+    const container = activitiesScrollRef.current;
+    if (!container) return;
+    const children = container.children;
+    if (children && children[index]) {
+      children[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+      setActiveIndex(index);
+    }
+  };
+
+  const scrollActivities = (direction) => {
+    const container = activitiesScrollRef.current;
+    if (!container) return;
+    const children = container.children;
+    if (!children || children.length === 0) return;
+
+    const targetIndex = direction === 'left'
+      ? Math.max(0, activeIndex - 1)
+      : Math.min(children.length - 1, activeIndex + 1);
+
+    scrollToActivityIndex(targetIndex);
+  };
+
+  useEffect(() => {
+    const el = activitiesScrollRef.current;
+    if (el) {
+      el.addEventListener('scroll', checkActivitiesScroll, { passive: true });
+      window.addEventListener('resize', checkActivitiesScroll);
+      checkActivitiesScroll();
+      return () => {
+        el.removeEventListener('scroll', checkActivitiesScroll);
+        window.removeEventListener('resize', checkActivitiesScroll);
+      };
+    }
+  }, [checkActivitiesScroll]);
 
   useEffect(() => {
     if (isHeroPaused) return;
@@ -288,9 +450,10 @@ export default function HomePage({ onOpenEnquiry }) {
       </section>
 
       {/* -------------------------------------------------------------
-          2. EXPLORE WORKSHOPS & ACTIVITIES — 12 CATEGORIES GRID
+          2. TOP 10 BEST-SELLING ACTIVITIES — SIDE SCROLL REVEAL
           ------------------------------------------------------------- */}
       <section id="experiences" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        {/* Section Header: Our Best Sellers */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className="font-serif font-bold text-3xl sm:text-4xl text-[#242824] tracking-tight">
             Our Best Sellers
@@ -300,54 +463,104 @@ export default function HomePage({ onOpenEnquiry }) {
           </p>
         </div>
 
-        {/* 12 Activity Categories Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {BROCHURE_CATEGORIES.map((category) => (
-            <article
-              key={category.id}
-              className="group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1"
-            >
-              {/* Category Hero Image */}
-              <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden">
-                <img
-                  src={category.heroImage}
-                  alt={category.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
+        {/* Horizontal Side-Scroll Cards Track with Reveal Snap */}
+        <div className="relative">
+          <div
+            ref={activitiesScrollRef}
+            className="flex gap-5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 px-1 scroll-smooth"
+          >
+            {TOP_10_ACTIVITIES.map((activity) => (
+              <article
+                key={activity.id}
+                className="w-[260px] sm:w-[300px] md:w-[320px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
+              >
+                {/* Visual Image with Duration Overlay */}
+                <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden">
+                  <img
+                    src={activity.image}
+                    alt={activity.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    loading="lazy"
+                    decoding="async"
+                  />
 
-              {/* Category Content */}
-              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
-                <div className="space-y-2">
-                  <h3 className="font-serif font-bold text-xl text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
-                    {category.name}
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-[#535953] leading-relaxed line-clamp-2">
-                    {category.tagline}
-                  </p>
-
-                  {/* Sub-items count & brief inclusions */}
-                  <div className="pt-2 flex items-center gap-2 text-xs text-[#245449] font-medium">
-                    <span className="px-2.5 py-0.5 rounded-md bg-[#FAF7F0] border border-[#E2DDD0] text-[11px] font-semibold text-[#6E5528]">
-                      {category.items?.length || 0} Session Options
-                    </span>
+                  {/* Duration Time Pill */}
+                  <div className="absolute bottom-3 left-3 text-white text-[11px] font-semibold flex items-center gap-1.5 bg-black/55 backdrop-blur-xs px-2.5 py-1 rounded-lg shadow-xs">
+                    <Clock className="w-3.5 h-3.5 text-[#E9BF69]" />
+                    <span>{activity.duration}</span>
                   </div>
                 </div>
 
-                {/* Action Button */}
-                <Link
-                  to={`/activities/${category.slug}`}
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#FAF7F0] hover:bg-[#245449] text-[#242824] hover:text-white border border-[#D5CEBF] hover:border-[#245449] text-xs font-semibold transition-all group-hover:bg-[#245449] group-hover:text-white group-hover:border-[#245449]"
-                >
-                  <span>View Activities & Details</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </article>
-          ))}
+                {/* Content Section: Title, Price & Book Now button (No description/category) */}
+                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-4">
+                  <h3 className="font-serif font-bold text-lg sm:text-xl text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
+                    {activity.title}
+                  </h3>
+
+                  {/* Price Row & Book Action Button */}
+                  <div className="pt-3 border-t border-[#F1ECE1] flex items-center justify-between gap-3">
+                    <div>
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-[#737A73] block">
+                        Price
+                      </span>
+                      <div className="flex items-baseline gap-1">
+                        <span className="font-serif font-black text-xl sm:text-2xl text-[#245449]">
+                          ₹{activity.price}
+                        </span>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => onOpenEnquiry ? onOpenEnquiry(activity.title) : null}
+                      className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#245449] hover:bg-[#193B33] text-white text-xs font-bold transition-all shadow-xs group-hover:shadow-md active:scale-95 cursor-pointer"
+                    >
+                      <span>Book Now</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* Interactive Pagination Dots with Left/Right Arrows */}
+          <div className="mt-8 flex items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => scrollActivities('left')}
+              disabled={activeIndex === 0}
+              aria-label="Previous activities"
+              className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-2">
+              {TOP_10_ACTIVITIES.map((activity, idx) => (
+                <button
+                  key={activity.id}
+                  type="button"
+                  onClick={() => scrollToActivityIndex(idx)}
+                  aria-label={`Go to activity ${idx + 1}: ${activity.title}`}
+                  className={`transition-all duration-300 rounded-full cursor-pointer ${activeIndex === idx
+                    ? 'w-7 sm:w-8 h-2.5 bg-[#245449] shadow-xs'
+                    : 'w-2.5 h-2.5 bg-[#D5CEBF] hover:bg-[#245449]/50 hover:scale-125'
+                    }`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => scrollActivities('right')}
+              disabled={activeIndex === TOP_10_ACTIVITIES.length - 1}
+              aria-label="Next activities"
+              className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </section>
 
