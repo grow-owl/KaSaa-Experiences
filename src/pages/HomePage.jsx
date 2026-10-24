@@ -203,6 +203,20 @@ const TOP_10_ACTIVITIES = [
   },
 ];
 
+// Date Plans for "Date Plans, Sorted!" Section
+const DATE_PLANS = [
+  {
+    id: 'table-setup-date',
+    title: 'Table Setup Date',
+    image: '/images/daiting_1.webp',
+  },
+  {
+    id: 'pottery-date',
+    title: 'Pottery Date',
+    image: '/images/activity-pottery.webp',
+  },
+];
+
 export default function HomePage({ onOpenEnquiry }) {
   const navigate = useNavigate();
 
@@ -297,6 +311,86 @@ export default function HomePage({ onOpenEnquiry }) {
       };
     }
   }, [checkActivitiesScroll]);
+
+  // Date Plans Side-Scroll State & Handlers (same as Our Best Sellers)
+  const datePlansScrollRef = useRef(null);
+  const [activeDateIndex, setActiveDateIndex] = useState(0);
+
+  const checkDatePlansScroll = React.useCallback(() => {
+    const container = datePlansScrollRef.current;
+    if (!container) return;
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    const children = container.children;
+    if (!children || children.length === 0) return;
+
+    if (scrollLeft <= 15) {
+      setActiveDateIndex(0);
+      return;
+    }
+    if (scrollLeft >= scrollWidth - clientWidth - 25) {
+      setActiveDateIndex(children.length - 1);
+      return;
+    }
+
+    const containerRect = container.getBoundingClientRect();
+    const containerCenter = containerRect.left + containerRect.width / 2;
+
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    for (let i = 0; i < children.length; i++) {
+      const childRect = children[i].getBoundingClientRect();
+      const childCenter = childRect.left + childRect.width / 2;
+      const distance = Math.abs(childCenter - containerCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = i;
+      }
+    }
+
+    setActiveDateIndex(closestIndex);
+  }, []);
+
+  const scrollToDateIndex = (index) => {
+    const container = datePlansScrollRef.current;
+    if (!container) return;
+    const children = container.children;
+    if (children && children[index]) {
+      children[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+      setActiveDateIndex(index);
+    }
+  };
+
+  const scrollDatePlans = (direction) => {
+    const container = datePlansScrollRef.current;
+    if (!container) return;
+    const children = container.children;
+    if (!children || children.length === 0) return;
+
+    const targetIndex = direction === 'left'
+      ? Math.max(0, activeDateIndex - 1)
+      : Math.min(children.length - 1, activeDateIndex + 1);
+
+    scrollToDateIndex(targetIndex);
+  };
+
+  useEffect(() => {
+    const el = datePlansScrollRef.current;
+    if (el) {
+      el.addEventListener('scroll', checkDatePlansScroll, { passive: true });
+      window.addEventListener('resize', checkDatePlansScroll);
+      checkDatePlansScroll();
+      return () => {
+        el.removeEventListener('scroll', checkDatePlansScroll);
+        window.removeEventListener('resize', checkDatePlansScroll);
+      };
+    }
+  }, [checkDatePlansScroll]);
 
   useEffect(() => {
     if (isHeroPaused) return;
@@ -580,204 +674,110 @@ export default function HomePage({ onOpenEnquiry }) {
           ------------------------------------------------------------- */}
       <section id="together" className="py-16 lg:py-24 bg-[#EBF1E9] border-y border-[#DCE6D9]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#245449]">
-              Meaningful Moments Together
-            </p>
-            <h2 className="font-serif font-bold text-3xl sm:text-4xl text-[#242824] tracking-tight">
-              Time Well Spent, Together
+            <h2 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+              Date Plans, Sorted!
             </h2>
             <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
-              Step away from the usual dinner-and-movie routine. Experience side-by-side creativity for romantic dates, friend reunions, and memorable group milestones.
+              Skip your usual plans and make your next date a little more memorable.
             </p>
           </div>
 
-          {/* 1. FEATURED: DATES & ANNIVERSARIES SPOTLIGHT (Full-width horizontal card, perfectly balanced) */}
-          {dateOffering && (
-            <div className="bg-white rounded-3xl border border-[#D5CEBF] shadow-xs overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-10">
-              {/* Image Column */}
-              <div className="lg:col-span-5 flex items-center justify-center">
-                <ImagePlaceholder
-                  src="/images/daiting_1.webp"
-                  alt="Couple enjoying pottery and painting together on a date"
-                  title="Creative Date Outing"
-                  type="together"
-                  aspectRatio="4/3"
-                  objectPosition="center 25%"
-                  className="shadow-md rounded-2xl w-full"
-                />
-              </div>
+          {/* Horizontal Side-Scroll Cards Track with Reveal Snap (Same as Our Best Sellers) */}
+          <div className="relative">
+            <div
+              ref={datePlansScrollRef}
+              className="flex gap-5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 px-1 scroll-smooth justify-start md:justify-center"
+            >
+              {DATE_PLANS.map((plan) => (
+                <article
+                  key={plan.id}
+                  className="w-[260px] sm:w-[300px] md:w-[320px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
+                >
+                  {/* Clean Visual Image */}
+                  <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden">
+                    <img
+                      src={plan.image}
+                      alt={plan.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
 
-              {/* Text & Action Column */}
-              <div className="lg:col-span-7 space-y-5">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#C86F50]/15 text-[#963E23]">
-                  <Heart className="w-3.5 h-3.5 fill-[#C86F50]" />
-                  <span>Couples & Special Occasions</span>
-                </div>
+                  {/* Content Section: Title & Book Action Button */}
+                  <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-4">
+                    <h3 className="font-serif font-bold text-lg sm:text-xl text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
+                      {plan.title}
+                    </h3>
 
-                <div>
-                  <h3 className="font-serif font-bold text-2xl sm:text-3xl text-[#242824]">
-                    {dateOffering.title}
-                  </h3>
-                  <p className="font-serif italic text-sm sm:text-base text-[#963E23] mt-1">
-                    {dateOffering.tagline}
-                  </p>
-                </div>
+                    {/* Book Action Button */}
+                    <div className="pt-3 border-t border-[#F1ECE1] flex items-center justify-between gap-3">
+                      <button
+                        type="button"
+                        onClick={() => onOpenEnquiry ? onOpenEnquiry('date', plan.title) : null}
+                        className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#245449] hover:bg-[#193B33] text-white text-xs font-bold transition-all shadow-xs group-hover:shadow-md active:scale-95 cursor-pointer"
+                      >
+                        <Heart className="w-3.5 h-3.5 text-[#E9BF69]" />
+                        <span>Book Now</span>
+                        <ChevronRight className="w-3.5 h-3.5 ml-0.5" />
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
 
-                <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
-                  {dateOffering.description}
-                </p>
+            {/* Interactive Pagination Dots with Left/Right Arrows */}
+            <div className="mt-8 flex items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={() => scrollDatePlans('left')}
+                disabled={activeDateIndex === 0}
+                aria-label="Previous date plan"
+                className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
 
-                <div className="pt-2">
+              <div className="flex items-center gap-2">
+                {DATE_PLANS.map((plan, idx) => (
                   <button
+                    key={plan.id}
                     type="button"
-                    onClick={() => onOpenEnquiry('date', 'Date or Anniversary Experience')}
-                    aria-label="Plan a Date or Anniversary experience enquiry via WhatsApp"
-                    className="py-3.5 px-6 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] text-sm font-semibold rounded-xl transition-colors flex items-center justify-center gap-2 shadow-xs active:scale-98"
-                  >
-                    <Heart className="w-4 h-4 text-[#E9BF69]" />
-                    <span>Plan a Date or Anniversary</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </button>
-                </div>
+                    onClick={() => scrollToDateIndex(idx)}
+                    aria-label={`Go to date plan ${idx + 1}: ${plan.title}`}
+                    className={`transition-all duration-300 rounded-full cursor-pointer ${activeDateIndex === idx
+                      ? 'w-7 sm:w-8 h-2.5 bg-[#245449] shadow-xs'
+                      : 'w-2.5 h-2.5 bg-[#D5CEBF] hover:bg-[#245449]/50 hover:scale-125'
+                      }`}
+                  />
+                ))}
               </div>
-            </div>
-          )}
 
-          {/* 2. GROUP EXPERIENCES (Friends, Family & Milestones in a balanced 3-column row) */}
-          <div className="space-y-6 pt-4">
-            <div className="text-center max-w-xl mx-auto space-y-1">
-              <h3 className="font-serif font-bold text-2xl text-[#242824]">
-                Friends & Group Celebrations
-              </h3>
-              <p className="text-xs sm:text-sm text-[#4D534D]">
-                Shared tables, guided creative workshops, and screen-free bonding for every gathering.
-              </p>
+              <button
+                type="button"
+                onClick={() => scrollDatePlans('right')}
+                disabled={activeDateIndex === DATE_PLANS.length - 1}
+                aria-label="Next date plan"
+                className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-              {/* Friends Card */}
-              {friendsOffering && (
-                <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#D5CEBF] shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#DCE6D9] text-[#193B33] border border-[#BFD0BC]">
-                        Friends & Groups
-                      </span>
-                      <div className="w-8 h-8 rounded-full bg-[#FAF7F0] border border-[#E2DDD0] flex items-center justify-center text-[#963E23]">
-                        <Users className="w-4 h-4" />
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-serif font-bold text-xl text-[#242824]">
-                        {friendsOffering.title}
-                      </h4>
-                      <p className="font-serif italic text-xs text-[#963E23] mt-1">
-                        {friendsOffering.tagline}
-                      </p>
-                    </div>
-
-                    <p className="text-xs sm:text-sm text-[#4D534D] leading-relaxed">
-                      {friendsOffering.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-4 border-t border-[#F1ECE1] mt-6">
-                    <button
-                      type="button"
-                      onClick={() => onOpenEnquiry('celebration', 'Friends Group Outing')}
-                      aria-label="Plan a Friends Outing enquiry via WhatsApp"
-                      className="w-full py-3 px-4 bg-[#DCE6D9] hover:bg-[#C2D2BD] text-[#193B33] text-xs sm:text-sm font-semibold rounded-xl transition-colors flex items-center justify-center gap-2 active:scale-98"
-                    >
-                      <MessageCircle className="w-4 h-4 text-[#245449]" />
-                      <span>Plan a Friends Outing</span>
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* Family Card */}
-              {familyOffering && (
-                <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#D5CEBF] shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#EBF0E7] text-[#245449] border border-[#BFD0BC]">
-                        Family & All Ages
-                      </span>
-                      <div className="w-8 h-8 rounded-full bg-[#FAF7F0] border border-[#E2DDD0] flex items-center justify-center text-[#E9BF69]">
-                        <Sparkles className="w-4 h-4 text-[#963E23]" />
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-serif font-bold text-xl text-[#242824]">
-                        {familyOffering.title}
-                      </h4>
-                      <p className="font-serif italic text-xs text-[#963E23] mt-1">
-                        {familyOffering.tagline}
-                      </p>
-                    </div>
-
-                    <p className="text-xs sm:text-sm text-[#4D534D] leading-relaxed">
-                      {familyOffering.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-4 border-t border-[#F1ECE1] mt-6">
-                    <button
-                      type="button"
-                      onClick={() => onOpenEnquiry('celebration', 'Family Creative Time')}
-                      aria-label="Plan a Family Outing enquiry via WhatsApp"
-                      className="w-full py-3 px-4 bg-[#F8F4EB] hover:bg-[#EAE4D5] text-[#193B33] border border-[#D5CEBF] text-xs sm:text-sm font-semibold rounded-xl transition-colors flex items-center justify-center gap-2 active:scale-98"
-                    >
-                      <MessageCircle className="w-4 h-4 text-[#245449]" />
-                      <span>Plan Family Outing</span>
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* Birthday Card */}
-              {birthdayOffering && (
-                <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#D5CEBF] shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#C86F50]/15 text-[#963E23] border border-[#C86F50]/30">
-                        Milestones & Private Events
-                      </span>
-                      <div className="w-8 h-8 rounded-full bg-[#FAF7F0] border border-[#E2DDD0] flex items-center justify-center text-[#963E23]">
-                        <PartyPopper className="w-4 h-4 text-[#963E23]" />
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-serif font-bold text-xl text-[#242824]">
-                        {birthdayOffering.title}
-                      </h4>
-                      <p className="font-serif italic text-xs text-[#963E23] mt-1">
-                        {birthdayOffering.tagline}
-                      </p>
-                    </div>
-
-                    <p className="text-xs sm:text-sm text-[#4D534D] leading-relaxed">
-                      {birthdayOffering.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-4 border-t border-[#F1ECE1] mt-6">
-                    <button
-                      type="button"
-                      onClick={() => onOpenEnquiry('celebration', 'Birthday / Private Celebration')}
-                      aria-label="Plan a Celebration enquiry via WhatsApp"
-                      className="w-full py-3 px-4 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] text-xs sm:text-sm font-semibold rounded-xl transition-colors flex items-center justify-center gap-2 active:scale-98 shadow-xs"
-                    >
-                      <MessageCircle className="w-4 h-4 text-[#E9BF69]" />
-                      <span>Plan a Celebration</span>
-                    </button>
-                  </div>
-                </div>
-              )}
+            {/* Plan a Date or Anniversary CTA Button */}
+            <div className="mt-8 sm:mt-10 text-center">
+              <button
+                type="button"
+                onClick={() => onOpenEnquiry ? onOpenEnquiry('date', 'Plan a Date or Anniversary') : null}
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-sm sm:text-base transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95 group cursor-pointer"
+              >
+                <Heart className="w-4 h-4 text-[#E9BF69]" />
+                <span>Plan a Date or Anniversary</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-0.5" />
+              </button>
             </div>
           </div>
         </div>
