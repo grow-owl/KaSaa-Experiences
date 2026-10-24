@@ -43,7 +43,7 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
   return (
     <div className="py-8 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       <SEOHead
-        title="Creative Workshops & Activities | KaSaa Experiences Siliguri"
+        title="Explore All Activities | KaSaa Experiences Siliguri"
         description="Explore 12 hands-on creative workshop categories from KaSaa's official Activity Brochure in Siliguri. Canvas painting, fluid art, resin crafts, soft play, and celebrations."
         canonicalPath="/activities"
       />
@@ -59,11 +59,11 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
             <span>Home</span>
           </Link>
           <span>/</span>
-          <span className="text-[#242824] font-semibold">Activities & Workshops</span>
+          <span className="text-[#242824] font-semibold">Explore All Activities</span>
         </div>
 
         <h1 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
-          Creative Workshops & Activities
+          Explore All Activities
         </h1>
 
         <p className="text-sm sm:text-base text-[#535953] leading-relaxed">

@@ -12,6 +12,7 @@ import ActivitiesPage from './pages/ActivitiesPage';
 import ActivityDetailPageLayout from './pages/activities/ActivityDetailPageLayout';
 import { getBrochureCategory } from './data/brochureActivities';
 import VisitPage from './pages/VisitPage';
+import OurStoryPage from './pages/OurStoryPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import BookingPolicyPage from './pages/BookingPolicyPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -83,6 +84,8 @@ export default function App() {
           <Route path="/activities/:slug" element={<ActivityRouteWrapper onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/menu" element={<MenuPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/our-story" element={<OurStoryPage onOpenEnquiry={handleOpenEnquiry} />} />
+          <Route path="/diy-kids" element={<Navigate to="/activities/soft-play" replace />} />
           <Route path="/visit" element={<VisitPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/booking-cancellation-policy" element={<BookingPolicyPage />} />

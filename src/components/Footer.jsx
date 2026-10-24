@@ -65,17 +65,17 @@ export default function Footer({ onOpenEnquiry }) {
               </li>
               <li>
                 <Link to="/activities" className="hover:text-[#E9BF69] transition-colors">
-                  Activities & Workshops
+                  Activities
                 </Link>
               </li>
               <li>
                 <a href="/#together" className="hover:text-[#E9BF69] transition-colors">
-                  Dates & Celebrations
+                  Celebrations
                 </a>
               </li>
               <li>
-                <Link to="/gallery" className="hover:text-[#E9BF69] transition-colors">
-                  Studio Gallery
+                <Link to="/activities/soft-play" className="hover:text-[#E9BF69] transition-colors">
+                  DIY Kids
                 </Link>
               </li>
               <li>
@@ -84,8 +84,18 @@ export default function Footer({ onOpenEnquiry }) {
                 </Link>
               </li>
               <li>
+                <Link to="/gallery" className="hover:text-[#E9BF69] transition-colors">
+                  Gallery
+                </Link>
+              </li>
+              <li>
+                <Link to="/our-story" className="hover:text-[#E9BF69] transition-colors">
+                  Our Story
+                </Link>
+              </li>
+              <li>
                 <Link to="/visit" className="hover:text-[#E9BF69] transition-colors">
-                  Visit & Directions
+                  Visit Us
                 </Link>
               </li>
             </ul>

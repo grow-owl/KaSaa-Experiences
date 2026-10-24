@@ -79,7 +79,7 @@ export default function HomePage({ onOpenEnquiry }) {
                   aria-label="Explore creative workshops and activities"
                   className="px-6 py-3.5 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-sm rounded-xl shadow-xs transition-all duration-200 flex items-center justify-center gap-2 group hover:shadow-md active:scale-98"
                 >
-                  <span>Explore Activities & Workshops</span>
+                  <span>Explore DIY Activities</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </a>
 
@@ -110,17 +110,20 @@ export default function HomePage({ onOpenEnquiry }) {
               {/* Mobile: Full-width main card + 2 side-by-side cards below / Desktop: 8:4 column collage */}
               <div className="flex flex-col sm:grid sm:grid-cols-12 gap-3 sm:gap-4 items-center">
                 {/* Large Main Feature Card (Pottery focus) */}
-                <div className="w-full sm:col-span-8 space-y-2.5">
+                <div className="w-full sm:col-span-8 space-y-2.5 flex flex-col items-center">
                   <ImagePlaceholder
                     src="/images/hero-pottery-hands.webp"
                     alt="Hands shaping wet clay on an electric pottery wheel at KaSaa Experiences"
                     title="Pottery Wheel Sessions"
                     type="pottery"
                     aspectRatio="4/3"
-                    objectPosition="center bottom"
+                    objectPosition="center top"
                     priority={true}
-                    className="shadow-md border-2 border-white rounded-2xl"
+                    className="shadow-md border-2 border-white rounded-2xl w-full"
                   />
+                  <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#FAF7F0] border border-[#E2DDD0] text-xs font-semibold text-[#193B33] shadow-xs">
+                    <span>Less scrolling. More living.</span>
+                  </div>
                 </div>
 
                 {/* Supporting Compact Cards - 2 equal columns on mobile, stacked column on tablet/desktop */}
@@ -143,22 +146,16 @@ export default function HomePage({ onOpenEnquiry }) {
                     <ImagePlaceholder
                       src="/images/collection_of_work.webp"
                       alt="Finished handcrafted ceramic pottery and artwork on display"
-                      title="Handcrafted Art"
-                      type="general"
+                      title="Pottery"
+                      type="pottery"
                       aspectRatio={null}
                       className="aspect-[4/5] sm:aspect-4/3 shadow-xs border-2 border-white rounded-xl"
                     />
                     <div className="text-xs sm:text-[11px] font-semibold text-[#242824] sm:text-[#6D756D] text-center truncate">
-                      Finished Art
+                      Pottery
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Decorative Floating Tag */}
-              <div className="absolute -bottom-3 right-1 bg-[#F8F4EB] border border-[#E2DDD0] px-3 py-1 rounded-xl shadow-md text-xs font-semibold text-[#193B33] hidden sm:flex items-center gap-1.5">
-                <span className="text-sm">✨</span>
-                <span>Less scrolling. More living.</span>
               </div>
             </div>
           </div>
@@ -170,11 +167,8 @@ export default function HomePage({ onOpenEnquiry }) {
           ------------------------------------------------------------- */}
       <section id="experiences" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#963E23]">
-            12 Workshop Categories
-          </p>
           <h2 className="font-serif font-bold text-3xl sm:text-4xl text-[#242824] tracking-tight">
-            Creative Workshops & Activities
+            Explore All Activities
           </h2>
           <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
             Curated hands-on workshop categories from our official Activity Brochure. All materials provided for every session.
