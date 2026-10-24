@@ -313,6 +313,52 @@ const GROUP_EXPERIENCES = [
   },
 ];
 
+// 6 Featured Food Items for "Yes, We Serve Food Too!" Section
+const FEATURED_FOOD_ITEMS = [
+  {
+    id: 'hot-momos',
+    title: 'Hot Steamed Momos',
+    price: '200',
+    category: 'Quick Bites',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'grilled-sandwiches',
+    title: 'Grilled Sandwiches',
+    price: '250',
+    category: 'Fillers',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'artisan-pizzas',
+    title: 'Artisan Pizzas',
+    price: '350',
+    category: 'Mains',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'ramen-bowls',
+    title: 'Korean Ramen Bowls',
+    price: '300',
+    category: 'Twirl & Slurp',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'pav-bhaji',
+    title: 'Butter Pav Bhaji',
+    price: '250',
+    category: 'Street Favs',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'coolers-shakes',
+    title: 'Shakes & Coolers',
+    price: '200',
+    category: 'Beverages',
+    image: '', // reserved for future upload
+  },
+];
+
 export default function HomePage({ onOpenEnquiry }) {
   const navigate = useNavigate();
 
@@ -567,6 +613,86 @@ export default function HomePage({ onOpenEnquiry }) {
       };
     }
   }, [checkGroupScroll]);
+
+  // Food Items Side-Scroll State & Handlers
+  const foodScrollRef = useRef(null);
+  const [activeFoodIndex, setActiveFoodIndex] = useState(0);
+
+  const checkFoodScroll = React.useCallback(() => {
+    const container = foodScrollRef.current;
+    if (!container) return;
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    const children = container.children;
+    if (!children || children.length === 0) return;
+
+    if (scrollLeft <= 15) {
+      setActiveFoodIndex(0);
+      return;
+    }
+    if (scrollLeft >= scrollWidth - clientWidth - 25) {
+      setActiveFoodIndex(children.length - 1);
+      return;
+    }
+
+    const containerRect = container.getBoundingClientRect();
+    const containerCenter = containerRect.left + containerRect.width / 2;
+
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    for (let i = 0; i < children.length; i++) {
+      const childRect = children[i].getBoundingClientRect();
+      const childCenter = childRect.left + childRect.width / 2;
+      const distance = Math.abs(childCenter - containerCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = i;
+      }
+    }
+
+    setActiveFoodIndex(closestIndex);
+  }, []);
+
+  const scrollToFoodIndex = (index) => {
+    const container = foodScrollRef.current;
+    if (!container) return;
+    const children = container.children;
+    if (children && children[index]) {
+      children[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+      setActiveFoodIndex(index);
+    }
+  };
+
+  const scrollFoodItems = (direction) => {
+    const container = foodScrollRef.current;
+    if (!container) return;
+    const children = container.children;
+    if (!children || children.length === 0) return;
+
+    const targetIndex = direction === 'left'
+      ? Math.max(0, activeFoodIndex - 1)
+      : Math.min(children.length - 1, activeFoodIndex + 1);
+
+    scrollToFoodIndex(targetIndex);
+  };
+
+  useEffect(() => {
+    const el = foodScrollRef.current;
+    if (el) {
+      el.addEventListener('scroll', checkFoodScroll, { passive: true });
+      window.addEventListener('resize', checkFoodScroll);
+      checkFoodScroll();
+      return () => {
+        el.removeEventListener('scroll', checkFoodScroll);
+        window.removeEventListener('resize', checkFoodScroll);
+      };
+    }
+  }, [checkFoodScroll]);
 
   useEffect(() => {
     if (isHeroPaused) return;
@@ -1100,7 +1226,144 @@ export default function HomePage({ onOpenEnquiry }) {
       </section>
 
       {/* -------------------------------------------------------------
-          4. CURATED GALLERY PREVIEW
+          4. FOOD MENU PREVIEW — YES, WE SERVE FOOD TOO!
+          ------------------------------------------------------------- */}
+      <section id="menu-preview" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
+            <Utensils className="w-3.5 h-3.5 text-[#B37B15]" />
+            <span>Food is our Love Language</span>
+          </div>
+
+          <h2 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+            Yes, We Serve Food Too!
+          </h2>
+
+          <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
+            While you spin clay or paint a canvas, our kitchen serves up hot momos, grilled sandwiches, delicious pizzas, ramen bowls and refreshing beverages to keep you fuelled through all the fun.
+          </p>
+        </div>
+
+        {/* Horizontal Side-Scroll 5-6 Food Cards Track with Reveal Snap */}
+        <div className="relative">
+          <div
+            ref={foodScrollRef}
+            className="flex gap-5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 px-1 scroll-smooth"
+          >
+            {FEATURED_FOOD_ITEMS.map((dish) => (
+              <article
+                key={dish.id}
+                className="w-[240px] sm:w-[280px] md:w-[300px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
+              >
+                {/* Image Placeholder Space (Reserved for future image upload) */}
+                <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden flex items-center justify-center">
+                  {dish.image ? (
+                    <img
+                      src={dish.image}
+                      alt={dish.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center text-[#8C8577] space-y-2 p-4 text-center select-none">
+                      <div className="w-12 h-12 rounded-2xl bg-[#DFD8CA]/80 border border-[#D5CEBF] flex items-center justify-center text-[#245449] shadow-2xs">
+                        <Utensils className="w-5 h-5 text-[#245449]" />
+                      </div>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#736C5F]">
+                        Photo Coming Soon
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Content Section: Title & Price */}
+                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+                  <h3 className="font-serif font-bold text-lg sm:text-xl text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
+                    {dish.title}
+                  </h3>
+
+                  {/* Price Row */}
+                  <div className="pt-3 border-t border-[#F1ECE1] flex items-center justify-between gap-3">
+                    <div>
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-[#737A73] block">
+                        Price
+                      </span>
+                      <div className="flex items-baseline gap-1">
+                        <span className="font-serif font-black text-xl sm:text-2xl text-[#245449]">
+                          ₹{dish.price}
+                        </span>
+                      </div>
+                    </div>
+
+                    <Link
+                      to="/menu"
+                      className="inline-flex items-center justify-center gap-1 px-3.5 py-2 rounded-xl bg-[#FAF7F0] hover:bg-[#245449] text-[#242824] hover:text-white border border-[#D5CEBF] hover:border-[#245449] text-xs font-bold transition-all shadow-2xs"
+                    >
+                      <span>Menu</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* Interactive Pagination Dots with Left/Right Arrows */}
+          <div className="mt-8 flex items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => scrollFoodItems('left')}
+              disabled={activeFoodIndex === 0}
+              aria-label="Previous food item"
+              className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-2">
+              {FEATURED_FOOD_ITEMS.map((dish, idx) => (
+                <button
+                  key={dish.id}
+                  type="button"
+                  onClick={() => scrollToFoodIndex(idx)}
+                  aria-label={`Go to food item ${idx + 1}: ${dish.title}`}
+                  className={`transition-all duration-300 rounded-full cursor-pointer ${activeFoodIndex === idx
+                    ? 'w-7 sm:w-8 h-2.5 bg-[#245449] shadow-xs'
+                    : 'w-2.5 h-2.5 bg-[#D5CEBF] hover:bg-[#245449]/50 hover:scale-125'
+                    }`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => scrollFoodItems('right')}
+              disabled={activeFoodIndex === FEATURED_FOOD_ITEMS.length - 1}
+              aria-label="Next food item"
+              className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Explore Our Food Menu CTA Button */}
+          <div className="mt-8 sm:mt-10 text-center">
+            <Link
+              to="/menu"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-sm sm:text-base transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95 group cursor-pointer"
+            >
+              <Utensils className="w-4 h-4 text-[#E9BF69]" />
+              <span>Explore Our Food Menu</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-0.5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* -------------------------------------------------------------
+          5. CURATED GALLERY PREVIEW
           ------------------------------------------------------------- */}
       <section id="gallery" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
@@ -1193,102 +1456,6 @@ export default function HomePage({ onOpenEnquiry }) {
             <span>View All Photos & Studio Captions</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------------
-          FOOD MENU PREVIEW SECTION (EXACTLY 3 IMAGES + SHOW MORE)
-          Placed directly above "Loved by People Who Visit"
-          ------------------------------------------------------------- */}
-      {/* -------------------------------------------------------------
-          FOOD MENU SHOWCASE (HERO MENU CARD + RIGHT DESCRIPTION)
-          Placed directly above "Loved by People Who Visit"
-          ------------------------------------------------------------- */}
-      <section id="menu-preview" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#FAF7F0] border border-[#E2DDD0] rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xs hover:shadow-sm transition-shadow">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left: Food Menu Card (Bada Size) */}
-            <div className="lg:col-span-5 flex justify-center">
-              <Link
-                to="/menu"
-                className="group relative block w-full max-w-xs sm:max-w-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-[#141814] border border-[#3E473E]"
-              >
-                <picture>
-                  <source srcSet="/images/menu/menu_page_1.webp" type="image/webp" />
-                  <img
-                    src="/images/menu/menu_page_1.jpg"
-                    alt="KaSaa Food Menu Card"
-                    className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-500"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </picture>
-
-                {/* Subtle Hover Overlay */}
-                <div className="absolute inset-0 bg-[#245449]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                  <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-[#242824] text-xs sm:text-sm font-bold shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                    <span>Click to Explore Menu</span>
-                    <ArrowRight className="w-4 h-4 text-[#245449]" />
-                  </span>
-                </div>
-              </Link>
-            </div>
-
-            {/* Right: Rich Minimal Description & Details */}
-            <div className="lg:col-span-7 space-y-6 text-left">
-              <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
-                  <Utensils className="w-3.5 h-3.5 text-[#B37B15]" />
-                  <span>FOOD IS OUR LOVE LANGUAGE</span>
-                </div>
-
-                <h2 className="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-[#242824] tracking-tight leading-tight">
-                  Food Like Never Before
-                </h2>
-
-                <p className="font-serif italic text-base sm:text-lg text-[#963E23]">
-                  "Good vibe, great food. The best conversations happen over food."
-                </p>
-              </div>
-
-              <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
-                At KaSaa Experiences, creativity and taste come together. Whether you are spinning clay on the pottery wheel,
-                painting a canvas, or enjoying an intimate date or birthday celebration, our studio cafe offers freshly made street
-                favorites, hot momos, crisp grilled sandwiches, artisan pizzas, comforting ramen bowls, desserts, and refreshing coolers.
-              </p>
-
-              {/* Highlights List */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs sm:text-sm text-[#343A34]">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#245449] shrink-0" />
-                  <span>41 Handcrafted Dishes & Drinks</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#245449] shrink-0" />
-                  <span>Street Favs to Artisan Pizzas</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#245449] shrink-0" />
-                  <span>Freshly Prepared While You Create</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#245449] shrink-0" />
-                  <span>Custom Menus for 10+ Guests</span>
-                </div>
-              </div>
-
-              {/* CTA Button */}
-              <div className="pt-2">
-                <Link
-                  to="/menu"
-                  className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-[#245449] hover:bg-[#1B4037] text-white font-semibold text-sm rounded-xl transition-all shadow-sm hover:shadow-md active:scale-98"
-                >
-                  <span>View Complete Menu</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
