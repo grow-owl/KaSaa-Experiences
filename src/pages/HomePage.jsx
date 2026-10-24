@@ -242,9 +242,8 @@ export default function HomePage({ onOpenEnquiry }) {
                     return (
                       <div
                         key={slide.id}
-                        className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                          isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-                        }`}
+                        className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                          }`}
                       >
                         <img
                           src={slide.src}
@@ -294,10 +293,10 @@ export default function HomePage({ onOpenEnquiry }) {
       <section id="experiences" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className="font-serif font-bold text-3xl sm:text-4xl text-[#242824] tracking-tight">
-            Explore All Activities
+            Our Best Seller
           </h2>
           <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
-            Curated hands-on workshop categories from our official Activity Brochure. All materials provided for every session.
+            The experiences everyone loves and the activities you'll want to try first!
           </p>
         </div>
 
