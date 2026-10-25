@@ -159,7 +159,7 @@ export default function Navbar({ onOpenEnquiry, onMobileMenuToggle }) {
   // Nav links in order requested: Celebrations, DIY Kits, Food Menu, Gallery, Our Story, Visit Us
   const otherNavLinks = [
     { name: 'Celebrations', path: '/#together', hash: 'together' },
-    { name: 'DIY Kits', path: '/activities/soft-play' },
+    { name: 'DIY Kits', path: '/diy-kits' },
     { name: 'Food Menu', path: '/menu' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Our Story', path: '/our-story' },

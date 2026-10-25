@@ -95,7 +95,7 @@ export default function ImagePlaceholder({
           src={src}
           alt={alt}
           loading={priority ? 'eager' : 'lazy'}
-          fetchPriority={priority ? 'high' : 'auto'}
+          fetchpriority={priority ? 'high' : 'auto'}
           decoding="async"
           onLoad={() => setIsLoaded(true)}
           onError={() => setHasError(true)}

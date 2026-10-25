@@ -1,18 +1,15 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowLeft, 
-  Search, 
-  Info, 
-  Utensils, 
-  MessageCircle, 
-  BookOpen, 
+import {
+  ArrowLeft,
+  Search,
+  Utensils,
+  MessageCircle,
+  BookOpen,
   X,
   ChevronLeft,
   ChevronRight,
-  Flame,
-  CheckCircle2,
-  Clock
+  ArrowRight
 } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import { allDishes, menuCategories, originalMenuBookPages } from '../data/menuData';
@@ -23,54 +20,61 @@ export default function MenuPage({ onOpenEnquiry }) {
   const [bookletOpen, setBookletOpen] = useState(false);
   const [bookletPage, setBookletPage] = useState(0);
 
-  // Filtered dishes
-  const filteredDishes = useMemo(() => {
-    return allDishes.filter((dish) => {
-      let matchesCategory = true;
-      if (activeCategory === 'popular') {
-        matchesCategory = Boolean(dish.tag);
-      } else if (activeCategory !== 'all') {
-        matchesCategory = dish.category === activeCategory;
+  // Group dishes by category according to search and active tab
+  const categoriesToRender = useMemo(() => {
+    const list = menuCategories.filter((c) => c.id !== 'all');
+
+    const activeList = activeCategory === 'all'
+      ? list
+      : list.filter((c) => c.id === activeCategory);
+
+    const q = searchQuery.toLowerCase().trim();
+
+    return activeList.map((cat) => {
+      let items = allDishes.filter((d) => d.category === cat.id);
+
+      if (q) {
+        items = items.filter(
+          (d) =>
+            d.name.toLowerCase().includes(q) ||
+            d.variants.toLowerCase().includes(q) ||
+            d.category.toLowerCase().includes(q) ||
+            (d.description && d.description.toLowerCase().includes(q))
+        );
       }
 
-      const q = searchQuery.toLowerCase().trim();
-      const matchesSearch =
-        !q ||
-        dish.name.toLowerCase().includes(q) ||
-        dish.variants.toLowerCase().includes(q) ||
-        dish.category.toLowerCase().includes(q) ||
-        (dish.description && dish.description.toLowerCase().includes(q));
-
-      return matchesCategory && matchesSearch;
-    });
+      return {
+        ...cat,
+        dishes: items,
+      };
+    }).filter((catGroup) => catGroup.dishes.length > 0);
   }, [activeCategory, searchQuery]);
 
   // Dish counts per category
   const categoryCounts = useMemo(() => {
-    const counts = { all: allDishes.length, popular: allDishes.filter(d => Boolean(d.tag)).length };
+    const counts = { all: allDishes.length };
     allDishes.forEach((d) => {
       counts[d.category] = (counts[d.category] || 0) + 1;
     });
     return counts;
   }, []);
 
-  // Filter tabs list (including Popular / Bestsellers)
+  // Filter tabs list
   const tabs = [
     { id: 'all', label: 'All Items' },
-    { id: 'popular', label: 'Bestsellers & Specials', icon: Flame },
     ...menuCategories.filter(c => c.id !== 'all'),
   ];
 
   return (
-    <div className="py-8 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="py-8 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
       <SEOHead
-        title="KaSaa Food Menu | Artisan Cafe, Snacks & Drinks"
+        title="KaSaa Food Menu | Authentic Cafe & Street Food"
         description="Explore KaSaa Experiences food menu in Siliguri. Mumbai pav bhaji, grilled sandwiches, artisan pizzas, steamed momos, Korean ramen, beverages with exact prices."
         canonicalPath="/menu"
       />
 
       {/* -------------------------------------------------------------
-          1. MINIMAL PREMIUM HEADER (CENTERED)
+          1. HEADER (CENTERED)
           ------------------------------------------------------------- */}
       <div className="space-y-4 pb-8 border-b border-[#E2DDD0] text-center max-w-2xl mx-auto">
         {/* Breadcrumb */}
@@ -88,10 +92,10 @@ export default function MenuPage({ onOpenEnquiry }) {
         </h1>
 
         <p className="text-sm sm:text-base text-[#535953] leading-relaxed">
-          Food like never before. Good vibe, great food.
+          Good food, great company and something delicious to enjoy between all the fun.
         </p>
 
-        {/* Clean GST Note */}
+        {/* Clean GST Note from Original Menu */}
         <p className="text-xs text-[#7A827A]">
           * Prices mentioned are exclusive of GST.
         </p>
@@ -101,7 +105,7 @@ export default function MenuPage({ onOpenEnquiry }) {
           <button
             type="button"
             onClick={() => setBookletOpen(true)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white hover:bg-[#F2EDE2] text-[#242824] border border-[#D5CEBF] text-xs sm:text-sm font-semibold shadow-xs transition-all hover:border-[#245449] active:scale-98"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white hover:bg-[#F2EDE2] text-[#242824] border border-[#D5CEBF] text-xs sm:text-sm font-semibold shadow-xs transition-all hover:border-[#245449] active:scale-98 cursor-pointer"
           >
             <BookOpen className="w-4 h-4 text-[#245449]" />
             <span>View Original Chalk Menu Book</span>
@@ -110,7 +114,7 @@ export default function MenuPage({ onOpenEnquiry }) {
       </div>
 
       {/* -------------------------------------------------------------
-          2. MINIMAL SEARCH & CATEGORY FILTER TABS
+          2. SEARCH & CATEGORY JUMP TABS
           ------------------------------------------------------------- */}
       <div className="space-y-4">
         {/* Search bar */}
@@ -128,7 +132,7 @@ export default function MenuPage({ onOpenEnquiry }) {
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-[#8C938C] hover:text-[#242824] font-semibold"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-[#8C938C] hover:text-[#242824] font-semibold cursor-pointer"
               >
                 Clear
               </button>
@@ -141,27 +145,23 @@ export default function MenuPage({ onOpenEnquiry }) {
           {tabs.map((tab) => {
             const count = categoryCounts[tab.id] || 0;
             const isActive = activeCategory === tab.id;
-            const Icon = tab.icon;
 
             return (
               <button
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveCategory(tab.id)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 ${
-                  isActive
-                    ? 'bg-[#245449] text-white shadow-xs'
-                    : 'bg-white hover:bg-[#F1ECE1] text-[#4A504A] border border-[#E2DDD0]'
-                }`}
+                className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 cursor-pointer ${isActive
+                  ? 'bg-[#245449] text-white shadow-xs'
+                  : 'bg-white hover:bg-[#F1ECE1] text-[#4A504A] border border-[#E2DDD0]'
+                  }`}
               >
-                {Icon && <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#E9BF69]' : 'text-[#C86F50]'}`} />}
                 <span>{tab.label}</span>
                 <span
-                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
-                    isActive
-                      ? 'bg-white/20 text-white'
-                      : 'bg-[#F2EDE2] text-[#6E756E]'
-                  }`}
+                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${isActive
+                    ? 'bg-white/20 text-white'
+                    : 'bg-[#F2EDE2] text-[#6E756E]'
+                    }`}
                 >
                   {count}
                 </span>
@@ -172,80 +172,104 @@ export default function MenuPage({ onOpenEnquiry }) {
       </div>
 
       {/* -------------------------------------------------------------
-          3. INDIVIDUAL DISH CARDS (MINIMAL & ULTRA-PREMIUM)
+          3. GROUPED CATEGORY SECTIONS (H2 HEADING + DISH CARDS)
           ------------------------------------------------------------- */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-        {filteredDishes.map((dish) => (
-          <article
-            key={dish.id}
-            className="group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1"
-          >
-            {/* Dish Photo */}
-            <div className="relative aspect-square bg-[#EAE5D9] overflow-hidden">
-              <picture>
-                <source srcSet={dish.image} type="image/webp" />
-                <img
-                  src={dish.fallbackImage}
-                  alt={dish.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </picture>
-
-
-
-              {/* Exact Price Pill */}
-              <div className="absolute top-3 right-3 px-3 py-1 rounded-xl bg-black/75 backdrop-blur-sm text-[#E9BF69] text-xs font-bold tracking-tight shadow-xs">
-                {dish.priceDisplay}
+      <div className="space-y-16">
+        {categoriesToRender.map((catGroup) => (
+          <section key={catGroup.id} id={catGroup.id.toLowerCase().replace(/\s+/g, '-')} className="space-y-6">
+            {/* Category H2 Section Header */}
+            <div className="flex items-center justify-between pb-3 border-b-2 border-[#E2DDD0]">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-2xl bg-[#E9BF69]/20 border border-[#E9BF69]/30 flex items-center justify-center text-[#245449]">
+                  <Utensils className="w-5 h-5 text-[#245449]" />
+                </div>
+                <h2 className="font-serif font-bold text-2xl sm:text-3xl text-[#242824] tracking-tight">
+                  {catGroup.label}
+                </h2>
               </div>
+              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white text-[#7A827A] border border-[#E2DDD0] shadow-2xs">
+                {catGroup.dishes.length} {catGroup.dishes.length === 1 ? 'dish' : 'dishes'}
+              </span>
             </div>
 
-            {/* Dish Info */}
-            <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-2.5 bg-white">
-              <div className="space-y-1">
-                <div className="text-[11px] font-bold text-[#8C938C] uppercase tracking-wider">
-                  {dish.category}
-                </div>
+            {/* Grid of Dishes for this Category */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+              {catGroup.dishes.map((dish) => (
+                <article
+                  key={dish.id}
+                  className="group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1"
+                >
+                  {/* Dish Photo */}
+                  <div className="relative aspect-square bg-[#EAE5D9] overflow-hidden">
+                    <picture>
+                      <source srcSet={dish.image} type="image/webp" />
+                      <img
+                        src={dish.fallbackImage}
+                        alt={dish.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </picture>
 
-                <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-serif font-bold text-lg text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
-                    {dish.name}
-                  </h3>
-                  <span className="font-bold text-sm sm:text-base text-[#245449] shrink-0">
-                    {dish.priceDisplay}
-                  </span>
-                </div>
-
-                {/* Variants / Choices */}
-                {dish.variants && (
-                  <div className="pt-0.5">
-                    <span className="inline-block text-[11px] px-2.5 py-0.5 rounded-lg bg-[#F5EFE4] text-[#4F564F] font-medium border border-[#EBE4D5]">
-                      <span className="text-[#8C938C]">Options: </span>
-                      <span className="italic">{dish.variants}</span>
-                    </span>
+                    {/* Exact Price Pill */}
+                    <div className="absolute top-3 right-3 px-3 py-1 rounded-xl bg-black/75 backdrop-blur-sm text-[#E9BF69] text-xs font-bold tracking-tight shadow-xs">
+                      {dish.priceDisplay}
+                    </div>
                   </div>
-                )}
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
 
-      {filteredDishes.length === 0 && (
-        <div className="text-center py-20 bg-white rounded-3xl border border-[#E2DDD0] space-y-3">
-          <Utensils className="w-10 h-10 text-[#8C938C] mx-auto" />
-          <h3 className="text-lg font-serif font-bold text-[#242824]">No dishes matched "{searchQuery}"</h3>
-          <p className="text-xs text-[#6F776F]">Try searching another name or reset the category filter.</p>
-          <button
-            type="button"
-            onClick={() => { setSearchQuery(''); setActiveCategory('all'); }}
-            className="px-5 py-2.5 bg-[#245449] text-white text-xs font-semibold rounded-xl hover:bg-[#1B4037] transition-colors"
-          >
-            Reset Filters
-          </button>
-        </div>
-      )}
+                  {/* Dish Info */}
+                  <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-2.5 bg-white">
+                    <div className="space-y-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="font-serif font-bold text-lg text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
+                          {dish.name}
+                        </h3>
+                        <span className="font-bold text-sm sm:text-base text-[#245449] shrink-0">
+                          {dish.priceDisplay}
+                        </span>
+                      </div>
+
+                      {/* Variants / Choices displayed as small chips */}
+                      {dish.variants && (
+                        <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                          {dish.variants
+                            .split(/[/,]/)
+                            .map((opt) => opt.trim())
+                            .filter(Boolean)
+                            .map((opt, i) => (
+                              <span
+                                key={i}
+                                className="inline-flex items-center text-[10.5px] sm:text-[11px] font-medium px-2 py-0.5 rounded-md bg-[#F4EFE6] text-[#4A504A] border border-[#E4DEC0] capitalize tracking-wide shadow-2xs"
+                              >
+                                {opt}
+                              </span>
+                            ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
+
+        {categoriesToRender.length === 0 && (
+          <div className="text-center py-20 bg-white rounded-3xl border border-[#E2DDD0] space-y-3">
+            <Utensils className="w-10 h-10 text-[#8C938C] mx-auto" />
+            <h3 className="text-lg font-serif font-bold text-[#242824]">No dishes matched "{searchQuery}"</h3>
+            <p className="text-xs text-[#6F776F]">Try searching another name or reset the category filter.</p>
+            <button
+              type="button"
+              onClick={() => { setSearchQuery(''); setActiveCategory('all'); }}
+              className="px-5 py-2.5 bg-[#245449] text-white text-xs font-semibold rounded-xl hover:bg-[#1B4037] transition-colors cursor-pointer"
+            >
+              Reset Filters
+            </button>
+          </div>
+        )}
+      </div>
 
       {/* -------------------------------------------------------------
           4. GROUP CATERING (PAGE 10 THEME & ARTWORK)
@@ -258,7 +282,7 @@ export default function MenuPage({ onOpenEnquiry }) {
               <source srcSet="/images/menu/menu_page_10.webp" type="image/webp" />
               <img
                 src="/images/menu/menu_page_10.jpg"
-                alt="KaSaa Group Custom Menu - Page 10 Artwork"
+                alt="Big Group, Bigger Appetite? Customised food menus for 10+ guests at KaSaa"
                 className="w-full h-auto object-cover"
                 loading="lazy"
                 decoding="async"
@@ -266,28 +290,41 @@ export default function MenuPage({ onOpenEnquiry }) {
             </picture>
           </div>
 
-          {/* Details & CTA */}
+          {/* Text and Actions */}
           <div className="space-y-4 text-center md:text-left flex-1">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E9BF69]/20 text-[#E9BF69] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
+              <span>FOR GROUPS & GATHERINGS</span>
+            </div>
+
             <h2 className="font-serif font-bold text-2xl sm:text-3xl text-[#F8F4EB] leading-tight">
-              Big Group, Bigger Appetite? We've Got You.
+              Big Group, Bigger Appetite?
             </h2>
 
-            <p className="text-sm sm:text-base text-[#DCE6D9]/90 leading-relaxed">
-              For 10+ guests, we offer customised menus — just reach out!
+            <p className="text-sm text-[#DCE6D9] leading-relaxed max-w-xl">
+              For 10+ guests, we offer customised party and event menus. From momo platters and pizza boxes to curated beverage bars, our kitchen takes care of everything.
             </p>
 
-            <p className="font-serif italic text-sm text-[#E9BF69]">
-              "The best conversations happen over food."
-            </p>
+            <blockquote className="italic text-xs text-[#E9BF69] border-l-2 border-[#E9BF69]/40 pl-3">
+              "The best conversations happen over food." — KaSaa Experiences
+            </blockquote>
 
-            <div className="pt-2">
+            <div className="pt-2 flex flex-wrap gap-3 justify-center md:justify-start">
               <button
                 type="button"
-                onClick={() => onOpenEnquiry ? onOpenEnquiry('celebration', 'group_dining') : null}
-                className="px-7 py-3.5 bg-[#25D366] hover:bg-[#20BA5A] text-white font-semibold text-sm rounded-xl transition-all inline-flex items-center justify-center gap-2 shadow-sm active:scale-98"
+                onClick={() => onOpenEnquiry ? onOpenEnquiry('food_group', 'Group Food Menu') : null}
+                className="px-6 py-3 bg-[#E9BF69] hover:bg-[#D4A950] text-[#193B33] text-xs font-bold rounded-xl flex items-center gap-2 shadow-xs transition-colors cursor-pointer"
               >
-                <MessageCircle className="w-4 h-4 text-white" />
-                <span>Enquire Group Custom Menu</span>
+                <MessageCircle className="w-4 h-4 text-[#193B33]" />
+                <span>Enquire Custom Group Menu</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setBookletOpen(true)}
+                className="px-5 py-3 bg-[#245449] hover:bg-[#1E453C] text-white border border-[#3E7D6F] text-xs font-semibold rounded-xl flex items-center gap-2 transition-colors cursor-pointer"
+              >
+                <BookOpen className="w-4 h-4 text-[#E9BF69]" />
+                <span>Flip Menu Booklet</span>
               </button>
             </div>
           </div>
@@ -295,72 +332,72 @@ export default function MenuPage({ onOpenEnquiry }) {
       </section>
 
       {/* -------------------------------------------------------------
-          5. ORIGINAL HANDWRITTEN CHALK MENU BOOKLET MODAL
+          5. BOOKLET MODAL (PAGE-BY-PAGE FLIP OF ALL 10 AUTHENTIC MENU PAGES)
           ------------------------------------------------------------- */}
       {bookletOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-3 sm:p-6"
-          onClick={() => setBookletOpen(false)}
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Original KaSaa Chalk Menu Book"
         >
-          {/* Top Bar */}
-          <div
-            className="w-full max-w-4xl flex items-center justify-between text-white pb-3 px-2"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center gap-3">
-              <span className="px-2.5 py-1 bg-white/20 rounded-md text-xs font-semibold">
-                Original Chalk Menu Page {bookletPage + 1} of {originalMenuBookPages.length}
-              </span>
-              <span className="text-sm font-semibold hidden sm:inline">
-                {originalMenuBookPages[bookletPage].title}
-              </span>
+          <div className="relative w-full max-w-2xl bg-[#141814] rounded-3xl border border-[#3E7D6F] overflow-hidden shadow-2xl flex flex-col max-h-[92vh]">
+            {/* Modal Header */}
+            <div className="px-5 py-3.5 border-b border-[#2A3F36] flex items-center justify-between text-white bg-[#19241E]">
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold">
+                <BookOpen className="w-4 h-4 text-[#E9BF69]" />
+                <span>KaSaa Original Chalk Menu ({bookletPage + 1} / {originalMenuBookPages.length})</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setBookletOpen(false)}
+                className="p-1.5 rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors cursor-pointer"
+                aria-label="Close menu booklet"
+              >
+                <X className="w-5 h-5" />
+              </button>
             </div>
 
-            <button
-              type="button"
-              onClick={() => setBookletOpen(false)}
-              className="p-2 rounded-xl bg-white/10 hover:bg-white/25 text-white transition-colors"
-              aria-label="Close"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
+            {/* Modal Body: Active Chalk Page */}
+            <div className="flex-1 overflow-auto p-4 flex items-center justify-center bg-black/40">
+              <div className="max-w-lg w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0C0E0C]">
+                <picture>
+                  <source srcSet={originalMenuBookPages[bookletPage].webp} type="image/webp" />
+                  <img
+                    src={originalMenuBookPages[bookletPage].src}
+                    alt={originalMenuBookPages[bookletPage].title}
+                    className="w-full h-auto object-contain max-h-[70vh] mx-auto select-none"
+                  />
+                </picture>
+              </div>
+            </div>
 
-          {/* Main Booklet Page Display */}
-          <div
-            className="relative max-w-3xl max-h-[82vh] w-full flex items-center justify-center"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={originalMenuBookPages[bookletPage].image}
-              alt={originalMenuBookPages[bookletPage].title}
-              className="max-h-[80vh] max-w-full object-contain rounded-2xl shadow-2xl border border-white/10"
-              decoding="async"
-            />
+            {/* Modal Footer Controls */}
+            <div className="px-5 py-3 border-t border-[#2A3F36] flex items-center justify-between bg-[#19241E] text-white">
+              <button
+                type="button"
+                onClick={() => setBookletPage((p) => Math.max(0, p - 1))}
+                disabled={bookletPage === 0}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed text-xs font-semibold transition-colors cursor-pointer"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span>Prev Page</span>
+              </button>
 
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setBookletPage((p) => (p - 1 + originalMenuBookPages.length) % originalMenuBookPages.length);
-              }}
-              className="absolute left-2 sm:-left-12 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white transition-all border border-white/20"
-              aria-label="Previous page"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
+              <div className="text-xs text-[#E9BF69] font-medium hidden sm:block">
+                {originalMenuBookPages[bookletPage].title}
+              </div>
 
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setBookletPage((p) => (p + 1) % originalMenuBookPages.length);
-              }}
-              className="absolute right-2 sm:-right-12 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 text-white transition-all border border-white/20"
-              aria-label="Next page"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
+              <button
+                type="button"
+                onClick={() => setBookletPage((p) => Math.min(originalMenuBookPages.length - 1, p + 1))}
+                disabled={bookletPage === originalMenuBookPages.length - 1}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed text-xs font-semibold transition-colors cursor-pointer"
+              >
+                <span>Next Page</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       )}

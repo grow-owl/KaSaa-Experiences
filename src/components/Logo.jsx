@@ -21,7 +21,7 @@ export default function Logo({ className = '', footer = false }) {
           footer ? 'h-11 sm:h-13' : 'h-10 sm:h-12'
         }`}
         loading={footer ? 'lazy' : 'eager'}
-        fetchPriority={footer ? 'auto' : 'high'}
+        fetchpriority={footer ? 'auto' : 'high'}
         decoding="async"
       />
     </Link>

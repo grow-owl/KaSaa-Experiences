@@ -17,7 +17,7 @@ export default function SEOHead({
     ? `${title} | ${siteConfig.businessName}`
     : `${siteConfig.businessName} | Pottery, Painting & Creative Experiences in Siliguri`;
   const metaDesc = description || siteConfig.shortDescription;
-  const socialImage = ogImage || `${siteConfig.siteUrl}/images/hero-pottery-hands.webp`;
+  const socialImage = ogImage || `${siteConfig.siteUrl}/images/wheel-pottery-real.jpg`;
 
   useEffect(() => {
     // 1. Update document title
@@ -86,7 +86,7 @@ export default function SEOHead({
       name: siteConfig.businessName,
       description: siteConfig.shortDescription,
       url: siteConfig.siteUrl,
-      image: `${siteConfig.siteUrl}/images/hero-pottery-hands.webp`,
+      image: `${siteConfig.siteUrl}/images/wheel-pottery-real.jpg`,
       address: {
         '@type': 'PostalAddress',
         streetAddress: siteConfig.location.fullAddress,

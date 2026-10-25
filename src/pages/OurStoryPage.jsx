@@ -68,7 +68,7 @@ export default function OurStoryPage({ onOpenEnquiry }) {
           <div className="grid grid-cols-2 gap-4">
             <div className="rounded-2xl overflow-hidden shadow-sm border border-[#E2DDD0] bg-white p-3 space-y-1">
               <img
-                src="/images/hero-pottery-hands.webp"
+                src="/images/wheel-pottery-real.jpg"
                 alt="Hands shaping clay on pottery wheel"
                 className="w-full h-32 object-cover rounded-xl"
                 loading="lazy"

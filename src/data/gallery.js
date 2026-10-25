@@ -18,7 +18,7 @@ export const galleryItems = [
     title: "Centering Clay on the Wheel",
     category: "pottery-painting",
     categoryLabel: "Pottery",
-    filename: "pottery.webp",
+    filename: "wheel-pottery-real.jpg",
     aspectRatio: "3/4",
     caption: "Focus, tactile grounding, and touch as natural clay takes form on the electric potter's wheel.",
     alt: "Participant shaping wet clay on a pottery wheel at KaSaa Experiences in Siliguri",

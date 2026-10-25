@@ -26,7 +26,7 @@ export const activities = [
     idealFor: "Individuals, couples on dates, friends, and anyone needing a screen-free mindful break",
     enquiryType: "pottery",
     ctaLabel: "Enquire About Pottery",
-    imageSlot: "pottery.webp",
+    imageSlot: "wheel-pottery-real.jpg",
     aspectRatio: "4/3",
     objectPosition: "center bottom",
   },

@@ -16,6 +16,7 @@ import OurStoryPage from './pages/OurStoryPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import BookingPolicyPage from './pages/BookingPolicyPage';
 import NotFoundPage from './pages/NotFoundPage';
+import DiyKitsPage from './pages/DiyKitsPage';
 
 // Dynamic wrapper for isolated brochure activity detail pages
 function ActivityRouteWrapper({ onOpenEnquiry }) {
@@ -85,8 +86,8 @@ export default function App() {
           <Route path="/menu" element={<MenuPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/our-story" element={<OurStoryPage onOpenEnquiry={handleOpenEnquiry} />} />
-          <Route path="/diy-kits" element={<Navigate to="/activities/soft-play" replace />} />
-          <Route path="/diy-kids" element={<Navigate to="/activities/soft-play" replace />} />
+          <Route path="/diy-kits" element={<DiyKitsPage onOpenEnquiry={handleOpenEnquiry} />} />
+          <Route path="/diy-kids" element={<Navigate to="/diy-kits" replace />} />
           <Route path="/visit" element={<VisitPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/booking-cancellation-policy" element={<BookingPolicyPage />} />

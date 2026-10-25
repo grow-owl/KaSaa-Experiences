@@ -154,7 +154,7 @@ export default function ActivityDetailPageLayout({
                     alt={`${category.name} visual showcase`}
                     className="w-full h-64 sm:h-72 object-contain p-3 transition-transform duration-500 group-hover:scale-105"
                     loading="eager"
-                    fetchPriority="high"
+                    fetchpriority="high"
                     decoding="async"
                   />
                 </div>

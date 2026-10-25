@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
+
   Sparkles,
   MapPin,
   Star,
@@ -136,7 +137,7 @@ const TOP_10_ACTIVITIES = [
     title: 'Wheel Pottery',
     price: 900,
     duration: '45-60 min',
-    image: '/images/activity-pottery.webp',
+    image: '/images/wheel-pottery-real.jpg',
   },
   {
     id: 'classic-canvas',
@@ -249,7 +250,7 @@ const DATE_PLANS = [
   },
 ];
 
-// 10 Group Experiences for "Planning, Group, Experience?" Section
+// 10 Group Experiences for "Planning a Group, Experience?" Section
 const GROUP_EXPERIENCES = [
   {
     id: 'birthdays-milestones',
@@ -313,51 +314,78 @@ const GROUP_EXPERIENCES = [
   },
 ];
 
-// 6 Featured Food Items for "Yes, We Serve Food Too!" Section
+// 10 Featured Food Items for "Yes, We Serve Food Too!" Section
 const FEATURED_FOOD_ITEMS = [
   {
-    id: 'hot-momos',
-    title: 'Hot Steamed Momos',
-    price: '200',
-    category: 'Quick Bites',
-    image: '', // reserved for future upload
-  },
-  {
-    id: 'grilled-sandwiches',
-    title: 'Grilled Sandwiches',
+    id: 'peri-peri-fries',
+    title: 'Peri - Peri Fries',
     price: '250',
-    category: 'Fillers',
     image: '', // reserved for future upload
   },
   {
-    id: 'artisan-pizzas',
-    title: 'Artisan Pizzas',
-    price: '350',
-    category: 'Mains',
+    id: 'chinese-bhel',
+    title: 'Chinese Bhel',
+    price: '250',
     image: '', // reserved for future upload
   },
   {
-    id: 'ramen-bowls',
-    title: 'Korean Ramen Bowls',
+    id: 'korean-ramen',
+    title: 'Korean Ramen',
     price: '300',
-    category: 'Twirl & Slurp',
     image: '', // reserved for future upload
   },
   {
-    id: 'pav-bhaji',
-    title: 'Butter Pav Bhaji',
+    id: 'maggie-chop',
+    title: 'Maggie Chop',
     price: '250',
-    category: 'Street Favs',
     image: '', // reserved for future upload
   },
   {
-    id: 'coolers-shakes',
-    title: 'Shakes & Coolers',
+    id: 'noodles',
+    title: 'Noodles',
+    price: '300',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'farmhouse-pizza',
+    title: 'Farmhouse Pizza',
+    price: '350',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'white-sauce-pasta',
+    title: 'White Sauce Pasta',
+    price: '350',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'cheese-garlic-bread',
+    title: 'Cheese Garlic Bread',
+    price: '250',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'nachos-with-salsa',
+    title: 'Nachos with Salsa',
     price: '200',
-    category: 'Beverages',
+    image: '', // reserved for future upload
+  },
+  {
+    id: 'wai-wai-bhel',
+    title: 'Wai Wai Bhel',
+    price: '200',
     image: '', // reserved for future upload
   },
 ];
+
+// Simple visible section divider with subtle shadow
+function SectionDivider() {
+  return (
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-hidden="true">
+      <div className="h-[1.5px] w-full bg-[#D5CEBF] shadow-[0_1px_3px_rgba(0,0,0,0.07)] rounded-full" />
+    </div>
+  );
+}
 
 export default function HomePage({ onOpenEnquiry }) {
   const navigate = useNavigate();
@@ -734,7 +762,7 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           1. HERO SECTION (Editorial Desktop / Compact Mobile)
           ------------------------------------------------------------- */}
-      <section className="relative py-14 sm:py-18 lg:py-20 border-b border-[#E8E0D0]">
+      <section className="relative py-14 sm:py-18 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
             {/* Left Column: Copy & Actions (Desktop ~48%, 6 cols in 12-col grid) */}
@@ -844,6 +872,8 @@ export default function HomePage({ onOpenEnquiry }) {
 
         </div>
       </section>
+
+      <SectionDivider />
 
       {/* -------------------------------------------------------------
           2. TOP 10 BEST-SELLING ACTIVITIES — SIDE SCROLL REVEAL
@@ -971,10 +1001,12 @@ export default function HomePage({ onOpenEnquiry }) {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* -------------------------------------------------------------
           3. TOGETHERNESS / DATES & CELEBRATIONS SECTION
           ------------------------------------------------------------- */}
-      <section id="together" className="py-16 lg:py-24 bg-[#EBF1E9] border-y border-[#DCE6D9]">
+      <section id="together" className="py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -1112,6 +1144,8 @@ export default function HomePage({ onOpenEnquiry }) {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* -------------------------------------------------------------
           3B. PLANNING, GROUP, EXPERIENCE? — SIDE SCROLL REVEAL (10 Cards)
           ------------------------------------------------------------- */}
@@ -1119,10 +1153,10 @@ export default function HomePage({ onOpenEnquiry }) {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <h2 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
-            Planning, Group, Experience?
+            Planning a Group Experience?
           </h2>
           <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
-            From birthday parties and bridal showers to team outings & reunions, We'll help you bring everyone together for memorable time at kasa
+            From birthday parties and bridal showers to team outings & reunions, we'll help you bring everyone together for memorable time at Kasaa.
           </p>
         </div>
 
@@ -1218,12 +1252,14 @@ export default function HomePage({ onOpenEnquiry }) {
               className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-sm sm:text-base transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95 group cursor-pointer"
             >
               <Users className="w-4 h-4 text-[#E9BF69]" />
-              <span>Plan Your Celebration</span>
+              <span>Plan Your Celebration with us</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-0.5" />
             </button>
           </div>
         </div>
       </section>
+
+      <SectionDivider />
 
       {/* -------------------------------------------------------------
           4. FOOD MENU PREVIEW — YES, WE SERVE FOOD TOO!
@@ -1231,11 +1267,6 @@ export default function HomePage({ onOpenEnquiry }) {
       <section id="menu-preview" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
-            <Utensils className="w-3.5 h-3.5 text-[#B37B15]" />
-            <span>Food is our Love Language</span>
-          </div>
-
           <h2 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
             Yes, We Serve Food Too!
           </h2>
@@ -1245,8 +1276,20 @@ export default function HomePage({ onOpenEnquiry }) {
           </p>
         </div>
 
-        {/* Horizontal Side-Scroll 5-6 Food Cards Track with Reveal Snap */}
-        <div className="relative">
+        {/* Horizontal Side-Scroll Food Cards Track with Reveal Snap */}
+        <div className="relative space-y-4">
+          {/* Centered Badges: Food is our Love Language & Our Best Sellers in matching design */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 px-1 text-center">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
+              <Utensils className="w-3.5 h-3.5 text-[#B37B15]" />
+              <span>Food is our Love Language</span>
+            </div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
+              <Sparkles className="w-3.5 h-3.5 text-[#B37B15]" />
+              <span>Our Best Sellers</span>
+            </div>
+          </div>
+
           <div
             ref={foodScrollRef}
             className="flex gap-5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 px-1 scroll-smooth"
@@ -1285,25 +1328,15 @@ export default function HomePage({ onOpenEnquiry }) {
                   </h3>
 
                   {/* Price Row */}
-                  <div className="pt-3 border-t border-[#F1ECE1] flex items-center justify-between gap-3">
-                    <div>
-                      <span className="text-[10px] font-semibold uppercase tracking-wider text-[#737A73] block">
-                        Price
+                  <div className="pt-3 border-t border-[#F1ECE1]">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#737A73] block">
+                      Price
+                    </span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="font-serif font-black text-xl sm:text-2xl text-[#245449]">
+                        ₹{dish.price}
                       </span>
-                      <div className="flex items-baseline gap-1">
-                        <span className="font-serif font-black text-xl sm:text-2xl text-[#245449]">
-                          ₹{dish.price}
-                        </span>
-                      </div>
                     </div>
-
-                    <Link
-                      to="/menu"
-                      className="inline-flex items-center justify-center gap-1 px-3.5 py-2 rounded-xl bg-[#FAF7F0] hover:bg-[#245449] text-[#242824] hover:text-white border border-[#D5CEBF] hover:border-[#245449] text-xs font-bold transition-all shadow-2xs"
-                    >
-                      <span>Menu</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </Link>
                   </div>
                 </div>
               </article>
@@ -1362,63 +1395,38 @@ export default function HomePage({ onOpenEnquiry }) {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* -------------------------------------------------------------
           5. CURATED GALLERY PREVIEW
           ------------------------------------------------------------- */}
-      <section id="gallery" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
-          <div className="space-y-2">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#963E23]">
-              Visual Showcase
-            </p>
-            <h2 className="font-serif font-bold text-3xl sm:text-4xl text-[#242824] tracking-tight">
-              A Little Peek Inside KaSaa
-            </h2>
-            <p className="text-sm text-[#4D534D] max-w-lg">
-              Authentic glimpses of clay spinning on wheels, fresh acrylic canvases, and visitors creating together on the 5th floor of Vega Circle Mall.
-            </p>
-          </div>
+      <section id="gallery" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <h2 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+            A Little Peek Inside KaSaa
+          </h2>
+          <p className="text-sm sm:text-base text-[#4D534D] max-w-xl mx-auto leading-relaxed">
+            Authentic glimpses of clay spinning on wheels, fresh acrylic canvases, and visitors creating together on the 5th floor of Vega Circle Mall.
+          </p>
+        </div>
 
-          {/* Category Filter Chips (3 on line 1, 2 on line 2 on mobile) */}
-          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2" role="tablist" aria-label="Gallery category filters">
-            {/* Mobile Line 1: 3 filters */}
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              {galleryCategories.slice(0, 3).map((cat) => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={selectedGalleryCategory === cat.id}
-                  onClick={() => setSelectedGalleryCategory(cat.id)}
-                  className={`px-2.5 sm:px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full transition-colors whitespace-nowrap ${selectedGalleryCategory === cat.id
-                    ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
-                    : 'bg-[#F1ECE1] hover:bg-[#E5DEC9] text-[#4D534D]'
-                    }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Mobile Line 2: 2 filters */}
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              {galleryCategories.slice(3, 5).map((cat) => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={selectedGalleryCategory === cat.id}
-                  onClick={() => setSelectedGalleryCategory(cat.id)}
-                  className={`px-2.5 sm:px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold rounded-full transition-colors whitespace-nowrap ${selectedGalleryCategory === cat.id
-                    ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
-                    : 'bg-[#F1ECE1] hover:bg-[#E5DEC9] text-[#4D534D]'
-                    }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
-          </div>
+        {/* Category Filter Chips (Centered) */}
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5" role="tablist" aria-label="Gallery category filters">
+          {galleryCategories.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              role="tab"
+              aria-selected={selectedGalleryCategory === cat.id}
+              onClick={() => setSelectedGalleryCategory(cat.id)}
+              className={`px-3.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold rounded-full transition-all whitespace-nowrap cursor-pointer ${selectedGalleryCategory === cat.id
+                ? 'bg-[#245449] text-[#F8F4EB] shadow-xs scale-105'
+                : 'bg-[#F1ECE1] hover:bg-[#E5DEC9] text-[#4D534D]'
+                }`}
+            >
+              {cat.label}
+            </button>
+          ))}
         </div>
 
         {/* Gallery Grid */}
@@ -1449,26 +1457,40 @@ export default function HomePage({ onOpenEnquiry }) {
         </div>
 
         <div className="mt-10 text-center">
-          <Link
-            to="/gallery"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-[#F1ECE1] text-[#242824] border border-[#D5CEBF] font-semibold text-sm rounded-xl transition-all shadow-xs"
+          <a
+            href={siteConfig.social?.instagram || 'https://www.instagram.com/kasaa.experiences/'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-[#F1ECE1] text-[#242824] border border-[#D5CEBF] font-semibold text-sm rounded-xl transition-all shadow-xs group"
           >
-            <span>View All Photos & Studio Captions</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+            <svg
+              className="w-4 h-4 text-[#D87D4A] group-hover:scale-110 transition-transform"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            <span>Come say Hi on Instagram!</span>
+            <ArrowRight className="w-4 h-4 text-[#4D534D] group-hover:translate-x-0.5 transition-transform" />
+          </a>
         </div>
       </section>
+
+      <SectionDivider />
 
       {/* -------------------------------------------------------------
           5. CUSTOMER REVIEWS + COMPACT BOOKING EXPLAINER
           ------------------------------------------------------------- */}
-      <section className="py-16 lg:py-24 bg-[#F2EDE2] border-y border-[#E2DDD0]">
+      <section id="reviews" className="py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           {/* Reviews Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#245449]">
-              Verified Feedback
-            </p>
             <h2 className="font-serif font-bold text-3xl sm:text-4xl text-[#242824] tracking-tight">
               Loved by People Who Visit
             </h2>
@@ -1521,15 +1543,14 @@ export default function HomePage({ onOpenEnquiry }) {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* -------------------------------------------------------------
           6. FAQS ACCORDION (Side-by-side on desktop)
           ------------------------------------------------------------- */}
       <section className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-4 space-y-4">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#963E23]">
-              Helpful Information
-            </p>
             <h2 className="font-serif font-bold text-3xl sm:text-4xl text-[#242824] tracking-tight">
               Frequently Asked Questions
             </h2>
@@ -1557,10 +1578,12 @@ export default function HomePage({ onOpenEnquiry }) {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* -------------------------------------------------------------
           7. VISIT US SECTION
           ------------------------------------------------------------- */}
-      <section className="py-16 lg:py-20 bg-[#FAF7F0] border-t border-[#E8E0D0]">
+      <section id="visit" className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Address & Hours details (7 cols) */}
