@@ -212,10 +212,7 @@ export default function MenuPage({ onOpenEnquiry }) {
                       />
                     </picture>
 
-                    {/* Exact Price Pill */}
-                    <div className="absolute top-3 right-3 px-3 py-1 rounded-xl bg-black/75 backdrop-blur-sm text-[#E9BF69] text-xs font-bold tracking-tight shadow-xs">
-                      {dish.priceDisplay}
-                    </div>
+
                   </div>
 
                   {/* Dish Info */}
