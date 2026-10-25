@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import {
+  Download,
+
   ArrowLeft,
   Search,
   Utensils,
@@ -100,8 +102,8 @@ export default function MenuPage({ onOpenEnquiry }) {
           * Prices mentioned are exclusive of GST.
         </p>
 
-        {/* Quick Action Button: View original handwritten chalk menu */}
-        <div className="pt-2 flex justify-center">
+        {/* Quick Action Buttons: View original chalk menu book & Download PDF */}
+        <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
           <button
             type="button"
             onClick={() => setBookletOpen(true)}
@@ -110,6 +112,14 @@ export default function MenuPage({ onOpenEnquiry }) {
             <BookOpen className="w-4 h-4 text-[#245449]" />
             <span>View Original Chalk Menu Book</span>
           </button>
+          <a
+            href="/Kasaa-Food-Menu.pdf"
+            download="KaSaa-Food-Menu.pdf"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#245449] hover:bg-[#1A3D35] text-[#F8F4EB] border border-[#245449] text-xs sm:text-sm font-semibold shadow-xs transition-all active:scale-98 cursor-pointer"
+          >
+            <Download className="w-4 h-4 text-[#E9BF69]" />
+            <span>Download Menu PDF</span>
+          </a>
         </div>
       </div>
 
@@ -345,14 +355,25 @@ export default function MenuPage({ onOpenEnquiry }) {
                 <BookOpen className="w-4 h-4 text-[#E9BF69]" />
                 <span>KaSaa Original Chalk Menu ({bookletPage + 1} / {originalMenuBookPages.length})</span>
               </div>
-              <button
-                type="button"
-                onClick={() => setBookletOpen(false)}
-                className="p-1.5 rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors cursor-pointer"
-                aria-label="Close menu booklet"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-2">
+                <a
+                  href="/Kasaa-Food-Menu.pdf"
+                  download="KaSaa-Food-Menu.pdf"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#245449] hover:bg-[#2D6659] text-white text-xs font-medium border border-[#3E7D6F] transition-colors"
+                  title="Download Menu PDF"
+                >
+                  <Download className="w-3.5 h-3.5 text-[#E9BF69]" />
+                  <span className="hidden sm:inline">Download PDF</span>
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setBookletOpen(false)}
+                  className="p-1.5 rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Close menu booklet"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             {/* Modal Body: Active Chalk Page */}
