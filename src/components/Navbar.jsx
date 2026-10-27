@@ -81,7 +81,7 @@ const CELEBRATION_ITEMS = [
   },
   {
     name: 'Date Plans & Anniversaries',
-    subtitle: 'Romantic couple setups & pottery dates',
+    subtitle: 'Romantic candlelit & creative couple dates',
     path: '/celebrations',
     icon: Heart,
   },

@@ -28,7 +28,7 @@ import { siteConfig } from '../data/siteConfig';
 
 // Map categories to modern distinct icons
 const CATEGORY_ICONS = {
-  'Classic Canvas & Pottery': Palette,
+  'Classic Canvas': Palette,
   'Fluid Expressions': Sparkles,
   'The Artisan Edit': Brush,
   'Mini Memoirs': Heart,
@@ -94,7 +94,8 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
             a.name.toLowerCase().includes(q) ||
             (a.variants && a.variants.toLowerCase().includes(q)) ||
             a.category.toLowerCase().includes(q) ||
-            (a.description && a.description.toLowerCase().includes(q))
+            (a.description && a.description.toLowerCase().includes(q)) ||
+            (a.chips && a.chips.some((c) => (c.label || c).toLowerCase().includes(q)))
         );
       }
 
@@ -117,7 +118,7 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
   // Filter tabs list
   const tabs = [
     { id: 'all', label: 'All Activities' },
-    ...activityCategories.filter(c => c.id !== 'all'),
+    ...activityCategories.filter((c) => c.id !== 'all'),
   ];
 
   const handleActivityEnquiry = (act) => {
@@ -136,7 +137,7 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
     <div className="py-8 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
       <SEOHead
         title="KaSaa Activity Menu | Creative Workshops & Experiences"
-        description="Explore KaSaa Experiences activity menu in Siliguri. Electric pottery wheel, canvas painting, fluid art, textured 3D moon, resin crafts, and soft play with exact prices."
+        description="Curated, hands on activities for all ages, with all materials provided for every session. Browse classic canvas painting, fluid art, textured 3D moon, resin crafts, and soft play in Siliguri."
         canonicalPath="/activities"
       />
 
@@ -159,7 +160,7 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
         </h1>
 
         <p className="text-sm sm:text-base text-[#535953] leading-relaxed">
-          Good vibes, creative spark and something wonderful to make and take home.
+          Curated, hands on activities for all ages, with all materials provided for every session
         </p>
 
         {/* Clean GST Note */}
@@ -167,7 +168,7 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
           * Prices mentioned are exclusive of GST. All raw materials and artist aprons provided.
         </p>
 
-        {/* Quick Action Buttons: View original activity brochure & Download PDF */}
+        {/* Quick Action Button: View original chalk activity brochure */}
         <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
           <button
             type="button"
@@ -175,16 +176,8 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-white hover:bg-[#F2EDE2] text-[#242824] border border-[#D5CEBF] text-xs sm:text-sm font-semibold shadow-xs transition-all hover:border-[#245449] active:scale-98 cursor-pointer"
           >
             <BookOpen className="w-4 h-4 text-[#245449]" />
-            <span>View Original Activity Brochure</span>
+            <span>View Original Chalk Activity Brochure</span>
           </button>
-          <a
-            href="/KaSaa-Activity-Brochure.pdf"
-            download="KaSaa-Activity-Brochure.pdf"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#245449] hover:bg-[#1A3D35] text-[#F8F4EB] border border-[#245449] text-xs sm:text-sm font-semibold shadow-xs transition-all active:scale-98 cursor-pointer"
-          >
-            <Download className="w-4 h-4 text-[#E9BF69]" />
-            <span>Download Activity Brochure PDF</span>
-          </a>
         </div>
       </div>
 
@@ -198,7 +191,7 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
             <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8C938C]" />
             <input
               type="text"
-              placeholder="Search activities (e.g. pottery, canvas, fluid bear, resin, moon)..."
+              placeholder="Search activities (e.g. canvas, fluid bear, resin, moon, tote)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-10 py-2.5 text-xs sm:text-sm bg-white border border-[#D5CEBF] rounded-2xl focus:outline-hidden focus:ring-2 focus:ring-[#245449] focus:border-transparent placeholder-[#8C938C] shadow-2xs"
@@ -249,7 +242,7 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
       </div>
 
       {/* -------------------------------------------------------------
-          3. GROUPED CATEGORY SECTIONS (H2 HEADING + ACTIVITY CARDS)
+          3. GROUPED CATEGORY SECTIONS (H2 HEADING + REFINED ACTIVITY CARDS)
           ------------------------------------------------------------- */}
       <div className="space-y-16">
         {categoriesToRender.map((catGroup) => {
@@ -263,28 +256,23 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
             >
               {/* Category H2 Section Header */}
               <div className="flex items-center justify-between pb-3 border-b-2 border-[#E2DDD0]">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-[#E9BF69]/20 border border-[#E9BF69]/30 flex items-center justify-center text-[#245449]">
-                    <IconComponent className="w-5 h-5 text-[#245449]" />
-                  </div>
-                  <h2 className="font-serif font-bold text-2xl sm:text-3xl text-[#242824] tracking-tight">
-                    {catGroup.label || catGroup.id}
-                  </h2>
-                </div>
+                <h2 className="font-serif font-bold text-2xl sm:text-3xl text-[#242824] tracking-tight">
+                  {catGroup.label || catGroup.id}
+                </h2>
                 <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white text-[#7A827A] border border-[#E2DDD0] shadow-2xs">
                   {catGroup.activities.length} {catGroup.activities.length === 1 ? 'activity' : 'activities'}
                 </span>
               </div>
 
               {/* Grid of Activities for this Category */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7">
                 {catGroup.activities.map((act) => (
                   <article
                     key={act.id}
                     onClick={() => handleActivityEnquiry(act)}
                     className="group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1 cursor-pointer"
                   >
-                    {/* Activity Photo - Clean image, NO overlays/badges */}
+                    {/* Activity Photo */}
                     <div className="relative aspect-square bg-[#EAE5D9] overflow-hidden">
                       <picture>
                         <source srcSet={act.image} type="image/webp" />
@@ -303,35 +291,65 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
                       </picture>
                     </div>
 
-                    {/* Activity Info */}
-                    <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-2.5 bg-white">
-                      <div className="space-y-1">
-                        <div className="flex items-start justify-between gap-2">
-                          <h3 className="font-serif font-bold text-lg text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
+                    {/* Activity Info: generous padding, beautifully organized layout */}
+                    <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3 bg-white">
+                      <div className="space-y-2">
+                        {/* Title & Price Header */}
+                        <div className="flex items-start justify-between gap-2.5">
+                          <h3 className="font-serif font-bold text-base sm:text-lg text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
                             {act.name}
                           </h3>
-                          <span className="font-bold text-sm sm:text-base text-[#245449] shrink-0">
+                          <span className="shrink-0 inline-flex items-center px-2 py-0.5 rounded-lg bg-[#245449]/8 text-[#245449] font-bold text-xs sm:text-sm border border-[#245449]/15 whitespace-nowrap">
                             {act.priceDisplay}
                           </span>
                         </div>
 
-                        {/* Variants / Choices displayed as small chips */}
-                        {act.variants && (
-                          <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                            {act.variants
-                              .split(/[/,]/)
-                              .map((opt) => opt.trim())
-                              .filter(Boolean)
-                              .map((opt, i) => (
-                                <span
-                                  key={i}
-                                  className="inline-flex items-center text-[10.5px] sm:text-[11px] font-medium px-2 py-0.5 rounded-md bg-[#F4EFE6] text-[#4A504A] border border-[#E4DEC0] capitalize tracking-wide shadow-2xs"
-                                >
-                                  {opt}
-                                </span>
-                              ))}
+                        {/* Special Badge (e.g. Pre-order basis only) */}
+                        {act.badge && (
+                          <div>
+                            <span className="inline-block text-[10.5px] font-semibold text-[#8F6211] bg-[#FAF3E3] px-2 py-0.5 rounded-md border border-[#EEDBBA]">
+                              {act.badge}
+                            </span>
                           </div>
                         )}
+
+                        {/* Options / Variants Chips cleanly formatted with option prices */}
+                        {act.chips && act.chips.length > 0 && (
+                          <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                            {act.chips.map((chip, i) => (
+                              <span
+                                key={i}
+                                className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-md bg-[#FAF7F0] text-[#3D423D] border border-[#E5DFD3] shadow-2xs"
+                              >
+                                <span>{chip.label || chip}</span>
+                                {chip.price && (
+                                  <span className="text-[#245449] font-bold text-[10.5px]">
+                                    {chip.price}
+                                  </span>
+                                )}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Description / Inclusions */}
+                        {act.description && (
+                          <p className="text-xs text-[#5E665E] leading-relaxed line-clamp-2 pt-0.5">
+                            {act.description}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Card Footer: Subtle Inclusions note & Book CTA */}
+                      <div className="pt-2 border-t border-[#F0ECE1] flex items-center justify-between text-xs text-[#7A827A] group-hover:text-[#245449] transition-colors">
+                        <span className="text-[11px] font-medium flex items-center gap-1 text-[#6E756E]">
+                          <Sparkles className="w-3.5 h-3.5 text-[#E9BF69]" />
+                          <span>All materials included</span>
+                        </span>
+                        <span className="font-semibold text-[11.5px] flex items-center gap-0.5 text-[#245449]">
+                          <span>Book</span>
+                          <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                        </span>
                       </div>
                     </div>
                   </article>
@@ -442,7 +460,7 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
               <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold">
                 <BookOpen className="w-4 h-4 text-[#E9BF69]" />
                 <span>
-                  KaSaa Activity Brochure ({bookletPage + 1} / {originalBrochurePages.length})
+                  KaSaa Original Chalk Activity Brochure ({bookletPage + 1} / {originalBrochurePages.length})
                 </span>
               </div>
               <div className="flex items-center gap-2">

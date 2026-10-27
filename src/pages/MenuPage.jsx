@@ -102,7 +102,7 @@ export default function MenuPage({ onOpenEnquiry }) {
           * Prices mentioned are exclusive of GST.
         </p>
 
-        {/* Quick Action Buttons: View original chalk menu book & Download PDF */}
+        {/* Quick Action Button: View original chalk menu book */}
         <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
           <button
             type="button"
@@ -112,14 +112,6 @@ export default function MenuPage({ onOpenEnquiry }) {
             <BookOpen className="w-4 h-4 text-[#245449]" />
             <span>View Original Chalk Menu Book</span>
           </button>
-          <a
-            href="/Kasaa-Food-Menu.pdf"
-            download="KaSaa-Food-Menu.pdf"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#245449] hover:bg-[#1A3D35] text-[#F8F4EB] border border-[#245449] text-xs sm:text-sm font-semibold shadow-xs transition-all active:scale-98 cursor-pointer"
-          >
-            <Download className="w-4 h-4 text-[#E9BF69]" />
-            <span>Download Menu PDF</span>
-          </a>
         </div>
       </div>
 
@@ -189,14 +181,9 @@ export default function MenuPage({ onOpenEnquiry }) {
           <section key={catGroup.id} id={catGroup.id.toLowerCase().replace(/\s+/g, '-')} className="space-y-6">
             {/* Category H2 Section Header */}
             <div className="flex items-center justify-between pb-3 border-b-2 border-[#E2DDD0]">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-[#E9BF69]/20 border border-[#E9BF69]/30 flex items-center justify-center text-[#245449]">
-                  <Utensils className="w-5 h-5 text-[#245449]" />
-                </div>
-                <h2 className="font-serif font-bold text-2xl sm:text-3xl text-[#242824] tracking-tight">
-                  {catGroup.label}
-                </h2>
-              </div>
+              <h2 className="font-serif font-bold text-2xl sm:text-3xl text-[#242824] tracking-tight">
+                {catGroup.label}
+              </h2>
               <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white text-[#7A827A] border border-[#E2DDD0] shadow-2xs">
                 {catGroup.dishes.length} {catGroup.dishes.length === 1 ? 'dish' : 'dishes'}
               </span>
