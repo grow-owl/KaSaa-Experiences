@@ -125,10 +125,7 @@ export default function CelebrationsPage({ onOpenEnquiry }) {
           <span className="text-[#242824] font-semibold">Celebrations & Dates</span>
         </div>
 
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
-          <PartyPopper className="w-3.5 h-3.5 text-[#B37B15]" />
-          <span>CELEBRATIONS & GATHERINGS</span>
-        </div>
+
 
         <h1 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
           Celebrate Moments That Matter
@@ -148,21 +145,14 @@ export default function CelebrationsPage({ onOpenEnquiry }) {
             <MessageCircle className="w-4 h-4 text-[#E9BF69]" />
             <span>Enquire Custom Celebration</span>
           </button>
-          <a
-            href="/KaSaa-Activity-Brochure.pdf"
-            download="KaSaa-Activity-Brochure.pdf"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white hover:bg-[#F2EDE2] text-[#242824] border border-[#D5CEBF] text-xs sm:text-sm font-semibold shadow-xs transition-all hover:border-[#245449] active:scale-98 cursor-pointer"
-          >
-            <Download className="w-4 h-4 text-[#245449]" />
-            <span>Download Celebrations Brochure</span>
-          </a>
+
         </div>
       </div>
 
       {/* -------------------------------------------------------------
           2. BESPOKE CELEBRATIONS PACKAGES (PAGE 8 OF BROCHURE)
           ------------------------------------------------------------- */}
-      <section className="space-y-8">
+      <section id="celebrations" className="space-y-8 scroll-mt-24">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <span className="text-xs font-bold uppercase tracking-wider text-[#B37B15]">
             Brochure Featured Packages
@@ -245,7 +235,7 @@ export default function CelebrationsPage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           3. DATE PLANS & ROMANTIC EXPERIENCES
           ------------------------------------------------------------- */}
-      <section className="space-y-8 bg-[#F5EFE4]/60 p-6 sm:p-10 rounded-3xl border border-[#E2DDD0]">
+      <section id="dates" className="space-y-8 bg-[#F5EFE4]/60 p-6 sm:p-10 rounded-3xl border border-[#E2DDD0] scroll-mt-24">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-[#963E23] text-xs font-bold border border-[#E2DDD0]">
             <Heart className="w-3.5 h-3.5 text-[#C86F50]" />

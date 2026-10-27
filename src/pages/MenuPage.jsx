@@ -143,33 +143,38 @@ export default function MenuPage({ onOpenEnquiry }) {
         </div>
 
         {/* Category Scrollable Pill Tabs */}
-        <div className="flex items-center sm:justify-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 scrollbar-none">
-          {tabs.map((tab) => {
-            const count = categoryCounts[tab.id] || 0;
-            const isActive = activeCategory === tab.id;
+        <div className="w-full overflow-x-auto pb-3 pt-1 scrollbar-none scroll-smooth">
+          <div className="flex items-center gap-2 w-max min-w-full px-4 sm:px-6 justify-start">
+            {tabs.map((tab) => {
+              const count = categoryCounts[tab.id] || 0;
+              const isActive = activeCategory === tab.id;
 
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveCategory(tab.id)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 cursor-pointer ${isActive
-                  ? 'bg-[#245449] text-white shadow-xs'
-                  : 'bg-white hover:bg-[#F1ECE1] text-[#4A504A] border border-[#E2DDD0]'
-                  }`}
-              >
-                <span>{tab.label}</span>
-                <span
-                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${isActive
-                    ? 'bg-white/20 text-white'
-                    : 'bg-[#F2EDE2] text-[#6E756E]'
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={(e) => {
+                    setActiveCategory(tab.id);
+                    e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                  }}
+                  className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2 shrink-0 cursor-pointer shadow-2xs hover:shadow-xs ${isActive
+                    ? 'bg-[#245449] text-white shadow-sm ring-2 ring-[#245449]/20 font-bold'
+                    : 'bg-white hover:bg-[#F1ECE1] text-[#4A504A] border border-[#E2DDD0]'
                     }`}
                 >
-                  {count}
-                </span>
-              </button>
-            );
-          })}
+                  <span>{tab.label}</span>
+                  <span
+                    className={`text-[10px] sm:text-xs px-2 py-0.5 rounded-full font-bold ${isActive
+                      ? 'bg-white/20 text-white'
+                      : 'bg-[#F2EDE2] text-[#6E756E]'
+                      }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 

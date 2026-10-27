@@ -80,7 +80,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage onOpenEnquiry={handleOpenEnquiry} />} />
           {/* External page routes removed per user request: redirect to respective homepage sections */}
-          <Route path="/experiences" element={<Navigate to="/#experiences" replace />} />
+          <Route path="/experiences" element={<Navigate to="/activities" replace />} />
           <Route path="/celebrations" element={<CelebrationsPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/together" element={<Navigate to="/celebrations" replace />} />
           <Route path="/activities" element={<ActivitiesPage onOpenEnquiry={handleOpenEnquiry} />} />

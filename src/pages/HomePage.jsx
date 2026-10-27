@@ -6,6 +6,8 @@ import {
   MapPin,
   Star,
   ArrowRight,
+  Play,
+  Film,
   Heart,
   Users,
   PartyPopper,
@@ -33,6 +35,7 @@ import { celebrationOfferings } from '../data/celebrations';
 import { reviews, bookingSteps } from '../data/reviews';
 import { faqs } from '../data/faqs';
 import { galleryItems, galleryCategories } from '../data/gallery';
+import { INSTAGRAM_REELS } from '../data/reelsData';
 import { landingMenuFeatured, allDishes } from '../data/menuData';
 
 // 13 Authentic KaSaa Experience Slides with tailored alignment
@@ -780,23 +783,23 @@ export default function HomePage({ onOpenEnquiry }) {
 
               {/* Primary & Secondary Actions */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
-                <a
-                  href="#experiences"
+                <Link
+                  to="/activities"
                   aria-label="Explore creative workshops and activities"
                   className="px-6 py-3.5 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-sm rounded-xl shadow-xs transition-all duration-200 flex items-center justify-center gap-2 group hover:shadow-md active:scale-98"
                 >
                   <span>Explore DIY Activities</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </a>
+                </Link>
 
-                <a
-                  href="#together"
+                <Link
+                  to="/celebrations"
                   aria-label="View creative date ideas and celebration options"
                   className="px-6 py-3.5 bg-white hover:bg-[#F1ECE1] text-[#242824] border border-[#D5CEBF] font-semibold text-sm rounded-xl transition-all duration-200 flex items-center justify-center gap-2 active:scale-98"
                 >
                   <Heart className="w-4 h-4 text-[#963E23]" />
                   <span>Date Ideas & Celebrations</span>
-                </a>
+                </Link>
               </div>
 
               {/* Verified Rating */}
@@ -1130,15 +1133,14 @@ export default function HomePage({ onOpenEnquiry }) {
 
             {/* Plan a Date or Anniversary CTA Button */}
             <div className="mt-8 sm:mt-10 text-center">
-              <button
-                type="button"
-                onClick={() => onOpenEnquiry ? onOpenEnquiry('date', 'Plan a Date or Anniversary') : null}
+              <Link
+                to="/celebrations#dates"
                 className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-sm sm:text-base transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95 group cursor-pointer"
               >
                 <Heart className="w-4 h-4 text-[#E9BF69]" />
                 <span>Plan a Date or Anniversary</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-0.5" />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -1246,15 +1248,14 @@ export default function HomePage({ onOpenEnquiry }) {
 
           {/* Plan Your Celebration CTA Button */}
           <div className="mt-8 sm:mt-10 text-center">
-            <button
-              type="button"
-              onClick={() => onOpenEnquiry ? onOpenEnquiry('celebration', 'Plan Your Celebration') : null}
+            <Link
+              to="/celebrations"
               className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-sm sm:text-base transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95 group cursor-pointer"
             >
               <Users className="w-4 h-4 text-[#E9BF69]" />
               <span>Plan Your Celebration with us</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-0.5" />
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -1398,73 +1399,101 @@ export default function HomePage({ onOpenEnquiry }) {
       <SectionDivider />
 
       {/* -------------------------------------------------------------
-          5. CURATED GALLERY PREVIEW
+          5. INSTAGRAM REELS (8 REELS PLACEHOLDERS)
           ------------------------------------------------------------- */}
-      <section id="gallery" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+      <section id="reels" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/15 border border-[#E9BF69]/40 text-[#7A5813] text-xs font-bold tracking-wide">
+            <Film className="w-3.5 h-3.5 text-[#B37B15]" />
+            <span>STUDIO REELS & STORIES</span>
+          </div>
           <h2 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
-            A Little Peek Inside KaSaa
+            Watch KaSaa in Action
           </h2>
           <p className="text-sm sm:text-base text-[#4D534D] max-w-xl mx-auto leading-relaxed">
-            Authentic glimpses of clay spinning on wheels, fresh acrylic canvases, and visitors creating together on the 5th floor of Vega Circle Mall.
+            Real workshops, joyful celebrations, and creative moments at Vega Circle Mall. Tap any reel to watch on Instagram.
           </p>
         </div>
 
-        {/* Category Filter Chips (Centered) */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5" role="tablist" aria-label="Gallery category filters">
-          {galleryCategories.map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              role="tab"
-              aria-selected={selectedGalleryCategory === cat.id}
-              onClick={() => setSelectedGalleryCategory(cat.id)}
-              className={`px-3.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold rounded-full transition-all whitespace-nowrap cursor-pointer ${selectedGalleryCategory === cat.id
-                ? 'bg-[#245449] text-[#F8F4EB] shadow-xs scale-105'
-                : 'bg-[#F1ECE1] hover:bg-[#E5DEC9] text-[#4D534D]'
-                }`}
+        {/* 8 Instagram Reels Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {INSTAGRAM_REELS.map((reel) => (
+            <a
+              key={reel.id}
+              href={reel.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Watch reel: ${reel.title} on Instagram`}
+              className="group relative aspect-[9/16] rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-4 sm:p-5 border border-[#E2DDD0] bg-neutral-900 hover:-translate-y-1.5 cursor-pointer"
             >
-              {cat.label}
-            </button>
-          ))}
-        </div>
+              {/* Thumbnail image if available, else curated background gradient */}
+              {reel.thumbnail ? (
+                <img
+                  src={reel.thumbnail}
+                  alt={reel.title}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              ) : (
+                <div className={`absolute inset-0 bg-gradient-to-br ${reel.gradient} opacity-90 group-hover:opacity-100 transition-opacity`} />
+              )}
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredGallery.map((item) => (
-            <div
-              key={item.id}
-              className="rounded-2xl overflow-hidden bg-white border border-[#E2DDD0] shadow-xs hover:shadow-md transition-shadow flex flex-col"
-            >
-              <ImagePlaceholder
-                src={`/images/${item.filename}`}
-                alt={item.alt}
-                title={item.title}
-                type={item.category === 'pottery-painting' ? 'pottery' : item.category}
-                aspectRatio={item.aspectRatio || '3/4'}
-                className="rounded-b-none"
-              />
-              <div className="p-4 bg-white border-t border-[#F1ECE1] flex items-center justify-between mt-auto">
-                <div className="min-w-0 pr-2">
-                  <h3 className="font-serif font-semibold text-sm text-[#242824] truncate">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-[#4D534D] line-clamp-1">{item.caption}</p>
+              {/* Decorative dark gradient vignette for readable text */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/40 pointer-events-none" />
+
+              {/* Top Header: Instagram Reel Badge */}
+              <div className="relative z-10 flex items-center justify-between">
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md border border-white/20 text-white text-[11px] font-semibold shadow-xs">
+                  <svg
+                    className="w-3.5 h-3.5 text-[#E1306C]"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                  <span>Reel</span>
                 </div>
               </div>
-            </div>
+
+              {/* Center Play Button Overlay */}
+              <div className="relative z-10 flex items-center justify-center my-auto">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-white flex items-center justify-center shadow-lg group-hover:scale-115 group-hover:bg-[#E9BF69] group-hover:text-[#193B33] group-hover:border-[#E9BF69] transition-all duration-300">
+                  <Play className="w-5 h-5 sm:w-6 sm:h-6 ml-0.5 fill-current" />
+                </div>
+              </div>
+
+              {/* Bottom Details & Meta */}
+              <div className="relative z-10 space-y-1.5 text-left">
+                <h3 className="text-white font-serif font-bold text-sm sm:text-base leading-snug group-hover:text-[#E9BF69] transition-colors line-clamp-2">
+                  {reel.title}
+                </h3>
+                <p className="text-white/75 text-xs line-clamp-1">
+                  {reel.caption}
+                </p>
+                <div className="pt-1 flex items-center gap-1 text-[11px] font-bold text-[#E9BF69] group-hover:underline">
+                  <span>Watch on Instagram</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </a>
           ))}
         </div>
 
+        {/* Bottom Social Link */}
         <div className="mt-10 text-center">
           <a
             href={siteConfig.social?.instagram || 'https://www.instagram.com/kasaa.experiences/'}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-[#F1ECE1] text-[#242824] border border-[#D5CEBF] font-semibold text-sm rounded-xl transition-all shadow-xs group"
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white hover:bg-[#F1ECE1] text-[#242824] border border-[#D5CEBF] font-semibold text-sm rounded-2xl transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95 group"
           >
             <svg
-              className="w-4 h-4 text-[#D87D4A] group-hover:scale-110 transition-transform"
+              className="w-4 h-4 text-[#E1306C] group-hover:scale-110 transition-transform"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -1476,8 +1505,8 @@ export default function HomePage({ onOpenEnquiry }) {
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
-            <span>Come say Hi on Instagram!</span>
-            <ArrowRight className="w-4 h-4 text-[#4D534D] group-hover:translate-x-0.5 transition-transform" />
+            <span>Follow Us on Instagram @kasaa.experiences</span>
+            <ArrowRight className="w-4 h-4 text-[#4D534D] group-hover:translate-x-1 transition-transform ml-0.5" />
           </a>
         </div>
       </section>

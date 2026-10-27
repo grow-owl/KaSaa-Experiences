@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Clock, MessageCircle, Compass, ExternalLink, ShieldCheck, Phone } from 'lucide-react';
+import { MapPin, Clock, MessageCircle, Compass, ExternalLink, Phone, ArrowUpRight } from 'lucide-react';
 import { siteConfig } from '../data/siteConfig';
 import Logo from './Logo';
 
@@ -15,13 +15,13 @@ export default function Footer({ onOpenEnquiry }) {
           <div className="lg:col-span-4 space-y-4">
             <Logo footer={true} />
             <p className="text-sm text-[#DCE6D9]/85 max-w-sm leading-relaxed">
-              Siliguri's dedicated studio for hands-on pottery workshops, canvas painting sessions, and meaningful shared moments for couples, friends, and celebrations.
+              Siliguri's dedicated art studio & cafe for canvas painting, DIY creative experiences, and meaningful shared moments for couples, friends, and private celebrations.
             </p>
             <div className="pt-2 flex items-center gap-3">
               <button
                 type="button"
                 onClick={() => onOpenEnquiry('general')}
-                className="px-4 py-2.5 bg-[#25D366] hover:bg-[#20BA5A] text-white text-xs font-semibold rounded-lg transition-all flex items-center gap-2 shadow-sm active:scale-98"
+                className="px-4 py-2.5 bg-[#25D366] hover:bg-[#20BA5A] text-white text-xs font-semibold rounded-lg transition-all flex items-center gap-2 shadow-sm active:scale-98 cursor-pointer"
               >
                 <MessageCircle className="w-4 h-4 text-white" />
                 <span>WhatsApp Enquiry</span>
@@ -52,40 +52,54 @@ export default function Footer({ onOpenEnquiry }) {
             </div>
           </div>
 
-          {/* Explore Links (2 cols) */}
-          <div className="lg:col-span-2 space-y-3">
+          {/* Experiences Menu (3 cols) */}
+          <div className="lg:col-span-3 space-y-3">
             <h3 className="font-serif font-semibold text-base text-[#F8F4EB] tracking-wide">
-              Explore
+              Experiences & Craft
             </h3>
             <ul className="space-y-2.5 text-sm text-[#DCE6D9]/80">
               <li>
-                <a href="/#experiences" className="hover:text-[#E9BF69] transition-colors">
-                  Creative Experiences
-                </a>
-              </li>
-              <li>
-                <Link to="/activities" className="hover:text-[#E9BF69] transition-colors">
-                  Activities
+                <Link to="/activities" className="hover:text-[#E9BF69] transition-colors flex items-center gap-1.5 group">
+                  <span>Activities & Workshops</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#E9BF69]" />
                 </Link>
               </li>
               <li>
-                <Link to="/celebrations" className="hover:text-[#E9BF69] transition-colors">
-                  Celebrations
+                <Link to="/celebrations" className="hover:text-[#E9BF69] transition-colors flex items-center gap-1.5 group">
+                  <span>Celebrations & Parties</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#E9BF69]" />
                 </Link>
               </li>
               <li>
-                <Link to="/diy-kits" className="hover:text-[#E9BF69] transition-colors">
-                  DIY Kits
+                <Link to="/celebrations#dates" className="hover:text-[#E9BF69] transition-colors flex items-center gap-1.5 group">
+                  <span>Couple & Date Plans</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#E9BF69]" />
                 </Link>
               </li>
               <li>
-                <Link to="/menu" className="hover:text-[#E9BF69] transition-colors">
-                  Food Menu
+                <Link to="/diy-kits" className="hover:text-[#E9BF69] transition-colors flex items-center gap-1.5 group">
+                  <span>DIY Art Kits</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#E9BF69]" />
                 </Link>
               </li>
               <li>
-                <Link to="/gallery" className="hover:text-[#E9BF69] transition-colors">
-                  Gallery
+                <Link to="/menu" className="hover:text-[#E9BF69] transition-colors flex items-center gap-1.5 group">
+                  <span>Food & Beverage Menu</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#E9BF69]" />
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Explore KaSaa Menu (2 cols) */}
+          <div className="lg:col-span-2 space-y-3">
+            <h3 className="font-serif font-semibold text-base text-[#F8F4EB] tracking-wide">
+              Explore KaSaa
+            </h3>
+            <ul className="space-y-2.5 text-sm text-[#DCE6D9]/80">
+              <li>
+                <Link to="/" className="hover:text-[#E9BF69] transition-colors">
+                  Home
                 </Link>
               </li>
               <li>
@@ -94,42 +108,52 @@ export default function Footer({ onOpenEnquiry }) {
                 </Link>
               </li>
               <li>
+                <Link to="/gallery" className="hover:text-[#E9BF69] transition-colors">
+                  Photo Gallery
+                </Link>
+              </li>
+              <li>
                 <Link to="/visit" className="hover:text-[#E9BF69] transition-colors">
-                  Visit Us
+                  Visit Us & Timings
+                </Link>
+              </li>
+              <li>
+                <Link to="/booking-cancellation-policy" className="hover:text-[#E9BF69] transition-colors">
+                  Booking Policy
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Studio Hours & Verification (3 cols) */}
-          <div className="lg:col-span-3 space-y-3">
-            <h3 className="font-serif font-semibold text-base text-[#F8F4EB] tracking-wide flex items-center gap-2">
-              <Clock className="w-4 h-4 text-[#E9BF69]" />
-              Operating Hours
-            </h3>
-            <div className="text-sm space-y-1.5 text-[#DCE6D9]/85">
-              <p className="font-medium text-[#F8F4EB]">{siteConfig.hours.days}</p>
-              <p className="text-base text-[#E9BF69] font-semibold">{siteConfig.hours.display}</p>
+          {/* Studio Hours & Location (3 cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <div className="space-y-2">
+              <h3 className="font-serif font-semibold text-base text-[#F8F4EB] tracking-wide flex items-center gap-2">
+                <Clock className="w-4 h-4 text-[#E9BF69]" />
+                Operating Hours
+              </h3>
+              <div className="text-sm space-y-1 text-[#DCE6D9]/85">
+                <p className="font-medium text-[#F8F4EB]">{siteConfig.hours.days}</p>
+                <p className="text-base text-[#E9BF69] font-semibold">{siteConfig.hours.display}</p>
+              </div>
             </div>
-          </div>
 
-          {/* Location & Directions (3 cols) */}
-          <div className="lg:col-span-3 space-y-3">
-            <h3 className="font-serif font-semibold text-base text-[#F8F4EB] tracking-wide flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-[#C86F50]" />
-              Studio Location
-            </h3>
-            <address className="not-italic text-sm text-[#DCE6D9]/85 space-y-1 leading-relaxed">
-              <p>{siteConfig.location.floor}</p>
-              <p>{siteConfig.location.building}, {siteConfig.location.street}</p>
-              <p>{siteConfig.location.city}, {siteConfig.location.state}</p>
-            </address>
+            <div className="space-y-2 pt-2 border-t border-[#2F6D5F]/40">
+              <h3 className="font-serif font-semibold text-base text-[#F8F4EB] tracking-wide flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-[#C86F50]" />
+                Studio Location
+              </h3>
+              <address className="not-italic text-xs text-[#DCE6D9]/85 space-y-0.5 leading-relaxed">
+                <p>{siteConfig.location.floor}</p>
+                <p>{siteConfig.location.building}, {siteConfig.location.street}</p>
+                <p>{siteConfig.location.city}, {siteConfig.location.state}</p>
+              </address>
+            </div>
 
-            <div className="pt-2 space-y-2.5 border-t border-[#2F6D5F]/40">
+            <div className="pt-2 space-y-2 border-t border-[#2F6D5F]/40">
               {siteConfig.contact.phone && (
                 <div className="flex items-center gap-2 text-xs text-[#DCE6D9]">
                   <Phone className="w-3.5 h-3.5 text-[#E9BF69] shrink-0" />
-                  <span className="text-[#DCE6D9]/75">Call / WhatsApp:</span>
                   <a
                     href={`tel:${siteConfig.contact.phone.replace(/\s+/g, '')}`}
                     className="font-bold text-[#F8F4EB] hover:text-[#E9BF69] transition-colors"

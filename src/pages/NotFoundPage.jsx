@@ -33,13 +33,13 @@ export default function NotFoundPage() {
           <Home className="w-4 h-4" />
           <span>Return Home</span>
         </Link>
-        <a
-          href="/#experiences"
+        <Link
+          to="/activities"
           className="w-full sm:w-auto px-6 py-3 bg-white hover:bg-[#F1ECE1] text-[#242824] border border-[#D5CEBF] text-sm font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
         >
           <Compass className="w-4 h-4 text-[#C86F50]" />
           <span>Explore Experiences</span>
-        </a>
+        </Link>
       </div>
     </div>
   );

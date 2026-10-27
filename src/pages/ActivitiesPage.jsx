@@ -27,6 +27,21 @@ import {
 import { siteConfig } from '../data/siteConfig';
 
 // Map categories to modern distinct icons
+// Slugs mapping to brochure category detail pages (/activities/:slug)
+const CATEGORY_SLUGS = {
+  'Classic Canvas': 'classic-canvas',
+  'Fluid Expressions': 'fluid-expressions',
+  'The Artisan Edit': 'the-artisan-edit',
+  'Mini Memoirs': 'mini-memoirs',
+  'The Textured Tales': 'the-textured-tales',
+  'Cloth & Colour': 'cloth-and-colour',
+  'Out of the Ordinary': 'out-of-the-ordinary',
+  'Personalised Memoirs': 'personalised-memoirs',
+  'Resin Reflections': 'resin-reflections',
+  'Decoupage Stories': 'decoupage-stories',
+  'Soft Play & Entry': 'soft-play',
+};
+
 const CATEGORY_ICONS = {
   'Classic Canvas': Palette,
   'Fluid Expressions': Sparkles,
@@ -209,35 +224,40 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
         </div>
 
         {/* Category Scrollable Pill Tabs */}
-        <div className="flex items-center sm:justify-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 scrollbar-none">
-          {tabs.map((tab) => {
-            const count = categoryCounts[tab.id] || 0;
-            const isActive = activeCategory === tab.id;
+        <div className="w-full overflow-x-auto pb-3 pt-1 scrollbar-none scroll-smooth">
+          <div className="flex items-center gap-2 w-max min-w-full px-4 sm:px-6 justify-start">
+            {tabs.map((tab) => {
+              const count = categoryCounts[tab.id] || 0;
+              const isActive = activeCategory === tab.id;
 
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveCategory(tab.id)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 cursor-pointer ${
-                  isActive
-                    ? 'bg-[#245449] text-white shadow-xs'
-                    : 'bg-white hover:bg-[#F1ECE1] text-[#4A504A] border border-[#E2DDD0]'
-                }`}
-              >
-                <span>{tab.label}</span>
-                <span
-                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={(e) => {
+                    setActiveCategory(tab.id);
+                    e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                  }}
+                  className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-2 shrink-0 cursor-pointer shadow-2xs hover:shadow-xs ${
                     isActive
-                      ? 'bg-white/20 text-white'
-                      : 'bg-[#F2EDE2] text-[#6E756E]'
+                      ? 'bg-[#245449] text-white shadow-sm ring-2 ring-[#245449]/20 font-bold'
+                      : 'bg-white hover:bg-[#F1ECE1] text-[#4A504A] border border-[#E2DDD0]'
                   }`}
                 >
-                  {count}
-                </span>
-              </button>
-            );
-          })}
+                  <span>{tab.label}</span>
+                  <span
+                    className={`text-[10px] sm:text-xs px-2 py-0.5 rounded-full font-bold ${
+                      isActive
+                        ? 'bg-white/20 text-white'
+                        : 'bg-[#F2EDE2] text-[#6E756E]'
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -247,6 +267,10 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
       <div className="space-y-16">
         {categoriesToRender.map((catGroup) => {
           const IconComponent = CATEGORY_ICONS[catGroup.id] || Palette;
+          const categorySlug =
+            CATEGORY_SLUGS[catGroup.id] ||
+            CATEGORY_SLUGS[catGroup.label] ||
+            catGroup.id.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
           return (
             <section
@@ -254,23 +278,33 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
               id={catGroup.id.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
               className="space-y-6"
             >
-              {/* Category H2 Section Header */}
+              {/* Category H2 Section Header: links to the brochure category detail page */}
               <div className="flex items-center justify-between pb-3 border-b-2 border-[#E2DDD0]">
-                <h2 className="font-serif font-bold text-2xl sm:text-3xl text-[#242824] tracking-tight">
-                  {catGroup.label || catGroup.id}
-                </h2>
-                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white text-[#7A827A] border border-[#E2DDD0] shadow-2xs">
-                  {catGroup.activities.length} {catGroup.activities.length === 1 ? 'activity' : 'activities'}
-                </span>
+                <Link
+                  to={`/activities/${categorySlug}`}
+                  className="group/h2 flex items-center gap-2 hover:text-[#245449] transition-colors"
+                >
+                  <h2 className="font-serif font-bold text-2xl sm:text-3xl text-[#242824] group-hover/h2:text-[#245449] tracking-tight">
+                    {catGroup.label || catGroup.id}
+                  </h2>
+                  <ChevronRight className="w-5 h-5 text-[#8C938C] group-hover/h2:text-[#245449] group-hover/h2:translate-x-1 transition-all" />
+                </Link>
+                <Link
+                  to={`/activities/${categorySlug}`}
+                  className="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-white hover:bg-[#245449] text-[#245449] hover:text-white border border-[#E2DDD0] hover:border-[#245449] shadow-2xs transition-all flex items-center gap-1 cursor-pointer"
+                >
+                  <span>{catGroup.activities.length} {catGroup.activities.length === 1 ? 'activity' : 'activities'}</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
 
-              {/* Grid of Activities for this Category */}
+              {/* Grid of Activities for this Category: clicking opens brochure detail page */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7">
                 {catGroup.activities.map((act) => (
-                  <article
+                  <Link
                     key={act.id}
-                    onClick={() => handleActivityEnquiry(act)}
-                    className="group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1 cursor-pointer"
+                    to={`/activities/${categorySlug}`}
+                    className="group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1 cursor-pointer block"
                   >
                     {/* Activity Photo */}
                     <div className="relative aspect-square bg-[#EAE5D9] overflow-hidden">
@@ -299,9 +333,11 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
                           <h3 className="font-serif font-bold text-base sm:text-lg text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
                             {act.name}
                           </h3>
-                          <span className="shrink-0 inline-flex items-center px-2 py-0.5 rounded-lg bg-[#245449]/8 text-[#245449] font-bold text-xs sm:text-sm border border-[#245449]/15 whitespace-nowrap">
-                            {act.priceDisplay}
-                          </span>
+                          {act.priceDisplay && (!act.chips || !act.chips.some((c) => c.price)) && (
+                            <span className="shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-lg bg-[#245449]/8 text-[#245449] font-bold text-xs sm:text-sm border border-[#245449]/15 whitespace-nowrap">
+                              {act.priceDisplay}
+                            </span>
+                          )}
                         </div>
 
                         {/* Special Badge (e.g. Pre-order basis only) */}
@@ -340,19 +376,9 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
                         )}
                       </div>
 
-                      {/* Card Footer: Subtle Inclusions note & Book CTA */}
-                      <div className="pt-2 border-t border-[#F0ECE1] flex items-center justify-between text-xs text-[#7A827A] group-hover:text-[#245449] transition-colors">
-                        <span className="text-[11px] font-medium flex items-center gap-1 text-[#6E756E]">
-                          <Sparkles className="w-3.5 h-3.5 text-[#E9BF69]" />
-                          <span>All materials included</span>
-                        </span>
-                        <span className="font-semibold text-[11.5px] flex items-center gap-0.5 text-[#245449]">
-                          <span>Book</span>
-                          <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                        </span>
-                      </div>
+
                     </div>
-                  </article>
+                  </Link>
                 ))}
               </div>
             </section>

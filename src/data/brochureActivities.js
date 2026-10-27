@@ -30,7 +30,6 @@ export const BROCHURE_CATEGORIES = [
       'Protective artist apron',
     ],
     specialNotes: [
-      '*Pre-order basis only',
       'All painting materials provided for the session',
       'Take your completed canvas masterpiece home',
     ],
@@ -42,7 +41,6 @@ export const BROCHURE_CATEGORIES = [
         description: 'Compact canvas board perfect for quick creative studies, detailed miniature compositions, or gentle first-time exploration.',
         image: '/images/brochure/classic-canvas.webp',
         badge: 'Canvas Variant',
-        note: 'Pre-order basis only',
       },
       {
         id: 'canvas-small',
@@ -50,7 +48,6 @@ export const BROCHURE_CATEGORIES = [
         description: 'Handy and versatile canvas size suited for beginner landscapes, botanical illustrations, and expressive color palettes.',
         image: '/images/brochure/classic-canvas.webp',
         badge: 'Canvas Variant',
-        note: 'Pre-order basis only',
       },
       {
         id: 'canvas-medium',
@@ -58,7 +55,6 @@ export const BROCHURE_CATEGORIES = [
         description: 'Spacious canvas format providing ample room for textured layers, bold strokes, and statement wall decor paintings.',
         image: '/images/brochure/classic-canvas.webp',
         badge: 'Canvas Variant',
-        note: 'Pre-order basis only',
       },
       {
         id: 'canvas-large',
@@ -66,7 +62,6 @@ export const BROCHURE_CATEGORIES = [
         description: 'Generous full-size canvas designed for immersive art sessions, detailed portraits, or ambitious multi-layered artwork.',
         image: '/images/brochure/classic-canvas.webp',
         badge: 'Canvas Variant',
-        note: 'Pre-order basis only',
       },
     ],
   },
@@ -357,7 +352,7 @@ export const BROCHURE_CATEGORIES = [
     slug: 'out-of-the-ordinary',
     name: 'Out of the Ordinary',
     brochurePage: 5,
-    heroImage: '/images/brochure/wine-glass-painting.webp',
+    heroImage: '/images/brochure/pot-painting.webp',
     tagline: 'Playful, unexpected creative experiences that step joyfully outside ordinary canvas bounds.',
     description:
       'From painting terracotta planters to stuffing cuddly teddy bears and decorating funky sunglasses, these offbeat crafts bring pure joy and quirky creativity to every participant.',

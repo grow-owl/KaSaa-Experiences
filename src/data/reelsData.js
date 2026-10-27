@@ -1,0 +1,88 @@
+/**
+ * Instagram Reels Configuration Data
+ * Replace `instagramUrl` with your exact Instagram Reel links
+ * (e.g., https://www.instagram.com/reel/Cxxxxxxxxx/)
+ * Optional: add `thumbnail` if you have a custom preview image (e.g., '/images/reels/reel1.jpg')
+ */
+export const INSTAGRAM_REELS = [
+  {
+    id: 1,
+    title: 'Canvas & Palette Session',
+    caption: 'Acrylic painting on tabletop easels',
+    instagramUrl: 'https://www.instagram.com/kasaa.experiences/',
+    duration: '0:35',
+    likes: '1.2K',
+    gradient: 'from-[#245449] via-[#1A3831] to-[#0D1D19]',
+    thumbnail: null,
+  },
+  {
+    id: 2,
+    title: 'Fluid Bear Sculpture',
+    caption: 'Mesmerizing acrylic pour swirls',
+    instagramUrl: 'https://www.instagram.com/kasaa.experiences/',
+    duration: '0:42',
+    likes: '2.8K',
+    gradient: 'from-[#833AB4] via-[#FD1D1D] to-[#FCB045]',
+    thumbnail: null,
+  },
+  {
+    id: 3,
+    title: 'Romantic Couple Date',
+    caption: 'Private table setup with candlelight & art',
+    instagramUrl: 'https://www.instagram.com/kasaa.experiences/',
+    duration: '0:48',
+    likes: '3.4K',
+    gradient: 'from-[#6A1B29] via-[#8B263E] to-[#2B0E17]',
+    thumbnail: null,
+  },
+  {
+    id: 4,
+    title: 'Textured 3D Moon Art',
+    caption: 'Sculpting lunar textures with palette knives',
+    instagramUrl: 'https://www.instagram.com/kasaa.experiences/',
+    duration: '0:30',
+    likes: '1.9K',
+    gradient: 'from-[#2F3E46] via-[#354F52] to-[#1C262B]',
+    thumbnail: null,
+  },
+  {
+    id: 5,
+    title: 'Resin Ocean Tray Making',
+    caption: 'Glossy crystal epoxy & ocean waves',
+    instagramUrl: 'https://www.instagram.com/kasaa.experiences/',
+    duration: '0:50',
+    likes: '2.1K',
+    gradient: 'from-[#0B4F6C] via-[#01BAEF] to-[#04080F]',
+    thumbnail: null,
+  },
+  {
+    id: 6,
+    title: 'Plushie Stuffing Adventure',
+    caption: 'Stuffing cute soft toys & adoption certificates',
+    instagramUrl: 'https://www.instagram.com/kasaa.experiences/',
+    duration: '0:28',
+    likes: '1.7K',
+    gradient: 'from-[#9B51E0] via-[#BB6BD9] to-[#4A154B]',
+    thumbnail: null,
+  },
+  {
+    id: 7,
+    title: 'Delicious Food & Beverages',
+    caption: 'Mumbai pav bhaji, momos & shakes',
+    instagramUrl: 'https://www.instagram.com/kasaa.experiences/',
+    duration: '0:36',
+    likes: '1.4K',
+    gradient: 'from-[#B25D1E] via-[#D87D4A] to-[#4E270A]',
+    thumbnail: null,
+  },
+  {
+    id: 8,
+    title: 'Birthday Celebrations at KaSaa',
+    caption: 'Decor, workshops, music & cake moments',
+    instagramUrl: 'https://www.instagram.com/kasaa.experiences/',
+    duration: '0:55',
+    likes: '4.2K',
+    gradient: 'from-[#193B33] via-[#2F6D5F] to-[#141814]',
+    thumbnail: null,
+  },
+];
