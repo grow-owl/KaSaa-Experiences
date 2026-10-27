@@ -18,7 +18,7 @@ export default function DiyKitsPage({ onOpenEnquiry }) {
           <span>COMING SOON</span>
         </div>
 
-        <h1 className="font-serif font-bold text-4xl sm:text-6xl text-[#242824] tracking-tight">
+        <h1 className="font-serif font-bold text-2xl sm:text-4xl lg:text-5xl text-[#242824] tracking-tight">
           DIY Kits
         </h1>
 
@@ -26,10 +26,10 @@ export default function DiyKitsPage({ onOpenEnquiry }) {
           Our curated DIY art & craft kits are coming soon. Stay tuned!
         </p>
 
-        <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+        <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#245449] hover:bg-[#193B33] text-white font-semibold text-sm transition-all shadow-xs active:scale-95"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#245449] hover:bg-[#193B33] text-white font-semibold text-sm transition-all shadow-xs active:scale-95 text-center"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Home</span>
@@ -39,7 +39,7 @@ export default function DiyKitsPage({ onOpenEnquiry }) {
             <button
               type="button"
               onClick={() => onOpenEnquiry('general', 'DIY Kits Enquiry')}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white hover:bg-[#FAF7F0] text-[#242824] border border-[#D5CEBF] font-semibold text-sm transition-all shadow-xs active:scale-95 cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white hover:bg-[#FAF7F0] text-[#242824] border border-[#D5CEBF] font-semibold text-sm transition-all shadow-xs active:scale-95 cursor-pointer text-center"
             >
               <MessageCircle className="w-4 h-4 text-[#245449]" />
               <span>Enquire on WhatsApp</span>

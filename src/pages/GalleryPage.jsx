@@ -32,7 +32,7 @@ export default function GalleryPage() {
           <span className="text-[#242824] font-medium">Gallery</span>
         </div>
 
-        <h1 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+        <h1 className="font-serif font-bold text-2xl sm:text-4xl lg:text-5xl text-[#242824] tracking-tight">
           A Glimpse Inside KaSaa Experiences
         </h1>
 

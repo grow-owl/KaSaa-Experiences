@@ -105,7 +105,7 @@ export default function CelebrationsPage({ onOpenEnquiry }) {
   };
 
   return (
-    <div className="py-8 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <div className="py-6 sm:py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-16">
       <SEOHead
         title="Celebrations, Dates & Group Events | KaSaa Experiences Siliguri"
         description="Celebrate birthdays, romantic couple dates, cooking dates, and bespoke gatherings at KaSaa Experiences, Vega Circle Mall Siliguri. Full decor & event planning."
@@ -127,7 +127,7 @@ export default function CelebrationsPage({ onOpenEnquiry }) {
 
 
 
-        <h1 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+        <h1 className="font-serif font-bold text-2xl sm:text-4xl lg:text-5xl text-[#242824] tracking-tight">
           Celebrate Moments That Matter
         </h1>
 
@@ -140,7 +140,7 @@ export default function CelebrationsPage({ onOpenEnquiry }) {
           <button
             type="button"
             onClick={() => handleEnquiry('Bespoke Celebration')}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#245449] hover:bg-[#1A3D35] text-[#F8F4EB] text-xs sm:text-sm font-semibold shadow-xs transition-all active:scale-98 cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-[#245449] hover:bg-[#1A3D35] text-[#F8F4EB] text-xs sm:text-sm font-semibold shadow-xs transition-all active:scale-98 cursor-pointer w-full sm:w-auto"
           >
             <MessageCircle className="w-4 h-4 text-[#E9BF69]" />
             <span>Enquire Custom Celebration</span>
@@ -165,11 +165,11 @@ export default function CelebrationsPage({ onOpenEnquiry }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {BESPOKE_CELEBRATIONS.map((pkg) => (
             <article
               key={pkg.id}
-              className="rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5 group"
+              className="rounded-2xl sm:rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5 group"
             >
               {/* Photo */}
               <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden">
@@ -185,7 +185,7 @@ export default function CelebrationsPage({ onOpenEnquiry }) {
               </div>
 
               {/* Body */}
-              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4 bg-white">
+              <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between space-y-4 bg-white">
                 <div className="space-y-2">
                   <div className="flex items-start justify-between gap-2">
                     <h3 className="font-serif font-bold text-lg text-[#242824] group-hover:text-[#245449] transition-colors">
@@ -235,7 +235,7 @@ export default function CelebrationsPage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           3. DATE PLANS & ROMANTIC EXPERIENCES
           ------------------------------------------------------------- */}
-      <section id="dates" className="space-y-8 bg-[#F5EFE4]/60 p-6 sm:p-10 rounded-3xl border border-[#E2DDD0] scroll-mt-24">
+      <section id="dates" className="space-y-6 sm:space-y-8 bg-[#F5EFE4]/60 p-4 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-[#E2DDD0] scroll-mt-24">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-[#963E23] text-xs font-bold border border-[#E2DDD0]">
             <Heart className="w-3.5 h-3.5 text-[#C86F50]" />
@@ -249,11 +249,11 @@ export default function CelebrationsPage({ onOpenEnquiry }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {DATE_EXPERIENCES.map((dateExp) => (
             <div
               key={dateExp.id}
-              className="bg-white rounded-2xl border border-[#E2DDD0] p-5 space-y-4 flex flex-col justify-between shadow-2xs hover:shadow-md transition-shadow"
+              className="bg-white rounded-2xl border border-[#E2DDD0] p-4 sm:p-5 space-y-4 flex flex-col justify-between shadow-2xs hover:shadow-md transition-shadow"
             >
               <div className="space-y-2">
                 <div className="w-full h-36 rounded-xl overflow-hidden bg-[#EAE5D9]">
@@ -306,11 +306,11 @@ export default function CelebrationsPage({ onOpenEnquiry }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {GROUP_CATEGORIES.map((item) => (
             <div
               key={item.id}
-              className="rounded-2xl bg-white border border-[#E2DDD0] p-6 space-y-3 hover:border-[#245449] transition-all shadow-2xs hover:shadow-sm flex flex-col justify-between"
+              className="rounded-2xl bg-white border border-[#E2DDD0] p-4 sm:p-6 space-y-3 hover:border-[#245449] transition-all shadow-2xs hover:shadow-sm flex flex-col justify-between"
             >
               <div className="space-y-2">
                 <span className="inline-block text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-md bg-[#FAF7F0] text-[#7D5B18] border border-[#E9BF69]/40">
@@ -340,7 +340,7 @@ export default function CelebrationsPage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           5. SIGNATURE EXPERIENCES BANNER (PAGE 8 THEME)
           ------------------------------------------------------------- */}
-      <section className="rounded-3xl bg-[#193B33] text-[#F8F4EB] p-8 sm:p-12 border border-[#2F6D5F]/50 shadow-md">
+      <section className="rounded-2xl sm:rounded-3xl bg-[#193B33] text-[#F8F4EB] p-5 sm:p-8 md:p-12 border border-[#2F6D5F]/50 shadow-md">
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#E9BF69] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
             <Sparkles className="w-3.5 h-3.5" />
@@ -359,7 +359,7 @@ export default function CelebrationsPage({ onOpenEnquiry }) {
             <button
               type="button"
               onClick={() => handleEnquiry('Signature Experience Planning')}
-              className="px-8 py-3.5 rounded-2xl bg-[#E9BF69] hover:bg-[#D4A950] text-[#193B33] font-bold text-sm shadow-md transition-all active:scale-95 cursor-pointer flex items-center gap-2"
+              className="px-8 py-3.5 rounded-2xl bg-[#E9BF69] hover:bg-[#D4A950] text-[#193B33] font-bold text-sm shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2 w-full sm:w-auto text-center"
             >
               <MessageCircle className="w-4 h-4 text-[#193B33]" />
               <span>Connect on WhatsApp for Full Planning</span>

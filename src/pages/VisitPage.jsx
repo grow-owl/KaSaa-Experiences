@@ -14,8 +14,8 @@ export default function VisitPage({ onOpenEnquiry }) {
       />
 
       {/* Header */}
-      <div className="space-y-4 max-w-3xl">
-        <div className="flex items-center gap-2 text-xs text-[#4D534D]">
+      <div className="space-y-4 max-w-3xl mx-auto text-center">
+        <div className="flex items-center justify-center gap-2 text-xs text-[#4D534D]">
           <Link to="/" className="hover:text-[#245449] flex items-center gap-1">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Home</span>
@@ -24,11 +24,11 @@ export default function VisitPage({ onOpenEnquiry }) {
           <span className="text-[#242824] font-medium">Visit</span>
         </div>
 
-        <h1 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+        <h1 className="font-serif font-bold text-2xl sm:text-4xl lg:text-5xl text-[#242824] tracking-tight">
           Plan Your Visit to KaSaa Experiences
         </h1>
 
-        <p className="text-base sm:text-lg text-[#4D534D] leading-relaxed">
+        <p className="text-base sm:text-lg text-[#4D534D] leading-relaxed max-w-2xl mx-auto">
           Find us on the 5th floor inside Vega Circle Mall, right along Sevoke Road in Siliguri. Here is everything you need to know about getting here, finding the studio inside the mall, and coordinating your workshop.
         </p>
       </div>

@@ -66,7 +66,7 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F8F4EB] text-[#242824] pb-14 md:pb-0">
+    <div className="flex flex-col min-h-screen bg-[#F8F4EB] text-[#242824] pb-20 md:pb-0">
       <ScrollToTop />
 
       {/* Primary Sticky Navbar */}

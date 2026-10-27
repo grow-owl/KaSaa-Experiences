@@ -134,7 +134,7 @@ export default function EnquiryModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#242824]/65 backdrop-blur-xs transition-opacity"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#242824]/65 backdrop-blur-xs transition-opacity"
       role="dialog"
       aria-modal="true"
       aria-labelledby="enquiry-modal-title"
@@ -142,7 +142,7 @@ export default function EnquiryModal({
     >
       <div className="relative w-full max-w-lg bg-[#F8F4EB] rounded-2xl shadow-2xl border border-[#E2DDD0] overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 bg-[#F1ECE1] border-b border-[#E2DDD0]">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 bg-[#F1ECE1] border-b border-[#E2DDD0]">
           <div className="flex items-center gap-2.5">
             <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#245449] text-[#F8F4EB]">
               <MessageCircle className="w-4 h-4" />
@@ -165,7 +165,7 @@ export default function EnquiryModal({
         </div>
 
         {/* Content Body */}
-        <div className="p-6 overflow-y-auto space-y-5">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-4 sm:space-y-5">
           {!showReviewStep ? (
             <form onSubmit={handleProceedToReview} className="space-y-4">
               {/* Activity Selection */}

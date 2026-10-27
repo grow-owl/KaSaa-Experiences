@@ -83,7 +83,7 @@ export default function ActivityDetailPageLayout({
     '+91 92396 07100';
 
   return (
-    <div className="py-6 sm:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
+    <div className="py-5 sm:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
       <SEOHead
         title={`${category.name} Activities & Workshops`}
         description={`${category.name} at KaSaa Experiences, Vega Circle Mall, Siliguri. ${category.tagline}`}
@@ -102,7 +102,7 @@ export default function ActivityDetailPageLayout({
       </nav>
 
       {/* Hero Header Section */}
-      <header className="relative bg-white rounded-3xl p-6 sm:p-10 border border-[#E2DDD0] shadow-xs overflow-hidden">
+      <header className="relative bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-10 border border-[#E2DDD0] shadow-xs overflow-hidden">
         {/* Subtle decorative background glow */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#DCE6D9]/30 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
         <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-[#FFF8E7]/60 rounded-full blur-2xl pointer-events-none" />
@@ -114,7 +114,7 @@ export default function ActivityDetailPageLayout({
               <span>Official KaSaa Activity Menu</span>
             </div>
 
-            <h1 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl text-[#242824] tracking-tight">
+            <h1 className="font-serif font-bold text-2xl sm:text-4xl md:text-5xl text-[#242824] tracking-tight">
               {category.name}
             </h1>
 
@@ -131,7 +131,7 @@ export default function ActivityDetailPageLayout({
               <button
                 type="button"
                 onClick={() => handleItemEnquiry()}
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] text-sm font-semibold rounded-2xl shadow-xs transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] text-sm font-semibold rounded-2xl shadow-xs transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer w-full sm:w-auto text-center"
                 aria-label={`Enquire about ${category.name} on WhatsApp`}
               >
                 <MessageCircle className="w-4 h-4 text-[#E9BF69]" />
@@ -148,7 +148,7 @@ export default function ActivityDetailPageLayout({
                   <img
                     src={category.heroImage}
                     alt={`${category.name} visual showcase`}
-                    className="w-full h-64 sm:h-72 object-contain p-3 transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-48 sm:h-72 object-contain p-2 sm:p-3 transition-transform duration-500 group-hover:scale-105"
                     loading="eager"
                     fetchpriority="high"
                     decoding="async"
@@ -167,7 +167,7 @@ export default function ActivityDetailPageLayout({
       <section aria-label="Session Inclusions and Notes" className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Inclusions */}
         {category.inclusions && category.inclusions.length > 0 && (
-          <div className="bg-[#FAF7F0] rounded-2xl p-6 border border-[#E2DDD0] space-y-3">
+          <div className="bg-[#FAF7F0] rounded-2xl p-4 sm:p-6 border border-[#E2DDD0] space-y-3">
             <h2 className="font-serif font-bold text-lg text-[#242824] flex items-center gap-2">
               <CheckCircle2 className="w-5 h-5 text-[#245449]" />
               <span>What's Provided for the Session</span>
@@ -185,7 +185,7 @@ export default function ActivityDetailPageLayout({
 
         {/* Special Brochure Notes */}
         {category.specialNotes && category.specialNotes.length > 0 && (
-          <div className="bg-[#FFFDF7] rounded-2xl p-6 border border-[#E9BF69]/60 space-y-3">
+          <div className="bg-[#FFFDF7] rounded-2xl p-4 sm:p-6 border border-[#E9BF69]/60 space-y-3">
             <h2 className="font-serif font-bold text-lg text-[#242824] flex items-center gap-2">
               <AlertCircle className="w-5 h-5 text-[#963E23]" />
               <span>Brochure Guidelines & Studio Notes</span>
@@ -221,14 +221,14 @@ export default function ActivityDetailPageLayout({
         </div>
 
         {/* Responsive Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
           {category.items?.map((item) => (
             <article
               key={item.id}
               className="group bg-white rounded-2xl border border-[#E2DDD0] shadow-xs hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden hover:border-[#245449]/40"
             >
               {/* Image Frame */}
-              <div className="relative bg-[#FAF7F0] border-b border-[#E2DDD0] p-4 flex items-center justify-center overflow-hidden h-56 sm:h-64">
+              <div className="relative bg-[#FAF7F0] border-b border-[#E2DDD0] p-3 sm:p-4 flex items-center justify-center overflow-hidden h-44 sm:h-64">
                 {item.image ? (
                   <img
                     src={item.image}
@@ -249,7 +249,7 @@ export default function ActivityDetailPageLayout({
               </div>
 
               {/* Content Body */}
-              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+              <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
                 <div className="space-y-2">
                   <h3 className="font-serif font-bold text-lg sm:text-xl text-[#242824] group-hover:text-[#245449] transition-colors">
                     {item.name}
@@ -275,7 +275,7 @@ export default function ActivityDetailPageLayout({
       </section>
 
       {/* Studio Venue & WhatsApp Contact Box */}
-      <section aria-labelledby="studio-enquiry-heading" className="bg-[#FAF7F0] rounded-3xl p-6 sm:p-10 border border-[#E2DDD0] shadow-xs">
+      <section aria-labelledby="studio-enquiry-heading" className="bg-[#FAF7F0] rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-10 border border-[#E2DDD0] shadow-xs">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-3">
             <h2 id="studio-enquiry-heading" className="font-serif font-bold text-2xl sm:text-3xl text-[#242824]">
@@ -325,14 +325,14 @@ export default function ActivityDetailPageLayout({
           <span className="text-xs text-[#4D534D]">12 Categories Total</span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3">
           {BROCHURE_CATEGORIES.map((cat) => {
             const isActive = cat.slug === category.slug;
             return (
               <Link
                 key={cat.id}
                 to={`/activities/${cat.slug}`}
-                className={`p-3 rounded-xl border text-xs text-center transition-all flex items-center justify-center min-h-[44px] ${
+                className={`p-2.5 sm:p-3 rounded-xl border text-xs text-center transition-all flex items-center justify-center min-h-[44px] ${
                   isActive
                     ? 'bg-[#245449] text-[#F8F4EB] border-[#245449] font-bold shadow-xs'
                     : 'bg-white hover:bg-[#FAF7F0] text-[#242824] border-[#E2DDD0] hover:border-[#245449]/40'

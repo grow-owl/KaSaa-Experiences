@@ -765,13 +765,13 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           1. HERO SECTION (Editorial Desktop / Compact Mobile)
           ------------------------------------------------------------- */}
-      <section className="relative py-14 sm:py-18 lg:py-20">
+      <section className="relative py-8 sm:py-14 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
             {/* Left Column: Copy & Actions (Desktop ~48%, 6 cols in 12-col grid) */}
             <div className="lg:col-span-6 space-y-6 text-left">
               {/* Main Heading */}
-              <h1 className="font-serif font-bold text-5xl sm:text-5xl lg:text-6xl text-[#242824] tracking-tight leading-[1.12]">
+              <h1 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#242824] tracking-tight leading-[1.15]">
                 Make Something. <br />
                 <span className="text-[#963E23] italic font-normal">Make Memories.</span>
               </h1>
@@ -786,7 +786,7 @@ export default function HomePage({ onOpenEnquiry }) {
                 <Link
                   to="/activities"
                   aria-label="Explore creative workshops and activities"
-                  className="px-6 py-3.5 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-sm rounded-xl shadow-xs transition-all duration-200 flex items-center justify-center gap-2 group hover:shadow-md active:scale-98"
+                  className="px-5 py-3 sm:px-6 sm:py-3.5 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-xs sm:text-sm rounded-xl shadow-xs transition-all duration-200 flex items-center justify-center gap-2 group hover:shadow-md active:scale-98"
                 >
                   <span>Explore DIY Activities</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -795,7 +795,7 @@ export default function HomePage({ onOpenEnquiry }) {
                 <Link
                   to="/celebrations"
                   aria-label="View creative date ideas and celebration options"
-                  className="px-6 py-3.5 bg-white hover:bg-[#F1ECE1] text-[#242824] border border-[#D5CEBF] font-semibold text-sm rounded-xl transition-all duration-200 flex items-center justify-center gap-2 active:scale-98"
+                  className="px-5 py-3 sm:px-6 sm:py-3.5 bg-white hover:bg-[#F1ECE1] text-[#242824] border border-[#D5CEBF] font-semibold text-xs sm:text-sm rounded-xl transition-all duration-200 flex items-center justify-center gap-2 active:scale-98"
                 >
                   <Heart className="w-4 h-4 text-[#963E23]" />
                   <span>Date Ideas & Celebrations</span>
@@ -819,7 +819,7 @@ export default function HomePage({ onOpenEnquiry }) {
               <div className="w-full max-w-md sm:max-w-lg lg:max-w-none space-y-3.5 flex flex-col items-center">
                 {/* Carousel Container */}
                 <div
-                  className="relative w-full aspect-[4/5] sm:aspect-[4/5] max-h-[480px] rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-[#EAE5D9] group select-none"
+                  className="relative w-full aspect-[4/3] sm:aspect-[4/5] max-h-[300px] sm:max-h-[480px] rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-[#EAE5D9] group select-none"
                   onMouseEnter={() => setIsHeroPaused(true)}
                   onMouseLeave={() => setIsHeroPaused(false)}
                   role="region"
@@ -881,10 +881,10 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           2. TOP 10 BEST-SELLING ACTIVITIES — SIDE SCROLL REVEAL
           ------------------------------------------------------------- */}
-      <section id="experiences" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section id="experiences" className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
         {/* Section Header: Our Best Sellers */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <h2 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight">
             Our Best Sellers
           </h2>
           <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
@@ -896,12 +896,12 @@ export default function HomePage({ onOpenEnquiry }) {
         <div className="relative">
           <div
             ref={activitiesScrollRef}
-            className="flex gap-5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 px-1 scroll-smooth"
+            className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth"
           >
             {TOP_10_ACTIVITIES.map((activity) => (
               <article
                 key={activity.id}
-                className="w-[260px] sm:w-[300px] md:w-[320px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
+                className="w-[240px] sm:w-[300px] md:w-[320px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
               >
                 {/* Visual Image with Duration Overlay */}
                 <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden">
@@ -1013,7 +1013,7 @@ export default function HomePage({ onOpenEnquiry }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <h2 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+            <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight">
               Date Plans, Sorted!
             </h2>
             <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
@@ -1025,12 +1025,12 @@ export default function HomePage({ onOpenEnquiry }) {
           <div className="relative">
             <div
               ref={datePlansScrollRef}
-              className="flex gap-5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 px-1 scroll-smooth"
+              className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth"
             >
               {DATE_PLANS.map((plan) => (
                 <article
                   key={plan.id}
-                  className="w-[260px] sm:w-[300px] md:w-[320px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
+                  className="w-[240px] sm:w-[300px] md:w-[320px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
                 >
                   {/* Image Placeholder Space (Reserved for future image upload) */}
                   <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden flex items-center justify-center">
@@ -1151,10 +1151,10 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           3B. PLANNING, GROUP, EXPERIENCE? — SIDE SCROLL REVEAL (10 Cards)
           ------------------------------------------------------------- */}
-      <section id="group-experiences" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section id="group-experiences" className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <h2 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight">
             Planning a Group Experience?
           </h2>
           <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
@@ -1166,12 +1166,12 @@ export default function HomePage({ onOpenEnquiry }) {
         <div className="relative">
           <div
             ref={groupScrollRef}
-            className="flex gap-5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 px-1 scroll-smooth"
+            className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth"
           >
             {GROUP_EXPERIENCES.map((exp) => (
               <article
                 key={exp.id}
-                className="w-[260px] sm:w-[300px] md:w-[320px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
+                className="w-[240px] sm:w-[300px] md:w-[320px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
               >
                 {/* Image Placeholder Space (Reserved for future image upload) */}
                 <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden flex items-center justify-center">
@@ -1265,10 +1265,10 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           4. FOOD MENU PREVIEW — YES, WE SERVE FOOD TOO!
           ------------------------------------------------------------- */}
-      <section id="menu-preview" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section id="menu-preview" className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <h2 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight">
             Yes, We Serve Food Too!
           </h2>
 
@@ -1293,7 +1293,7 @@ export default function HomePage({ onOpenEnquiry }) {
 
           <div
             ref={foodScrollRef}
-            className="flex gap-5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 px-1 scroll-smooth"
+            className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth"
           >
             {FEATURED_FOOD_ITEMS.map((dish) => (
               <article
@@ -1401,13 +1401,13 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           5. INSTAGRAM REELS (8 REELS PLACEHOLDERS)
           ------------------------------------------------------------- */}
-      <section id="reels" className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+      <section id="reels" className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/15 border border-[#E9BF69]/40 text-[#7A5813] text-xs font-bold tracking-wide">
             <Film className="w-3.5 h-3.5 text-[#B37B15]" />
             <span>STUDIO REELS & STORIES</span>
           </div>
-          <h2 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight">
             Watch KaSaa in Action
           </h2>
           <p className="text-sm sm:text-base text-[#4D534D] max-w-xl mx-auto leading-relaxed">
@@ -1416,7 +1416,7 @@ export default function HomePage({ onOpenEnquiry }) {
         </div>
 
         {/* 8 Instagram Reels Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {INSTAGRAM_REELS.map((reel) => (
             <a
               key={reel.id}
@@ -1424,7 +1424,7 @@ export default function HomePage({ onOpenEnquiry }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Watch reel: ${reel.title} on Instagram`}
-              className="group relative aspect-[9/16] rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-4 sm:p-5 border border-[#E2DDD0] bg-neutral-900 hover:-translate-y-1.5 cursor-pointer"
+              className="group relative aspect-[9/16] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-3 sm:p-5 border border-[#E2DDD0] bg-neutral-900 hover:-translate-y-1.5 cursor-pointer"
             >
               {/* Thumbnail image if available, else curated background gradient */}
               {reel.thumbnail ? (
@@ -1462,8 +1462,8 @@ export default function HomePage({ onOpenEnquiry }) {
 
               {/* Center Play Button Overlay */}
               <div className="relative z-10 flex items-center justify-center my-auto">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-white flex items-center justify-center shadow-lg group-hover:scale-115 group-hover:bg-[#E9BF69] group-hover:text-[#193B33] group-hover:border-[#E9BF69] transition-all duration-300">
-                  <Play className="w-5 h-5 sm:w-6 sm:h-6 ml-0.5 fill-current" />
+                <div className="w-9 h-9 sm:w-14 sm:h-14 rounded-full bg-white/25 backdrop-blur-md border border-white/40 text-white flex items-center justify-center shadow-md group-hover:scale-115 group-hover:bg-[#E9BF69] group-hover:text-[#193B33] group-hover:border-[#E9BF69] transition-all duration-300">
+                  <Play className="w-3.5 h-3.5 sm:w-6 sm:h-6 ml-0.5 fill-current" />
                 </div>
               </div>
 
@@ -1516,7 +1516,7 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           5. CUSTOMER REVIEWS + COMPACT BOOKING EXPLAINER
           ------------------------------------------------------------- */}
-      <section id="reviews" className="py-16 lg:py-24">
+      <section id="reviews" className="py-10 sm:py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           {/* Reviews Header */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -1577,7 +1577,7 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           6. FAQS ACCORDION (Side-by-side on desktop)
           ------------------------------------------------------------- */}
-      <section className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-4 space-y-4">
             <h2 className="font-serif font-bold text-3xl sm:text-4xl text-[#242824] tracking-tight">
@@ -1612,7 +1612,7 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           7. VISIT US SECTION
           ------------------------------------------------------------- */}
-      <section id="visit" className="py-16 lg:py-20">
+      <section id="visit" className="py-10 sm:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Address & Hours details (7 cols) */}
@@ -1674,13 +1674,13 @@ export default function HomePage({ onOpenEnquiry }) {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
                 <a
                   href={siteConfig.location.directionsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Get directions to KaSaa Experiences on Google Maps"
-                  className="px-5 py-3 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] text-xs font-semibold rounded-xl flex items-center gap-2 shadow-xs transition-colors"
+                  className="px-5 py-3 bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] text-xs font-semibold rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors w-full sm:w-auto text-center"
                 >
                   <Compass className="w-4 h-4 text-[#E9BF69]" />
                   <span>Get Directions on Google Maps</span>
@@ -1691,7 +1691,7 @@ export default function HomePage({ onOpenEnquiry }) {
                   type="button"
                   onClick={() => onOpenEnquiry('general')}
                   aria-label="Enquire about visit timings via WhatsApp"
-                  className="px-5 py-3 bg-[#25D366] hover:bg-[#20BA5A] text-white text-xs font-semibold rounded-xl flex items-center gap-2 transition-colors shadow-xs"
+                  className="px-5 py-3 bg-[#25D366] hover:bg-[#20BA5A] text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-2 transition-colors shadow-xs w-full sm:w-auto text-center"
                 >
                   <MessageCircle className="w-4 h-4 text-white" />
                   <span>WhatsApp: {siteConfig.contact.phone}</span>

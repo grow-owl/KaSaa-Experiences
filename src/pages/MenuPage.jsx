@@ -68,7 +68,7 @@ export default function MenuPage({ onOpenEnquiry }) {
   ];
 
   return (
-    <div className="py-8 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+    <div className="py-6 sm:py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-14">
       <SEOHead
         title="KaSaa Food Menu | Authentic Cafe & Street Food"
         description="Explore KaSaa Experiences food menu in Siliguri. Mumbai pav bhaji, grilled sandwiches, artisan pizzas, steamed momos, Korean ramen, beverages with exact prices."
@@ -89,7 +89,7 @@ export default function MenuPage({ onOpenEnquiry }) {
           <span className="text-[#242824] font-semibold">Food Menu</span>
         </div>
 
-        <h1 className="font-serif font-bold text-3xl sm:text-5xl text-[#242824] tracking-tight">
+        <h1 className="font-serif font-bold text-2xl sm:text-4xl lg:text-5xl text-[#242824] tracking-tight">
           KaSaa Food Menu
         </h1>
 
@@ -195,14 +195,14 @@ export default function MenuPage({ onOpenEnquiry }) {
             </div>
 
             {/* Grid of Dishes for this Category */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8">
               {catGroup.dishes.map((dish) => (
                 <article
                   key={dish.id}
-                  className="group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1"
+                  className="group rounded-2xl sm:rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1"
                 >
                   {/* Dish Photo */}
-                  <div className="relative aspect-square bg-[#EAE5D9] overflow-hidden">
+                  <div className="relative aspect-[16/10] sm:aspect-square bg-[#EAE5D9] overflow-hidden">
                     <picture>
                       <source srcSet={dish.image} type="image/webp" />
                       <img
@@ -273,10 +273,10 @@ export default function MenuPage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           4. GROUP CATERING (PAGE 10 THEME & ARTWORK)
           ------------------------------------------------------------- */}
-      <section className="rounded-3xl bg-[#193B33] text-[#F8F4EB] p-6 sm:p-10 border border-[#2F6D5F]/50 shadow-md">
+      <section className="rounded-2xl sm:rounded-3xl bg-[#193B33] text-[#F8F4EB] p-5 sm:p-8 md:p-10 border border-[#2F6D5F]/50 shadow-md">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Authentic Page 10 Artwork Card */}
-          <div className="w-48 sm:w-56 shrink-0 rounded-2xl overflow-hidden border border-[#3E7D6F] shadow-lg bg-[#141814]">
+          <div className="w-40 sm:w-56 shrink-0 rounded-2xl overflow-hidden border border-[#3E7D6F] shadow-lg bg-[#141814]">
             <picture>
               <source srcSet="/images/menu/menu_page_10.webp" type="image/webp" />
               <img
@@ -307,11 +307,11 @@ export default function MenuPage({ onOpenEnquiry }) {
               "The best conversations happen over food." — KaSaa Experiences
             </blockquote>
 
-            <div className="pt-2 flex flex-wrap gap-3 justify-center md:justify-start">
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 justify-center md:justify-start">
               <button
                 type="button"
                 onClick={() => onOpenEnquiry ? onOpenEnquiry('food_group', 'Group Food Menu') : null}
-                className="px-6 py-3 bg-[#E9BF69] hover:bg-[#D4A950] text-[#193B33] text-xs font-bold rounded-xl flex items-center gap-2 shadow-xs transition-colors cursor-pointer"
+                className="px-6 py-3 bg-[#E9BF69] hover:bg-[#D4A950] text-[#193B33] text-xs font-bold rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer w-full sm:w-auto text-center"
               >
                 <MessageCircle className="w-4 h-4 text-[#193B33]" />
                 <span>Enquire Custom Group Menu</span>
@@ -320,7 +320,7 @@ export default function MenuPage({ onOpenEnquiry }) {
               <button
                 type="button"
                 onClick={() => setBookletOpen(true)}
-                className="px-5 py-3 bg-[#245449] hover:bg-[#1E453C] text-white border border-[#3E7D6F] text-xs font-semibold rounded-xl flex items-center gap-2 transition-colors cursor-pointer"
+                className="px-5 py-3 bg-[#245449] hover:bg-[#1E453C] text-white border border-[#3E7D6F] text-xs font-semibold rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer w-full sm:w-auto text-center"
               >
                 <BookOpen className="w-4 h-4 text-[#E9BF69]" />
                 <span>Flip Menu Booklet</span>
