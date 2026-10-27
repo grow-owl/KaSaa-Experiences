@@ -608,67 +608,7 @@ export const BROCHURE_CATEGORIES = [
       },
     ],
   },
-  {
-    id: 'bespoke-celebrations',
-    slug: 'bespoke-celebrations',
-    name: 'Bespoke Celebrations',
-    brochurePage: 8,
-    heroImage: '/images/painting_3.webp',
-    tagline: 'Private setups, cooking dates, proposal milestones, and fully planned signature experiences.',
-    description:
-      'From custom decor and tailored art activities to intimate cooking dates and unforgettable proposals — KaSaa plans and hosts your occasions from start to finish.',
-    inclusions: [
-      'Custom thematic decor and ambient studio styling',
-      'Curated hands-on creative activities for all guests',
-      'Dedicated host coordination and private area reservation',
-      'Complimentary assistance for cakes, photography, and music',
-    ],
-    specialNotes: [
-      'Planning a Birthday, Kitty Party, Date Night, or Anniversary? Leave it on us!',
-      'Additional services will be provided to a group of 10+ people',
-      'From décor and activities to moments and memories — your occasions, fully planned by us',
-    ],
-    enquiryType: 'bespoke-celebrations',
-    items: [
-      {
-        id: 'private-setups',
-        name: 'Private Setups',
-        description: 'Exclusive studio area styled with romantic ambient decor, private art stations, and dedicated host support for intimate celebrations.',
-        image: '/images/brochure/bespoke-gathering.webp',
-        badge: 'Private Ambience',
-      },
-      {
-        id: 'cooking-dates',
-        name: 'Cooking Dates',
-        description: 'Interactive culinary bonding session where couples prepare delicious food together in a fun, relaxed, and guided setting.',
-        image: '/images/brochure/bespoke-gathering.webp',
-        badge: 'Couples Experience',
-      },
-      {
-        id: 'proposal-setups',
-        name: 'Proposal Setups',
-        description: 'Romantic, picture-perfect proposal styling with candlelight, fairy lights, florals, and personalized keepsake activities.',
-        image: '/images/brochure/bespoke-hands.webp',
-        badge: 'Romantic Milestone',
-      },
-      {
-        id: 'group-gatherings',
-        name: 'Group Gatherings (4–10 People)',
-        description: 'Curated creative gathering for friend groups, kitty parties, or birthdays with shared art workshops, games, and cozy seating.',
-        image: '/images/brochure/signature-celebration.webp',
-        badge: 'Group Outing',
-        note: 'Additional services provided for groups of 10+',
-      },
-      {
-        id: 'signature-experiences',
-        name: 'Signature Experiences',
-        description: 'Complete end-to-end occasion management. From theme conception and decor styling to activities and memory keeping — we handle every detail.',
-        image: '/images/brochure/signature-cake.webp',
-        badge: 'Full Planning',
-        note: 'Theme, decor & activities fully planned',
-      },
-    ],
-  },
+  
 ];
 
 /**

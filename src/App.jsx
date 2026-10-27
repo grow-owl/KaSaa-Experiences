@@ -8,6 +8,7 @@ import { buildEnquiryMessage, getWhatsAppUrl } from './utils/whatsapp';
 import HomePage from './pages/HomePage';
 import GalleryPage from './pages/GalleryPage';
 import MenuPage from './pages/MenuPage';
+import CelebrationsPage from './pages/CelebrationsPage';
 import ActivitiesPage from './pages/ActivitiesPage';
 import ActivityDetailPageLayout from './pages/activities/ActivityDetailPageLayout';
 import { getBrochureCategory } from './data/brochureActivities';
@@ -80,7 +81,8 @@ export default function App() {
           <Route path="/" element={<HomePage onOpenEnquiry={handleOpenEnquiry} />} />
           {/* External page routes removed per user request: redirect to respective homepage sections */}
           <Route path="/experiences" element={<Navigate to="/#experiences" replace />} />
-          <Route path="/together" element={<Navigate to="/#together" replace />} />
+          <Route path="/celebrations" element={<CelebrationsPage onOpenEnquiry={handleOpenEnquiry} />} />
+          <Route path="/together" element={<Navigate to="/celebrations" replace />} />
           <Route path="/activities" element={<ActivitiesPage onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/activities/:slug" element={<ActivityRouteWrapper onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/menu" element={<MenuPage onOpenEnquiry={handleOpenEnquiry} />} />

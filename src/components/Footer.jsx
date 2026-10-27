@@ -69,9 +69,9 @@ export default function Footer({ onOpenEnquiry }) {
                 </Link>
               </li>
               <li>
-                <a href="/#together" className="hover:text-[#E9BF69] transition-colors">
+                <Link to="/celebrations" className="hover:text-[#E9BF69] transition-colors">
                   Celebrations
-                </a>
+                </Link>
               </li>
               <li>
                 <Link to="/diy-kits" className="hover:text-[#E9BF69] transition-colors">
