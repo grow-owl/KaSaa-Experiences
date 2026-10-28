@@ -1276,17 +1276,6 @@ export default function HomePage({ onOpenEnquiry }) {
 
         {/* Horizontal Side-Scroll Food Cards Track with Reveal Snap */}
         <div className="relative space-y-4 w-full max-w-full min-w-0">
-          {/* Left-aligned Badges: Food is our Love Language & Our Best Sellers */}
-          <div className="flex flex-wrap items-center justify-start gap-2.5 px-1 text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
-              <Utensils className="w-3.5 h-3.5 text-[#B37B15]" />
-              <span>Food is our Love Language</span>
-            </div>
-            <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
-              <span>Our Best Sellers</span>
-            </div>
-          </div>
-
           <div
             ref={foodScrollRef}
             className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth scroll-pl-4 sm:scroll-pl-0 touch-pan-x"
