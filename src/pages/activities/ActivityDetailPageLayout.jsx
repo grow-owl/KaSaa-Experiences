@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import {
   ArrowLeft,
   MessageCircle,
-  Sparkles,
   CheckCircle2,
   AlertCircle,
   MapPin,
@@ -109,11 +108,6 @@ export default function ActivityDetailPageLayout({
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FAF7F0] border border-[#E2DDD0] text-xs font-semibold text-[#245449]">
-              <Sparkles className="w-3.5 h-3.5 text-[#C86F50]" />
-              <span>Official KaSaa Activity Menu</span>
-            </div>
-
             <h1 className="font-serif font-bold text-2xl sm:text-4xl md:text-5xl text-[#242824] tracking-tight">
               {category.name}
             </h1>

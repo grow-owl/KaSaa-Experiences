@@ -7,7 +7,6 @@ import {
   Star,
   ArrowRight,
   Play,
-  Film,
   Heart,
   Users,
   PartyPopper,
@@ -45,21 +44,21 @@ const HERO_SLIDES = [
     src: '/images/hero-carousel/slide_1.jpeg',
     alt: 'Birthday celebration with handcrafted photo frames at KaSaa Experiences',
     title: 'Celebrations & Birthday Parties',
-    objectPosition: 'center 62%',
+    objectPosition: 'center center',
   },
   {
     id: 2,
     src: '/images/hero-carousel/slide_2.jpeg',
     alt: 'Handcrafted personalized denim heart charm making at KaSaa Experiences',
     title: 'Handmade Charms & DIY Crafts',
-    objectPosition: 'center 35%',
+    objectPosition: 'center center',
   },
   {
     id: 3,
     src: '/images/hero-carousel/slide_3.jpeg',
     alt: 'Guided canvas painting workshop at KaSaa Experiences Siliguri',
     title: 'Canvas Painting Workshops',
-    objectPosition: 'center 30%',
+    objectPosition: 'center 40%',
   },
   {
     id: 4,
@@ -73,7 +72,7 @@ const HERO_SLIDES = [
     src: '/images/hero-carousel/slide_5.jpeg',
     alt: 'Friends creating personalized tote bags and jewelry at KaSaa',
     title: 'Personalized Tote Bag Art',
-    objectPosition: 'center 42%',
+    objectPosition: 'center 50%',
   },
   {
     id: 6,
@@ -87,14 +86,14 @@ const HERO_SLIDES = [
     src: '/images/hero-carousel/slide_7.jpeg',
     alt: 'Creative date outing for couples with pottery and art at KaSaa',
     title: 'Couples & Creative Date Ideas',
-    objectPosition: 'center 45%',
+    objectPosition: 'center 50%',
   },
   {
     id: 8,
     src: '/images/hero-carousel/slide_8.jpeg',
     alt: 'Kids workshop making plushies and crafts at KaSaa',
     title: 'Kids DIY Workshops & Plushies',
-    objectPosition: 'center 60%',
+    objectPosition: 'center 50%',
   },
   {
     id: 9,
@@ -115,21 +114,21 @@ const HERO_SLIDES = [
     src: '/images/hero-carousel/slide_11.jpeg',
     alt: 'Vision board collage workshop at KaSaa Experiences',
     title: 'Vision Boards & Collage Art',
-    objectPosition: 'center 45%',
+    objectPosition: 'center 50%',
   },
   {
     id: 12,
     src: '/images/hero-carousel/slide_12.jpeg',
     alt: 'Couple enjoying pizza making date at KaSaa Experiences cafe',
     title: 'Artisan Pizza Dates & Cafe Treats',
-    objectPosition: 'center 48%',
+    objectPosition: 'center 50%',
   },
   {
     id: 13,
     src: '/images/hero-carousel/slide_13.jpeg',
     alt: 'Vintage decoupage and letter art group workshop at KaSaa',
     title: 'Vintage Decoupage & Paper Crafts',
-    objectPosition: 'center 60%',
+    objectPosition: 'center 50%',
   },
 ];
 
@@ -1279,14 +1278,13 @@ export default function HomePage({ onOpenEnquiry }) {
 
         {/* Horizontal Side-Scroll Food Cards Track with Reveal Snap */}
         <div className="relative space-y-4">
-          {/* Centered Badges: Food is our Love Language & Our Best Sellers in matching design */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 px-1 text-center">
+          {/* Left-aligned Badges: Food is our Love Language & Our Best Sellers */}
+          <div className="flex flex-wrap items-center justify-start gap-2.5 px-1 text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
               <Utensils className="w-3.5 h-3.5 text-[#B37B15]" />
               <span>Food is our Love Language</span>
             </div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
-              <Sparkles className="w-3.5 h-3.5 text-[#B37B15]" />
+            <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
               <span>Our Best Sellers</span>
             </div>
           </div>
@@ -1403,15 +1401,11 @@ export default function HomePage({ onOpenEnquiry }) {
           ------------------------------------------------------------- */}
       <section id="reels" className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/15 border border-[#E9BF69]/40 text-[#7A5813] text-xs font-bold tracking-wide">
-            <Film className="w-3.5 h-3.5 text-[#B37B15]" />
-            <span>STUDIO REELS & STORIES</span>
-          </div>
           <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight">
             Watch KaSaa in Action
           </h2>
           <p className="text-sm sm:text-base text-[#4D534D] max-w-xl mx-auto leading-relaxed">
-            Real workshops, joyful celebrations, and creative moments at Vega Circle Mall. Tap any reel to watch on Instagram.
+            Real workshops, joyful celebrations, and creative moments at Kasaa.
           </p>
         </div>
 
@@ -1440,28 +1434,8 @@ export default function HomePage({ onOpenEnquiry }) {
               {/* Decorative dark gradient vignette for readable text */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/40 pointer-events-none" />
 
-              {/* Top Header: Instagram Reel Badge */}
-              <div className="relative z-10 flex items-center justify-between">
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md border border-white/20 text-white text-[11px] font-semibold shadow-xs">
-                  <svg
-                    className="w-3.5 h-3.5 text-[#E1306C]"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                  </svg>
-                  <span>Reel</span>
-                </div>
-              </div>
-
               {/* Center Play Button Overlay */}
-              <div className="relative z-10 flex items-center justify-center my-auto">
+              <div className="relative z-10 flex-1 flex items-center justify-center">
                 <div className="w-9 h-9 sm:w-14 sm:h-14 rounded-full bg-white/25 backdrop-blur-md border border-white/40 text-white flex items-center justify-center shadow-md group-hover:scale-115 group-hover:bg-[#E9BF69] group-hover:text-[#193B33] group-hover:border-[#E9BF69] transition-all duration-300">
                   <Play className="w-3.5 h-3.5 sm:w-6 sm:h-6 ml-0.5 fill-current" />
                 </div>
@@ -1490,10 +1464,10 @@ export default function HomePage({ onOpenEnquiry }) {
             href={siteConfig.social?.instagram || 'https://www.instagram.com/kasaa.experiences/'}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white hover:bg-[#F1ECE1] text-[#242824] border border-[#D5CEBF] font-semibold text-sm rounded-2xl transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95 group"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-[#F1ECE1] text-[#242824] border border-[#D5CEBF] font-semibold text-sm rounded-xl transition-all shadow-xs group"
           >
             <svg
-              className="w-4 h-4 text-[#E1306C] group-hover:scale-110 transition-transform"
+              className="w-4 h-4 text-[#D87D4A] group-hover:scale-110 transition-transform"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -1505,8 +1479,8 @@ export default function HomePage({ onOpenEnquiry }) {
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
-            <span>Follow Us on Instagram @kasaa.experiences</span>
-            <ArrowRight className="w-4 h-4 text-[#4D534D] group-hover:translate-x-1 transition-transform ml-0.5" />
+            <span>Come say Hi on Instagram!</span>
+            <ArrowRight className="w-4 h-4 text-[#4D534D] group-hover:translate-x-0.5 transition-transform" />
           </a>
         </div>
       </section>

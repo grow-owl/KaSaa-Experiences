@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Clock, MessageCircle, Compass, ExternalLink, Phone, ArrowUpRight } from 'lucide-react';
+import { MapPin, Clock, MessageCircle, Compass, ExternalLink, Phone } from 'lucide-react';
 import { siteConfig } from '../data/siteConfig';
 import Logo from './Logo';
 
@@ -52,49 +52,10 @@ export default function Footer({ onOpenEnquiry }) {
             </div>
           </div>
 
-          {/* Experiences Menu (3 cols) */}
-          <div className="lg:col-span-3 space-y-3">
-            <h3 className="font-serif font-semibold text-base text-[#F8F4EB] tracking-wide">
-              Experiences & Craft
-            </h3>
-            <ul className="space-y-2.5 text-sm text-[#DCE6D9]/80">
-              <li>
-                <Link to="/activities" className="hover:text-[#E9BF69] transition-colors flex items-center gap-1.5 group">
-                  <span>Activities & Workshops</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#E9BF69]" />
-                </Link>
-              </li>
-              <li>
-                <Link to="/celebrations" className="hover:text-[#E9BF69] transition-colors flex items-center gap-1.5 group">
-                  <span>Celebrations & Parties</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#E9BF69]" />
-                </Link>
-              </li>
-              <li>
-                <Link to="/celebrations#dates" className="hover:text-[#E9BF69] transition-colors flex items-center gap-1.5 group">
-                  <span>Couple & Date Plans</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#E9BF69]" />
-                </Link>
-              </li>
-              <li>
-                <Link to="/diy-kits" className="hover:text-[#E9BF69] transition-colors flex items-center gap-1.5 group">
-                  <span>DIY Art Kits</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#E9BF69]" />
-                </Link>
-              </li>
-              <li>
-                <Link to="/menu" className="hover:text-[#E9BF69] transition-colors flex items-center gap-1.5 group">
-                  <span>Food & Beverage Menu</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#E9BF69]" />
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Explore KaSaa Menu (2 cols) */}
+          {/* Explore Links matching Navbar (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
             <h3 className="font-serif font-semibold text-base text-[#F8F4EB] tracking-wide">
-              Explore KaSaa
+              Explore
             </h3>
             <ul className="space-y-2.5 text-sm text-[#DCE6D9]/80">
               <li>
@@ -103,29 +64,44 @@ export default function Footer({ onOpenEnquiry }) {
                 </Link>
               </li>
               <li>
+                <Link to="/activities" className="hover:text-[#E9BF69] transition-colors">
+                  Activities
+                </Link>
+              </li>
+              <li>
+                <Link to="/celebrations" className="hover:text-[#E9BF69] transition-colors">
+                  Celebrations
+                </Link>
+              </li>
+              <li>
+                <Link to="/diy-kits" className="hover:text-[#E9BF69] transition-colors">
+                  DIY Kits
+                </Link>
+              </li>
+              <li>
+                <Link to="/menu" className="hover:text-[#E9BF69] transition-colors">
+                  Food Menu
+                </Link>
+              </li>
+              <li>
+                <Link to="/gallery" className="hover:text-[#E9BF69] transition-colors">
+                  Gallery
+                </Link>
+              </li>
+              <li>
                 <Link to="/our-story" className="hover:text-[#E9BF69] transition-colors">
                   Our Story
                 </Link>
               </li>
               <li>
-                <Link to="/gallery" className="hover:text-[#E9BF69] transition-colors">
-                  Photo Gallery
-                </Link>
-              </li>
-              <li>
                 <Link to="/visit" className="hover:text-[#E9BF69] transition-colors">
-                  Visit Us & Timings
-                </Link>
-              </li>
-              <li>
-                <Link to="/booking-cancellation-policy" className="hover:text-[#E9BF69] transition-colors">
-                  Booking Policy
+                  Visit Us
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Studio Hours & Location (3 cols) */}
+          {/* Studio Hours (3 cols) */}
           <div className="lg:col-span-3 space-y-4">
             <div className="space-y-2">
               <h3 className="font-serif font-semibold text-base text-[#F8F4EB] tracking-wide flex items-center gap-2">
@@ -137,8 +113,11 @@ export default function Footer({ onOpenEnquiry }) {
                 <p className="text-base text-[#E9BF69] font-semibold">{siteConfig.hours.display}</p>
               </div>
             </div>
+          </div>
 
-            <div className="space-y-2 pt-2 border-t border-[#2F6D5F]/40">
+          {/* Location & Directions (3 cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <div className="space-y-2">
               <h3 className="font-serif font-semibold text-base text-[#F8F4EB] tracking-wide flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-[#C86F50]" />
                 Studio Location
