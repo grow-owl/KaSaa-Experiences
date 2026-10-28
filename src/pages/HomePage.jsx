@@ -880,27 +880,27 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           2. TOP 10 BEST-SELLING ACTIVITIES — SIDE SCROLL REVEAL
           ------------------------------------------------------------- */}
-      <section id="experiences" className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
+      <section id="experiences" className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12 overflow-hidden w-full max-w-full">
         {/* Section Header: Our Best Sellers */}
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight">
+        <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-3 px-2 w-full">
+          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight break-words">
             Our Best Sellers
           </h2>
-          <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed max-w-xl mx-auto">
             The experiences everyone loves and the activities you'll want to try first!
           </p>
         </div>
 
         {/* Horizontal Side-Scroll Cards Track with Reveal Snap */}
-        <div className="relative">
+        <div className="relative w-full max-w-full min-w-0">
           <div
             ref={activitiesScrollRef}
-            className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth"
+            className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth scroll-pl-4 sm:scroll-pl-0 touch-pan-x w-full max-w-full"
           >
             {TOP_10_ACTIVITIES.map((activity) => (
               <article
                 key={activity.id}
-                className="w-[240px] sm:w-[300px] md:w-[320px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
+                className="w-[78vw] min-w-[250px] max-w-[290px] sm:w-[300px] md:w-[320px] shrink-0 snap-start sm:snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
               >
                 {/* Visual Image with Duration Overlay */}
                 <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden">
@@ -941,7 +941,7 @@ export default function HomePage({ onOpenEnquiry }) {
                     <button
                       type="button"
                       onClick={() => onOpenEnquiry ? onOpenEnquiry(activity.title) : null}
-                      className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#245449] hover:bg-[#193B33] text-white text-xs font-bold transition-all shadow-xs group-hover:shadow-md active:scale-95 cursor-pointer"
+                      className="inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-[#245449] hover:bg-[#193B33] text-white text-xs font-bold transition-all shadow-xs group-hover:shadow-md active:scale-95 cursor-pointer shrink-0"
                     >
                       <span>Book Now</span>
                       <ChevronRight className="w-3.5 h-3.5" />
@@ -953,27 +953,27 @@ export default function HomePage({ onOpenEnquiry }) {
           </div>
 
           {/* Interactive Pagination Dots with Left/Right Arrows */}
-          <div className="mt-8 flex items-center justify-center gap-3">
+          <div className="mt-6 sm:mt-8 flex items-center justify-center gap-2 sm:gap-3">
             <button
               type="button"
               onClick={() => scrollActivities('left')}
               disabled={activeIndex === 0}
               aria-label="Previous activities"
-              className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+              className="p-1.5 sm:p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer shrink-0"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               {TOP_10_ACTIVITIES.map((activity, idx) => (
                 <button
                   key={activity.id}
                   type="button"
                   onClick={() => scrollToActivityIndex(idx)}
                   aria-label={`Go to activity ${idx + 1}: ${activity.title}`}
-                  className={`transition-all duration-300 rounded-full cursor-pointer ${activeIndex === idx
-                    ? 'w-7 sm:w-8 h-2.5 bg-[#245449] shadow-xs'
-                    : 'w-2.5 h-2.5 bg-[#D5CEBF] hover:bg-[#245449]/50 hover:scale-125'
+                  className={`transition-all duration-300 rounded-full cursor-pointer shrink-0 ${activeIndex === idx
+                    ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-[#245449] shadow-xs'
+                    : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-[#D5CEBF] hover:bg-[#245449]/50 hover:scale-125'
                     }`}
                 />
               ))}
@@ -984,7 +984,7 @@ export default function HomePage({ onOpenEnquiry }) {
               onClick={() => scrollActivities('right')}
               disabled={activeIndex === TOP_10_ACTIVITIES.length - 1}
               aria-label="Next activities"
-              className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+              className="p-1.5 sm:p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer shrink-0"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -1008,139 +1008,137 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           3. TOGETHERNESS / DATES & CELEBRATIONS SECTION
           ------------------------------------------------------------- */}
-      <section id="together" className="py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          {/* Section Header */}
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight">
-              Date Plans, Sorted!
-            </h2>
-            <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
-              Skip your usual plans and make your next date a little more memorable.
-            </p>
+      <section id="together" className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12 overflow-hidden w-full max-w-full">
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-3 px-2 w-full">
+          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight break-words">
+            Date Plans, Sorted!
+          </h2>
+          <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed max-w-xl mx-auto">
+            Skip your usual plans and make your next date a little more memorable.
+          </p>
+        </div>
+
+        {/* Horizontal Side-Scroll Date Cards Track with Reveal Snap */}
+        <div className="relative w-full max-w-full min-w-0">
+          <div
+            ref={datePlansScrollRef}
+            className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth scroll-pl-4 sm:scroll-pl-0 touch-pan-x w-full max-w-full"
+          >
+            {DATE_PLANS.map((plan) => (
+              <article
+                key={plan.id}
+                className="w-[78vw] min-w-[250px] max-w-[290px] sm:w-[300px] md:w-[320px] shrink-0 snap-start sm:snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
+              >
+                {/* Image Placeholder Space (Reserved for future image upload) */}
+                <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden flex items-center justify-center">
+                  {plan.image ? (
+                    <img
+                      src={plan.image}
+                      alt={plan.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center text-[#8C8577] space-y-2 p-4 text-center select-none">
+                      <div className="w-12 h-12 rounded-2xl bg-[#DFD8CA]/80 border border-[#D5CEBF] flex items-center justify-center text-[#963E23] shadow-2xs">
+                        <Heart className="w-5 h-5 text-[#C86F50]" />
+                      </div>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#736C5F]">
+                        Photo Coming Soon
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Content Section: Title, Short Description, Price & Book Action Button */}
+                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+                  <div className="space-y-1.5">
+                    <h3 className="font-serif font-bold text-lg sm:text-xl text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
+                      {plan.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#535953] leading-relaxed line-clamp-2">
+                      {plan.description}
+                    </p>
+                  </div>
+
+                  {/* Price Row & Book Action Button */}
+                  <div className="pt-3 border-t border-[#F1ECE1] flex items-center justify-between gap-3">
+                    <div>
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-[#737A73] block">
+                        Price
+                      </span>
+                      <div className="flex items-baseline gap-1">
+                        <span className="font-serif font-black text-xl sm:text-2xl text-[#245449]">
+                          ₹{plan.price}
+                        </span>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => onOpenEnquiry ? onOpenEnquiry('date', `${plan.title} (₹${plan.price})`) : null}
+                      className="inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-[#245449] hover:bg-[#193B33] text-white text-xs font-bold transition-all shadow-xs group-hover:shadow-md active:scale-95 cursor-pointer shrink-0"
+                    >
+                      <Heart className="w-3.5 h-3.5 text-[#E9BF69]" />
+                      <span>Book Now</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
 
-          {/* Horizontal Side-Scroll Date Cards Track with Reveal Snap */}
-          <div className="relative">
-            <div
-              ref={datePlansScrollRef}
-              className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth"
+          {/* Interactive Pagination Dots with Left/Right Arrows */}
+          <div className="mt-6 sm:mt-8 flex items-center justify-center gap-2 sm:gap-3">
+            <button
+              type="button"
+              onClick={() => scrollDatePlans('left')}
+              disabled={activeDateIndex === 0}
+              aria-label="Previous date plan"
+              className="p-1.5 sm:p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer shrink-0"
             >
-              {DATE_PLANS.map((plan) => (
-                <article
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              {DATE_PLANS.map((plan, idx) => (
+                <button
                   key={plan.id}
-                  className="w-[240px] sm:w-[300px] md:w-[320px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
-                >
-                  {/* Image Placeholder Space (Reserved for future image upload) */}
-                  <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden flex items-center justify-center">
-                    {plan.image ? (
-                      <img
-                        src={plan.image}
-                        alt={plan.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    ) : (
-                      <div className="flex flex-col items-center justify-center text-[#8C8577] space-y-2 p-4 text-center select-none">
-                        <div className="w-12 h-12 rounded-2xl bg-[#DFD8CA]/80 border border-[#D5CEBF] flex items-center justify-center text-[#963E23] shadow-2xs">
-                          <Heart className="w-5 h-5 text-[#C86F50]" />
-                        </div>
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#736C5F]">
-                          Photo Coming Soon
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Content Section: Title, Short Description, Price & Book Action Button */}
-                  <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
-                    <div className="space-y-1.5">
-                      <h3 className="font-serif font-bold text-lg sm:text-xl text-[#242824] group-hover:text-[#245449] transition-colors leading-snug">
-                        {plan.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-[#535953] leading-relaxed line-clamp-2">
-                        {plan.description}
-                      </p>
-                    </div>
-
-                    {/* Price Row & Book Action Button */}
-                    <div className="pt-3 border-t border-[#F1ECE1] flex items-center justify-between gap-3">
-                      <div>
-                        <span className="text-[10px] font-semibold uppercase tracking-wider text-[#737A73] block">
-                          Price
-                        </span>
-                        <div className="flex items-baseline gap-1">
-                          <span className="font-serif font-black text-xl sm:text-2xl text-[#245449]">
-                            ₹{plan.price}
-                          </span>
-                        </div>
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => onOpenEnquiry ? onOpenEnquiry('date', `${plan.title} (₹${plan.price})`) : null}
-                        className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#245449] hover:bg-[#193B33] text-white text-xs font-bold transition-all shadow-xs group-hover:shadow-md active:scale-95 cursor-pointer"
-                      >
-                        <Heart className="w-3.5 h-3.5 text-[#E9BF69]" />
-                        <span>Book Now</span>
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                </article>
+                  type="button"
+                  onClick={() => scrollToDateIndex(idx)}
+                  aria-label={`Go to date plan ${idx + 1}: ${plan.title}`}
+                  className={`transition-all duration-300 rounded-full cursor-pointer shrink-0 ${activeDateIndex === idx
+                    ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-[#245449] shadow-xs'
+                    : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-[#D5CEBF] hover:bg-[#245449]/50 hover:scale-125'
+                    }`}
+                />
               ))}
             </div>
 
-            {/* Interactive Pagination Dots with Left/Right Arrows */}
-            <div className="mt-8 flex items-center justify-center gap-3">
-              <button
-                type="button"
-                onClick={() => scrollDatePlans('left')}
-                disabled={activeDateIndex === 0}
-                aria-label="Previous date plan"
-                className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
+            <button
+              type="button"
+              onClick={() => scrollDatePlans('right')}
+              disabled={activeDateIndex === DATE_PLANS.length - 1}
+              aria-label="Next date plan"
+              className="p-1.5 sm:p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer shrink-0"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
 
-              <div className="flex items-center gap-2">
-                {DATE_PLANS.map((plan, idx) => (
-                  <button
-                    key={plan.id}
-                    type="button"
-                    onClick={() => scrollToDateIndex(idx)}
-                    aria-label={`Go to date plan ${idx + 1}: ${plan.title}`}
-                    className={`transition-all duration-300 rounded-full cursor-pointer ${activeDateIndex === idx
-                      ? 'w-7 sm:w-8 h-2.5 bg-[#245449] shadow-xs'
-                      : 'w-2.5 h-2.5 bg-[#D5CEBF] hover:bg-[#245449]/50 hover:scale-125'
-                      }`}
-                  />
-                ))}
-              </div>
-
-              <button
-                type="button"
-                onClick={() => scrollDatePlans('right')}
-                disabled={activeDateIndex === DATE_PLANS.length - 1}
-                aria-label="Next date plan"
-                className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Plan a Date or Anniversary CTA Button */}
-            <div className="mt-8 sm:mt-10 text-center">
-              <Link
-                to="/celebrations#dates"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-sm sm:text-base transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95 group cursor-pointer"
-              >
-                <Heart className="w-4 h-4 text-[#E9BF69]" />
-                <span>Plan a Date or Anniversary</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-0.5" />
-              </Link>
-            </div>
+          {/* Plan a Date or Anniversary CTA Button */}
+          <div className="mt-8 sm:mt-10 text-center">
+            <Link
+              to="/celebrations#dates"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-[#245449] hover:bg-[#193B33] text-[#F8F4EB] font-semibold text-sm sm:text-base transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95 group cursor-pointer"
+            >
+              <Heart className="w-4 h-4 text-[#E9BF69]" />
+              <span>Plan a Date or Anniversary</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-0.5" />
+            </Link>
           </div>
         </div>
       </section>
@@ -1150,27 +1148,27 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           3B. PLANNING, GROUP, EXPERIENCE? — SIDE SCROLL REVEAL (10 Cards)
           ------------------------------------------------------------- */}
-      <section id="group-experiences" className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
+      <section id="group-experiences" className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12 overflow-hidden w-full max-w-full">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight">
+        <div className="text-center max-w-3xl mx-auto space-y-2 sm:space-y-3 px-2 w-full">
+          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight break-words">
             Planning a Group Experience?
           </h2>
-          <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed max-w-xl mx-auto">
             From birthday parties and bridal showers to team outings & reunions, we'll help you bring everyone together for memorable time at Kasaa.
           </p>
         </div>
 
         {/* Horizontal Side-Scroll 10 Cards Track with Reveal Snap (Same as Our Best Sellers) */}
-        <div className="relative">
+        <div className="relative w-full max-w-full min-w-0">
           <div
             ref={groupScrollRef}
-            className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth"
+            className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth scroll-pl-4 sm:scroll-pl-0 touch-pan-x"
           >
             {GROUP_EXPERIENCES.map((exp) => (
               <article
                 key={exp.id}
-                className="w-[240px] sm:w-[300px] md:w-[320px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
+                className="w-[78vw] min-w-[250px] max-w-[290px] sm:w-[300px] md:w-[320px] shrink-0 snap-start sm:snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
               >
                 {/* Image Placeholder Space (Reserved for future image upload) */}
                 <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden flex items-center justify-center">
@@ -1208,27 +1206,27 @@ export default function HomePage({ onOpenEnquiry }) {
           </div>
 
           {/* Interactive Pagination Dots with Left/Right Arrows */}
-          <div className="mt-8 flex items-center justify-center gap-3">
+          <div className="mt-6 sm:mt-8 flex items-center justify-center gap-2 sm:gap-3">
             <button
               type="button"
               onClick={() => scrollGroupExperiences('left')}
               disabled={activeGroupIndex === 0}
               aria-label="Previous group experience"
-              className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+              className="p-1.5 sm:p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer shrink-0"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               {GROUP_EXPERIENCES.map((exp, idx) => (
                 <button
                   key={exp.id}
                   type="button"
                   onClick={() => scrollToGroupIndex(idx)}
                   aria-label={`Go to group experience ${idx + 1}: ${exp.title}`}
-                  className={`transition-all duration-300 rounded-full cursor-pointer ${activeGroupIndex === idx
-                    ? 'w-7 sm:w-8 h-2.5 bg-[#245449] shadow-xs'
-                    : 'w-2.5 h-2.5 bg-[#D5CEBF] hover:bg-[#245449]/50 hover:scale-125'
+                  className={`transition-all duration-300 rounded-full cursor-pointer shrink-0 ${activeGroupIndex === idx
+                    ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-[#245449] shadow-xs'
+                    : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-[#D5CEBF] hover:bg-[#245449]/50 hover:scale-125'
                     }`}
                 />
               ))}
@@ -1239,7 +1237,7 @@ export default function HomePage({ onOpenEnquiry }) {
               onClick={() => scrollGroupExperiences('right')}
               disabled={activeGroupIndex === GROUP_EXPERIENCES.length - 1}
               aria-label="Next group experience"
-              className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+              className="p-1.5 sm:p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer shrink-0"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -1264,20 +1262,20 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           4. FOOD MENU PREVIEW — YES, WE SERVE FOOD TOO!
           ------------------------------------------------------------- */}
-      <section id="menu-preview" className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
+      <section id="menu-preview" className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12 overflow-hidden w-full max-w-full">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight">
+        <div className="text-center max-w-3xl mx-auto space-y-2 sm:space-y-3 px-2 w-full">
+          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight break-words">
             Yes, We Serve Food Too!
           </h2>
 
-          <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed">
+          <p className="text-sm sm:text-base text-[#4D534D] leading-relaxed max-w-xl mx-auto">
             While you spin clay or paint a canvas, our kitchen serves up hot momos, grilled sandwiches, delicious pizzas, ramen bowls and refreshing beverages to keep you fuelled through all the fun.
           </p>
         </div>
 
         {/* Horizontal Side-Scroll Food Cards Track with Reveal Snap */}
-        <div className="relative space-y-4">
+        <div className="relative space-y-4 w-full max-w-full min-w-0">
           {/* Left-aligned Badges: Food is our Love Language & Our Best Sellers */}
           <div className="flex flex-wrap items-center justify-start gap-2.5 px-1 text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] text-xs font-bold tracking-wider border border-[#E9BF69]/30">
@@ -1291,12 +1289,12 @@ export default function HomePage({ onOpenEnquiry }) {
 
           <div
             ref={foodScrollRef}
-            className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth"
+            className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth scroll-pl-4 sm:scroll-pl-0 touch-pan-x"
           >
             {FEATURED_FOOD_ITEMS.map((dish) => (
               <article
                 key={dish.id}
-                className="w-[240px] sm:w-[280px] md:w-[300px] shrink-0 snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
+                className="w-[78vw] min-w-[250px] max-w-[290px] sm:w-[280px] md:w-[300px] shrink-0 snap-start sm:snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
               >
                 {/* Image Placeholder Space (Reserved for future image upload) */}
                 <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden flex items-center justify-center">
@@ -1343,27 +1341,27 @@ export default function HomePage({ onOpenEnquiry }) {
           </div>
 
           {/* Interactive Pagination Dots with Left/Right Arrows */}
-          <div className="mt-8 flex items-center justify-center gap-3">
+          <div className="mt-6 sm:mt-8 flex items-center justify-center gap-2 sm:gap-3">
             <button
               type="button"
               onClick={() => scrollFoodItems('left')}
               disabled={activeFoodIndex === 0}
               aria-label="Previous food item"
-              className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+              className="p-1.5 sm:p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer shrink-0"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               {FEATURED_FOOD_ITEMS.map((dish, idx) => (
                 <button
                   key={dish.id}
                   type="button"
                   onClick={() => scrollToFoodIndex(idx)}
                   aria-label={`Go to food item ${idx + 1}: ${dish.title}`}
-                  className={`transition-all duration-300 rounded-full cursor-pointer ${activeFoodIndex === idx
-                    ? 'w-7 sm:w-8 h-2.5 bg-[#245449] shadow-xs'
-                    : 'w-2.5 h-2.5 bg-[#D5CEBF] hover:bg-[#245449]/50 hover:scale-125'
+                  className={`transition-all duration-300 rounded-full cursor-pointer shrink-0 ${activeFoodIndex === idx
+                    ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-[#245449] shadow-xs'
+                    : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-[#D5CEBF] hover:bg-[#245449]/50 hover:scale-125'
                     }`}
                 />
               ))}
@@ -1374,7 +1372,7 @@ export default function HomePage({ onOpenEnquiry }) {
               onClick={() => scrollFoodItems('right')}
               disabled={activeFoodIndex === FEATURED_FOOD_ITEMS.length - 1}
               aria-label="Next food item"
-              className="p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer"
+              className="p-1.5 sm:p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer shrink-0"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
