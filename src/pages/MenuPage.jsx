@@ -371,14 +371,24 @@ export default function MenuPage({ onOpenEnquiry }) {
             {/* Modal Body: Active Chalk Page */}
             <div className="flex-1 overflow-auto p-4 flex items-center justify-center bg-black/40">
               <div className="max-w-lg w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#0C0E0C]">
-                <picture>
-                  <source srcSet={originalMenuBookPages[bookletPage].webp} type="image/webp" />
-                  <img
-                    src={originalMenuBookPages[bookletPage].src}
-                    alt={originalMenuBookPages[bookletPage].title}
-                    className="w-full h-auto object-contain max-h-[70vh] mx-auto select-none"
-                  />
-                </picture>
+                {(() => {
+                  const page = originalMenuBookPages[bookletPage];
+                  return (
+                    <picture>
+                      <source srcSet={page.webp || page.image} type="image/webp" />
+                      <img
+                        src={page.src || page.image || page.fallbackImage}
+                        alt={page.title}
+                        onError={(e) => {
+                          if (page.fallbackImage && !e.currentTarget.src.includes(page.fallbackImage)) {
+                            e.currentTarget.src = page.fallbackImage;
+                          }
+                        }}
+                        className="w-full h-auto object-contain max-h-[70vh] mx-auto select-none"
+                      />
+                    </picture>
+                  );
+                })()}
               </div>
             </div>
 

@@ -282,28 +282,37 @@ export default function Navbar({ onOpenEnquiry, onMobileMenuToggle }) {
                 onMouseEnter={handleActivitiesMouseEnter}
                 onMouseLeave={handleActivitiesMouseLeave}
               >
-                <button
-                  type="button"
-                  onClick={() => {
-                    setActivitiesDropdownOpen((prev) => !prev);
-                    setCelebrationsDropdownOpen(false);
-                  }}
-                  aria-expanded={activitiesDropdownOpen}
-                  aria-haspopup="true"
-                  aria-label="Toggle Activities menu"
-                  className={`px-2.5 lg:px-3 py-2 text-xs lg:text-sm font-semibold rounded-lg transition-colors flex items-center gap-1 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#245449] ${
+                <div
+                  className={`flex items-center rounded-lg transition-colors ${
                     isActivitiesActive
                       ? 'text-[#245449] bg-[#F1ECE1]'
                       : 'text-[#242824] hover:text-[#245449] hover:bg-[#F1ECE1]'
                   }`}
                 >
-                  <span>Activities</span>
-                  <ChevronDown
-                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                      activitiesDropdownOpen ? 'rotate-180 text-[#245449]' : 'text-[#6F776F]'
-                    }`}
-                  />
-                </button>
+                  <Link
+                    to="/activities"
+                    className="pl-2.5 lg:pl-3 pr-1 py-2 text-xs lg:text-sm font-semibold hover:text-[#245449] focus-visible:outline-hidden"
+                  >
+                    Activities
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActivitiesDropdownOpen((prev) => !prev);
+                      setCelebrationsDropdownOpen(false);
+                    }}
+                    aria-expanded={activitiesDropdownOpen}
+                    aria-haspopup="true"
+                    aria-label="Toggle Activities menu"
+                    className="pr-2 lg:pr-2.5 pl-1 py-2 cursor-pointer focus-visible:outline-hidden"
+                  >
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                        activitiesDropdownOpen ? 'rotate-180 text-[#245449]' : 'text-[#6F776F]'
+                      }`}
+                    />
+                  </button>
+                </div>
 
                 {/* Desktop Dropdown Panel for Activities */}
                 {activitiesDropdownOpen && (
@@ -378,28 +387,37 @@ export default function Navbar({ onOpenEnquiry, onMobileMenuToggle }) {
                 onMouseEnter={handleCelebrationsMouseEnter}
                 onMouseLeave={handleCelebrationsMouseLeave}
               >
-                <button
-                  type="button"
-                  onClick={() => {
-                    setCelebrationsDropdownOpen((prev) => !prev);
-                    setActivitiesDropdownOpen(false);
-                  }}
-                  aria-expanded={celebrationsDropdownOpen}
-                  aria-haspopup="true"
-                  aria-label="Toggle Celebrations menu"
-                  className={`px-2.5 lg:px-3 py-2 text-xs lg:text-sm font-semibold rounded-lg transition-colors flex items-center gap-1 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#245449] ${
+                <div
+                  className={`flex items-center rounded-lg transition-colors ${
                     isCelebrationsActive
                       ? 'text-[#245449] bg-[#F1ECE1]'
                       : 'text-[#242824] hover:text-[#245449] hover:bg-[#F1ECE1]'
                   }`}
                 >
-                  <span>Celebrations</span>
-                  <ChevronDown
-                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                      celebrationsDropdownOpen ? 'rotate-180 text-[#245449]' : 'text-[#6F776F]'
-                    }`}
-                  />
-                </button>
+                  <Link
+                    to="/celebrations"
+                    className="pl-2.5 lg:pl-3 pr-1 py-2 text-xs lg:text-sm font-semibold hover:text-[#245449] focus-visible:outline-hidden"
+                  >
+                    Celebrations
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCelebrationsDropdownOpen((prev) => !prev);
+                      setActivitiesDropdownOpen(false);
+                    }}
+                    aria-expanded={celebrationsDropdownOpen}
+                    aria-haspopup="true"
+                    aria-label="Toggle Celebrations menu"
+                    className="pr-2 lg:pr-2.5 pl-1 py-2 cursor-pointer focus-visible:outline-hidden"
+                  >
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                        celebrationsDropdownOpen ? 'rotate-180 text-[#245449]' : 'text-[#6F776F]'
+                      }`}
+                    />
+                  </button>
+                </div>
 
                 {/* Desktop Dropdown Panel for Celebrations */}
                 {celebrationsDropdownOpen && (
@@ -559,24 +577,28 @@ export default function Navbar({ onOpenEnquiry, onMobileMenuToggle }) {
 
                 {/* Activities Accordion in Mobile */}
                 <div className="rounded-xl overflow-hidden border border-[#E8E0D0] bg-[#FAF7F0]">
-                  <button
-                    type="button"
-                    onClick={() => setMobileActivitiesOpen((prev) => !prev)}
-                    className="w-full text-left px-4 py-3.5 text-base font-semibold text-[#242824] hover:bg-[#EAE4D5] active:bg-[#E2DDD0] transition-colors flex items-center justify-between cursor-pointer"
-                    aria-expanded={mobileActivitiesOpen}
-                  >
-                    <div className="flex items-center gap-2">
-                      <span>Activities</span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#EBF1E9] text-[#245449] border border-[#DCE6D9]">
-                        11
-                      </span>
-                    </div>
-                    <ChevronDown
-                      className={`w-4 h-4 text-[#963E23] transition-transform duration-200 ${
-                        mobileActivitiesOpen ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
+                  <div className="flex items-center justify-between w-full hover:bg-[#EAE4D5] active:bg-[#E2DDD0] transition-colors">
+                    <Link
+                      to="/activities"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex-1 px-4 py-3.5 text-base font-semibold text-[#242824]"
+                    >
+                      Activities
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => setMobileActivitiesOpen((prev) => !prev)}
+                      className="p-3.5 text-[#963E23] cursor-pointer flex items-center justify-center min-w-[44px] min-h-[44px]"
+                      aria-expanded={mobileActivitiesOpen}
+                      aria-label="Toggle activities submenu"
+                    >
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          mobileActivitiesOpen ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                  </div>
 
                   {/* Submenu for Activities */}
                   {mobileActivitiesOpen && (
@@ -609,24 +631,28 @@ export default function Navbar({ onOpenEnquiry, onMobileMenuToggle }) {
 
                 {/* Celebrations Accordion in Mobile */}
                 <div className="rounded-xl overflow-hidden border border-[#E8E0D0] bg-[#FAF7F0]">
-                  <button
-                    type="button"
-                    onClick={() => setMobileCelebrationsOpen((prev) => !prev)}
-                    className="w-full text-left px-4 py-3.5 text-base font-semibold text-[#242824] hover:bg-[#EAE4D5] active:bg-[#E2DDD0] transition-colors flex items-center justify-between cursor-pointer"
-                    aria-expanded={mobileCelebrationsOpen}
-                  >
-                    <div className="flex items-center gap-2">
-                      <span>Celebrations</span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#E9BF69]/20 text-[#7D5B18] border border-[#E9BF69]/30">
-                        Dates & Events
-                      </span>
-                    </div>
-                    <ChevronDown
-                      className={`w-4 h-4 text-[#963E23] transition-transform duration-200 ${
-                        mobileCelebrationsOpen ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
+                  <div className="flex items-center justify-between w-full hover:bg-[#EAE4D5] active:bg-[#E2DDD0] transition-colors">
+                    <Link
+                      to="/celebrations"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex-1 px-4 py-3.5 text-base font-semibold text-[#242824]"
+                    >
+                      Celebrations
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => setMobileCelebrationsOpen((prev) => !prev)}
+                      className="p-3.5 text-[#963E23] cursor-pointer flex items-center justify-center min-w-[44px] min-h-[44px]"
+                      aria-expanded={mobileCelebrationsOpen}
+                      aria-label="Toggle celebrations submenu"
+                    >
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          mobileCelebrationsOpen ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                  </div>
 
                   {/* Submenu for Celebrations */}
                   {mobileCelebrationsOpen && (

@@ -544,14 +544,14 @@ export const landingMenuFeatured = [
 
 // Reference to original menu book pages for optional flipbook/lightbox
 export const originalMenuBookPages = [
-  { pageNumber: 1, title: 'Food Menu Cover', image: '/images/menu/menu_page_1.webp' },
-  { pageNumber: 2, title: 'Street Favs', image: '/images/menu/menu_page_2.webp' },
-  { pageNumber: 3, title: 'Snacks & Sides', image: '/images/menu/menu_page_3.webp' },
-  { pageNumber: 4, title: 'Fillers', image: '/images/menu/menu_page_4.webp' },
-  { pageNumber: 5, title: 'Quick Bites', image: '/images/menu/menu_page_5.webp' },
-  { pageNumber: 6, title: 'Mains', image: '/images/menu/menu_page_6.webp' },
-  { pageNumber: 7, title: 'Twirl & Slurp', image: '/images/menu/menu_page_7.webp' },
-  { pageNumber: 8, title: 'Beverages', image: '/images/menu/menu_page_8.webp' },
-  { pageNumber: 9, title: 'Platters, Soups & Desserts', image: '/images/menu/menu_page_9.webp' },
-  { pageNumber: 10, title: 'Group Custom Menus', image: '/images/menu/menu_page_10.webp' },
+  { pageNumber: 1, title: 'Food Menu Cover', image: '/images/menu/menu_page_1.webp', webp: '/images/menu/menu_page_1.webp', src: '/images/menu/menu_page_1.webp', fallbackImage: '/images/menu/menu_page_1.jpg' },
+  { pageNumber: 2, title: 'Street Favs', image: '/images/menu/menu_page_2.webp', webp: '/images/menu/menu_page_2.webp', src: '/images/menu/menu_page_2.webp', fallbackImage: '/images/menu/menu_page_2.jpg' },
+  { pageNumber: 3, title: 'Snacks & Sides', image: '/images/menu/menu_page_3.webp', webp: '/images/menu/menu_page_3.webp', src: '/images/menu/menu_page_3.webp', fallbackImage: '/images/menu/menu_page_3.jpg' },
+  { pageNumber: 4, title: 'Fillers', image: '/images/menu/menu_page_4.webp', webp: '/images/menu/menu_page_4.webp', src: '/images/menu/menu_page_4.webp', fallbackImage: '/images/menu/menu_page_4.jpg' },
+  { pageNumber: 5, title: 'Quick Bites', image: '/images/menu/menu_page_5.webp', webp: '/images/menu/menu_page_5.webp', src: '/images/menu/menu_page_5.webp', fallbackImage: '/images/menu/menu_page_5.jpg' },
+  { pageNumber: 6, title: 'Mains', image: '/images/menu/menu_page_6.webp', webp: '/images/menu/menu_page_6.webp', src: '/images/menu/menu_page_6.webp', fallbackImage: '/images/menu/menu_page_6.jpg' },
+  { pageNumber: 7, title: 'Twirl & Slurp', image: '/images/menu/menu_page_7.webp', webp: '/images/menu/menu_page_7.webp', src: '/images/menu/menu_page_7.webp', fallbackImage: '/images/menu/menu_page_7.jpg' },
+  { pageNumber: 8, title: 'Beverages', image: '/images/menu/menu_page_8.webp', webp: '/images/menu/menu_page_8.webp', src: '/images/menu/menu_page_8.webp', fallbackImage: '/images/menu/menu_page_8.jpg' },
+  { pageNumber: 9, title: 'Platters, Soups & Desserts', image: '/images/menu/menu_page_9.webp', webp: '/images/menu/menu_page_9.webp', src: '/images/menu/menu_page_9.webp', fallbackImage: '/images/menu/menu_page_9.jpg' },
+  { pageNumber: 10, title: 'Group Custom Menus', image: '/images/menu/menu_page_10.webp', webp: '/images/menu/menu_page_10.webp', src: '/images/menu/menu_page_10.webp', fallbackImage: '/images/menu/menu_page_10.jpg' },
 ];

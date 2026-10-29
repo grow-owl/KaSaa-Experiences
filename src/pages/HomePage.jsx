@@ -322,61 +322,61 @@ const FEATURED_FOOD_ITEMS = [
     id: 'peri-peri-fries',
     title: 'Peri - Peri Fries',
     price: '250',
-    image: '', // reserved for future upload
+    image: '/images/dishes/fries.webp',
   },
   {
     id: 'chinese-bhel',
     title: 'Chinese Bhel',
     price: '250',
-    image: '', // reserved for future upload
+    image: '/images/dishes/chinese_bhel.webp',
   },
   {
     id: 'korean-ramen',
     title: 'Korean Ramen',
     price: '300',
-    image: '', // reserved for future upload
+    image: '/images/dishes/korean_ramen.webp',
   },
   {
     id: 'maggie-chop',
     title: 'Maggie Chop',
     price: '250',
-    image: '', // reserved for future upload
+    image: '/images/dishes/maggie_chop.webp',
   },
   {
     id: 'noodles',
     title: 'Noodles',
     price: '300',
-    image: '', // reserved for future upload
+    image: '/images/dishes/noodles.webp',
   },
   {
     id: 'farmhouse-pizza',
     title: 'Farmhouse Pizza',
     price: '350',
-    image: '', // reserved for future upload
+    image: '/images/dishes/pizza.webp',
   },
   {
     id: 'white-sauce-pasta',
     title: 'White Sauce Pasta',
     price: '350',
-    image: '', // reserved for future upload
+    image: '/images/dishes/pasta.webp',
   },
   {
     id: 'cheese-garlic-bread',
     title: 'Cheese Garlic Bread',
     price: '250',
-    image: '', // reserved for future upload
+    image: '/images/dishes/garlic_bread.webp',
   },
   {
     id: 'nachos-with-salsa',
     title: 'Nachos with Salsa',
     price: '200',
-    image: '', // reserved for future upload
+    image: '/images/dishes/nachos.webp',
   },
   {
     id: 'wai-wai-bhel',
     title: 'Wai Wai Bhel',
     price: '200',
-    image: '', // reserved for future upload
+    image: '/images/dishes/wai_wai.webp',
   },
 ];
 
@@ -723,6 +723,86 @@ export default function HomePage({ onOpenEnquiry }) {
       };
     }
   }, [checkFoodScroll]);
+
+  // Instagram Reels Side-Scroll State & Handlers
+  const reelsScrollRef = useRef(null);
+  const [activeReelIndex, setActiveReelIndex] = useState(0);
+
+  const checkReelsScroll = React.useCallback(() => {
+    const container = reelsScrollRef.current;
+    if (!container) return;
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    const children = container.children;
+    if (!children || children.length === 0) return;
+
+    if (scrollLeft <= 15) {
+      setActiveReelIndex(0);
+      return;
+    }
+    if (scrollLeft >= scrollWidth - clientWidth - 25) {
+      setActiveReelIndex(children.length - 1);
+      return;
+    }
+
+    const containerRect = container.getBoundingClientRect();
+    const containerCenter = containerRect.left + containerRect.width / 2;
+
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    for (let i = 0; i < children.length; i++) {
+      const childRect = children[i].getBoundingClientRect();
+      const childCenter = childRect.left + childRect.width / 2;
+      const distance = Math.abs(childCenter - containerCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = i;
+      }
+    }
+
+    setActiveReelIndex(closestIndex);
+  }, []);
+
+  const scrollToReelIndex = (index) => {
+    const container = reelsScrollRef.current;
+    if (!container) return;
+    const children = container.children;
+    if (children && children[index]) {
+      children[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+      setActiveReelIndex(index);
+    }
+  };
+
+  const scrollReels = (direction) => {
+    const container = reelsScrollRef.current;
+    if (!container) return;
+    const children = container.children;
+    if (!children || children.length === 0) return;
+
+    const targetIndex = direction === 'left'
+      ? Math.max(0, activeReelIndex - 1)
+      : Math.min(children.length - 1, activeReelIndex + 1);
+
+    scrollToReelIndex(targetIndex);
+  };
+
+  useEffect(() => {
+    const el = reelsScrollRef.current;
+    if (el) {
+      el.addEventListener('scroll', checkReelsScroll, { passive: true });
+      window.addEventListener('resize', checkReelsScroll);
+      checkReelsScroll();
+      return () => {
+        el.removeEventListener('scroll', checkReelsScroll);
+        window.removeEventListener('resize', checkReelsScroll);
+      };
+    }
+  }, [checkReelsScroll]);
 
   useEffect(() => {
     if (isHeroPaused) return;
@@ -1396,53 +1476,97 @@ export default function HomePage({ onOpenEnquiry }) {
           </p>
         </div>
 
-        {/* 8 Instagram Reels Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-          {INSTAGRAM_REELS.map((reel) => (
-            <a
-              key={reel.id}
-              href={reel.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Watch reel: ${reel.title} on Instagram`}
-              className="group relative aspect-[9/16] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-3 sm:p-5 border border-[#E2DDD0] bg-neutral-900 hover:-translate-y-1.5 cursor-pointer"
+        {/* Horizontal Side-Scroll Instagram Reels Track with Reveal Snap */}
+        <div className="relative space-y-4 w-full max-w-full min-w-0">
+          <div
+            ref={reelsScrollRef}
+            className="flex gap-3.5 sm:gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory py-3 -mx-4 px-4 sm:mx-0 sm:px-1 scroll-smooth scroll-pl-4 sm:scroll-pl-0 touch-pan-x"
+          >
+            {INSTAGRAM_REELS.map((reel) => (
+              <a
+                key={reel.id}
+                href={reel.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Watch reel: ${reel.title} on Instagram`}
+                className="w-[70vw] min-w-[220px] max-w-[270px] sm:w-[260px] md:w-[280px] shrink-0 snap-start sm:snap-center group relative aspect-[9/16] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-3.5 sm:p-5 border border-[#E2DDD0] bg-neutral-900 hover:-translate-y-1.5 cursor-pointer"
+              >
+                {/* Thumbnail image if available, else curated background gradient */}
+                {reel.thumbnail ? (
+                  <img
+                    src={reel.thumbnail}
+                    alt={reel.title}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className={`absolute inset-0 bg-gradient-to-br ${reel.gradient} opacity-90 group-hover:opacity-100 transition-opacity`} />
+                )}
+
+                {/* Decorative dark gradient vignette for readable text */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/40 pointer-events-none" />
+
+                {/* Center Play Button Overlay */}
+                <div className="relative z-10 flex-1 flex items-center justify-center">
+                  <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white/25 backdrop-blur-md border border-white/40 text-white flex items-center justify-center shadow-md group-hover:scale-115 group-hover:bg-[#E9BF69] group-hover:text-[#193B33] group-hover:border-[#E9BF69] transition-all duration-300">
+                    <Play className="w-4 h-4 sm:w-6 sm:h-6 ml-0.5 fill-current" />
+                  </div>
+                </div>
+
+                {/* Bottom Details & Meta */}
+                <div className="relative z-10 space-y-1.5 text-left">
+                  <h3 className="text-white font-serif font-bold text-sm sm:text-base leading-snug group-hover:text-[#E9BF69] transition-colors line-clamp-2">
+                    {reel.title}
+                  </h3>
+                  <p className="text-white/75 text-xs line-clamp-1">
+                    {reel.caption}
+                  </p>
+                  <div className="pt-1 flex items-center gap-1 text-[11px] font-bold text-[#E9BF69] group-hover:underline">
+                    <span>Watch on Instagram</span>
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          {/* Interactive Pagination Dots with Left/Right Arrows */}
+          <div className="mt-4 sm:mt-6 flex items-center justify-center gap-2 sm:gap-3">
+            <button
+              type="button"
+              onClick={() => scrollReels('left')}
+              disabled={activeReelIndex === 0}
+              aria-label="Previous reel"
+              className="p-1.5 sm:p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer shrink-0"
             >
-              {/* Thumbnail image if available, else curated background gradient */}
-              {reel.thumbnail ? (
-                <img
-                  src={reel.thumbnail}
-                  alt={reel.title}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              {INSTAGRAM_REELS.map((reel, idx) => (
+                <button
+                  key={reel.id}
+                  type="button"
+                  onClick={() => scrollToReelIndex(idx)}
+                  aria-label={`Go to reel ${idx + 1}: ${reel.title}`}
+                  className={`transition-all duration-300 rounded-full cursor-pointer shrink-0 ${
+                    activeReelIndex === idx
+                      ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-[#245449] shadow-xs'
+                      : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-[#D5CEBF] hover:bg-[#245449]/50 hover:scale-125'
+                  }`}
                 />
-              ) : (
-                <div className={`absolute inset-0 bg-gradient-to-br ${reel.gradient} opacity-90 group-hover:opacity-100 transition-opacity`} />
-              )}
+              ))}
+            </div>
 
-              {/* Decorative dark gradient vignette for readable text */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/40 pointer-events-none" />
-
-              {/* Center Play Button Overlay */}
-              <div className="relative z-10 flex-1 flex items-center justify-center">
-                <div className="w-9 h-9 sm:w-14 sm:h-14 rounded-full bg-white/25 backdrop-blur-md border border-white/40 text-white flex items-center justify-center shadow-md group-hover:scale-115 group-hover:bg-[#E9BF69] group-hover:text-[#193B33] group-hover:border-[#E9BF69] transition-all duration-300">
-                  <Play className="w-3.5 h-3.5 sm:w-6 sm:h-6 ml-0.5 fill-current" />
-                </div>
-              </div>
-
-              {/* Bottom Details & Meta */}
-              <div className="relative z-10 space-y-1.5 text-left">
-                <h3 className="text-white font-serif font-bold text-sm sm:text-base leading-snug group-hover:text-[#E9BF69] transition-colors line-clamp-2">
-                  {reel.title}
-                </h3>
-                <p className="text-white/75 text-xs line-clamp-1">
-                  {reel.caption}
-                </p>
-                <div className="pt-1 flex items-center gap-1 text-[11px] font-bold text-[#E9BF69] group-hover:underline">
-                  <span>Watch on Instagram</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            </a>
-          ))}
+            <button
+              type="button"
+              onClick={() => scrollReels('right')}
+              disabled={activeReelIndex === INSTAGRAM_REELS.length - 1}
+              aria-label="Next reel"
+              className="p-1.5 sm:p-2 rounded-full border border-[#D5CEBF] bg-white text-[#245449] hover:bg-[#FAF7F0] disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-2xs cursor-pointer shrink-0"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
         {/* Bottom Social Link */}
