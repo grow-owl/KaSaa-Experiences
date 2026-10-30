@@ -154,7 +154,6 @@ const TOP_10_ACTIVITIES = [
     price: 900,
     duration: '60 min',
     image: '/images/brochure/textured-3d-moon.webp',
-    objectPosition: 'center 75%',
   },
   {
     id: 'metallic-frame',
@@ -984,7 +983,7 @@ export default function HomePage({ onOpenEnquiry }) {
                 className="w-[78vw] min-w-[250px] max-w-[290px] sm:w-[300px] md:w-[320px] shrink-0 snap-start sm:snap-center group rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1.5"
               >
                 {/* Visual Image with Duration Overlay */}
-                <div className="relative aspect-4/3 bg-[#EAE5D9] overflow-hidden">
+                <div className="relative aspect-square bg-[#EAE5D9] overflow-hidden">
                   <img
                     src={activity.image}
                     alt={activity.title}

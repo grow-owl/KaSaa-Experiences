@@ -307,7 +307,7 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
                     className="group rounded-2xl sm:rounded-3xl bg-white border border-[#E2DDD0] overflow-hidden shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1 cursor-pointer block"
                   >
                     {/* Activity Photo */}
-                    <div className="relative aspect-[16/10] sm:aspect-square bg-[#EAE5D9] overflow-hidden">
+                    <div className="relative aspect-square bg-[#EAE5D9] overflow-hidden">
                       <picture>
                         <source srcSet={act.image} type="image/webp" />
                         <img
