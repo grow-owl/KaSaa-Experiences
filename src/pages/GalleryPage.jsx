@@ -22,53 +22,34 @@ export default function GalleryPage() {
       />
 
       {/* Header */}
-      <div className="space-y-4 max-w-3xl">
-        <div className="flex items-center gap-2 text-xs text-[#535953]">
-          <Link to="/" className="hover:text-[#245449] flex items-center gap-1">
+      <div className="space-y-4 pb-6 sm:pb-8 border-b border-[#E2DDD0] text-center max-w-3xl mx-auto">
+        <div className="flex items-center justify-center gap-2 text-xs text-[#535953]">
+          <Link to="/" className="hover:text-[#245449] flex items-center gap-1 font-medium">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Home</span>
           </Link>
           <span>/</span>
-          <span className="text-[#242824] font-medium">Gallery</span>
+          <span className="text-[#242824] font-semibold">Gallery</span>
         </div>
 
         <h1 className="font-serif font-bold text-2xl sm:text-4xl lg:text-5xl text-[#242824] tracking-tight">
           A Glimpse Inside KaSaa Experiences
         </h1>
 
-        <p className="text-base sm:text-lg text-[#535953] leading-relaxed">
+        <p className="text-sm sm:text-base text-[#535953] leading-relaxed max-w-2xl mx-auto">
           From the centering of natural clay on electric wheels to vibrant acrylic brushwork and shared celebration moments, here is a peek at life inside our Vega Circle Mall studio in Siliguri.
         </p>
       </div>
 
-      {/* Filter Tabs (3 on line 1, 2 on line 2 on mobile) */}
-      <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-2 pb-2 border-b border-[#E8E0D0]">
-        {/* Mobile Line 1: 3 filters */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
-          {galleryCategories.slice(0, 3).map((cat) => (
+      {/* Filter Tabs Centered */}
+      <div className="w-full overflow-x-auto pb-2 scrollbar-none">
+        <div className="flex items-center justify-center gap-2 flex-wrap min-w-full px-2">
+          {galleryCategories.map((cat) => (
             <button
               key={cat.id}
               type="button"
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-2.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold rounded-xl transition-all whitespace-nowrap ${
-                activeCategory === cat.id
-                  ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
-                  : 'bg-white hover:bg-[#F1ECE1] text-[#535953] border border-[#E2DDD0]'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Mobile Line 2: 2 filters */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
-          {galleryCategories.slice(3, 5).map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-2.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold rounded-xl transition-all whitespace-nowrap ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold rounded-xl transition-all whitespace-nowrap cursor-pointer ${
                 activeCategory === cat.id
                   ? 'bg-[#245449] text-[#F8F4EB] shadow-xs'
                   : 'bg-white hover:bg-[#F1ECE1] text-[#535953] border border-[#E2DDD0]'

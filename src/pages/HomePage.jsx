@@ -1494,7 +1494,7 @@ export default function HomePage({ onOpenEnquiry }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Watch reel: ${reel.title} on Instagram`}
-                className="w-[66vw] min-w-[210px] max-w-[250px] sm:w-[280px] md:w-[300px] shrink-0 snap-start sm:snap-center group relative aspect-[9/16] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-3.5 sm:p-5 border border-[#E2DDD0] bg-neutral-900 hover:-translate-y-1.5 cursor-pointer"
+                className="w-[66vw] min-w-[210px] max-w-[250px] sm:w-[300px] md:w-[330px] lg:w-[350px] shrink-0 snap-start sm:snap-center group relative aspect-[9/16] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-3.5 sm:p-5 border border-[#E2DDD0] bg-neutral-900 hover:-translate-y-1.5 cursor-pointer"
               >
                 {/* Thumbnail image if available, else curated background gradient */}
                 {reel.thumbnail ? (
