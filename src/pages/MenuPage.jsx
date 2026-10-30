@@ -377,11 +377,11 @@ export default function MenuPage({ onOpenEnquiry }) {
                     <picture>
                       <source srcSet={page.webp || page.image} type="image/webp" />
                       <img
-                        src={page.src || page.image || page.fallbackImage}
+                        src={page.fallbackImage || page.image}
                         alt={page.title}
                         onError={(e) => {
-                          if (page.fallbackImage && !e.currentTarget.src.includes(page.fallbackImage)) {
-                            e.currentTarget.src = page.fallbackImage;
+                          if (page.image && !e.currentTarget.src.includes(page.image)) {
+                            e.currentTarget.src = page.image;
                           }
                         }}
                         className="w-full h-auto object-contain max-h-[70vh] mx-auto select-none"

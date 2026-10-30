@@ -154,6 +154,7 @@ const TOP_10_ACTIVITIES = [
     price: 900,
     duration: '60 min',
     image: '/images/brochure/textured-3d-moon.webp',
+    objectPosition: 'center 75%',
   },
   {
     id: 'metallic-frame',
@@ -988,6 +989,7 @@ export default function HomePage({ onOpenEnquiry }) {
                     src={activity.image}
                     alt={activity.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    style={activity.objectPosition ? { objectPosition: activity.objectPosition } : undefined}
                     loading="lazy"
                     decoding="async"
                   />
@@ -1466,9 +1468,13 @@ export default function HomePage({ onOpenEnquiry }) {
       {/* -------------------------------------------------------------
           5. INSTAGRAM REELS (8 REELS PLACEHOLDERS)
           ------------------------------------------------------------- */}
-      <section id="reels" className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight">
+      <section
+        id="reels"
+        className="py-10 sm:py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12 overflow-hidden w-full max-w-full"
+      >
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-2 sm:space-y-3 px-2 w-full">
+          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl text-[#242824] tracking-tight break-words">
             Watch KaSaa in Action
           </h2>
           <p className="text-sm sm:text-base text-[#4D534D] max-w-xl mx-auto leading-relaxed">
@@ -1489,7 +1495,7 @@ export default function HomePage({ onOpenEnquiry }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Watch reel: ${reel.title} on Instagram`}
-                className="w-[70vw] min-w-[220px] max-w-[270px] sm:w-[260px] md:w-[280px] shrink-0 snap-start sm:snap-center group relative aspect-[9/16] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-3.5 sm:p-5 border border-[#E2DDD0] bg-neutral-900 hover:-translate-y-1.5 cursor-pointer"
+                className="w-[66vw] min-w-[210px] max-w-[250px] sm:w-[280px] md:w-[300px] shrink-0 snap-start sm:snap-center group relative aspect-[9/16] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xs hover:shadow-2xl transition-all duration-300 flex flex-col justify-between p-3.5 sm:p-5 border border-[#E2DDD0] bg-neutral-900 hover:-translate-y-1.5 cursor-pointer"
               >
                 {/* Thumbnail image if available, else curated background gradient */}
                 {reel.thumbnail ? (
@@ -1570,7 +1576,7 @@ export default function HomePage({ onOpenEnquiry }) {
         </div>
 
         {/* Bottom Social Link */}
-        <div className="mt-10 text-center">
+        <div className="mt-6 sm:mt-10 pb-8 sm:pb-0 text-center">
           <a
             href={siteConfig.social?.instagram || 'https://www.instagram.com/kasaa.experiences/'}
             target="_blank"

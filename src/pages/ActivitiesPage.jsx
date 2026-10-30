@@ -314,6 +314,7 @@ export default function ActivitiesPage({ onOpenEnquiry }) {
                           src={act.fallbackImage || act.image}
                           alt={act.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          style={act.objectPosition ? { objectPosition: act.objectPosition } : undefined}
                           loading="lazy"
                           decoding="async"
                           onError={(e) => {

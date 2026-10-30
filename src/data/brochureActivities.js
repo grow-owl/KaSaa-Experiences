@@ -272,6 +272,7 @@ export const BROCHURE_CATEGORIES = [
         name: 'Textured 3D Moon',
         description: 'Circular wall disc capturing lunar craters and glowing celestial topography with rich dimensional modeling paste and shimmering pigment.',
         image: '/images/brochure/textured-3d-moon.webp',
+        objectPosition: 'center 75%',
         badge: '3D Relief Disc',
       },
       {
